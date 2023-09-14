@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/Zararthustra/marcus_front/compare/v0.0.2...v0.0.3) (2023-09-14)
+
+
+### Features
+
+* **Loader:** add cinema clap loader ([6f4bda9](https://github.com/Zararthustra/marcus_front/commit/6f4bda97ebe30c90ab2b514a207844b739a56062))
+* **Logo:** add Logo ([ca9ac64](https://github.com/Zararthustra/marcus_front/commit/ca9ac6401439f2e954bf805c982aa6ce8c24f276))
+
 ### 0.0.2 (2023-09-14)
 
 
