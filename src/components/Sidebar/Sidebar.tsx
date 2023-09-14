@@ -8,7 +8,8 @@ import {
   IconClap,
   IconSidebarClose,
   IconSidebarOpen,
-  IconUser
+  IconUser,
+  logo
 } from '@assets/index';
 import { clearLS } from '@services/localStorageService';
 
@@ -36,12 +37,13 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
 
   if (isMobile && !isOpenSidebar)
     return (
-      <div className="sidebar-mobile">
+      <div className="sidebar-mobile flex justify-between align-center p-1">
         <IconSidebarOpen
           size={35}
-          className="sidebar__icon mt-1"
+          className="sidebar__icon"
           onClick={() => setIsOpenSidebar(!isOpenSidebar)}
         />
+        <img src={logo} alt="Logo Marcus" className="sidebar__logo" />
       </div>
     );
 
@@ -128,8 +130,9 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
         {/* Open */}
         {isOpenSidebar && (
           <>
-            <div className="flex justify-between mt-1 mr-1">
-              <div className="px-1 pt-05">LOGO_HERE</div>
+            <div className="flex justify-between align-center mt-1 mx-1">
+              <img src={logo} alt="Logo Marcus" className="sidebar__logo" />
+
               <IconSidebarClose
                 size={35}
                 className="sidebar__icon"

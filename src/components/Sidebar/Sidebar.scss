@@ -9,7 +9,10 @@
   &--close {
     width: 4rem;
   }
-
+  &__logo {
+    width: 6rem;
+    object-fit: contain;
+  }
   &__icon {
     cursor: pointer;
     flex-shrink: 0;
@@ -99,7 +102,6 @@
   position: fixed;
   background-color: var(--color-grey-100);
   width: 100%;
-  padding: 0 0 0.5rem 1rem;
   z-index: 9;
 }
 
