@@ -1,7 +1,1 @@
-export {
-  useMutationCreate,
-  useQueryRetrieveAll,
-  useQueryRetrieveOne,
-  useMutationUpdate,
-  useMutationDelete
-} from './queryTemplate';
+export { useQueryCritics } from './critic';

@@ -1,2 +1,25 @@
 .cinema {
+  &__header {
+    img {
+      width: 100%;
+      max-height: 30vw;
+      object-fit: cover;
+      object-position: bottom;
+    }
+  }
+
+  &__tabs {
+    width: 100%;
+    max-width: 40rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .cinema {
+    &__header {
+      img {
+        max-height: 12rem;
+      }
+    }
+  }
 }

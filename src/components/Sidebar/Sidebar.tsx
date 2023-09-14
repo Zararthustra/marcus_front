@@ -47,7 +47,6 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
 
   return (
     <div
-      onClick={() => !isOpenSidebar && setIsOpenSidebar(true)}
       className={
         isOpenSidebar ? 'sidebar sidebar--open' : 'sidebar sidebar--close'
       }>

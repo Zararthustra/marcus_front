@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AppWrapper from '@services/AppWrapper';
 import { ModalReloadSW } from '@components/index';
-import { Cinema, Home, Music } from '@pages/index';
+import { Cinema, Home, Movie, Music, NotFound } from '@pages/index';
 
 const App = () => {
   const {
@@ -31,7 +31,7 @@ const App = () => {
     <ConfigProvider
       locale={frFR}
       theme={{
-        token: { colorPrimary: '#e77d00', borderRadius: 3 }
+        token: { colorPrimary: '#d83f4a', borderRadius: 3 }
       }}>
       <AntApp>
         <BrowserRouter>
@@ -45,8 +45,12 @@ const App = () => {
             <Route element={<AppWrapper />}>
               <Route element={<Home />} path="/" />
               <Route element={<Cinema />} path="/cinema" />
+              <Route element={<Movie />} path="/cinema/:movieId" />
               <Route element={<Music />} path="/musique" />
             </Route>
+
+            {/* 404 */}
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </AntApp>

@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: var(--color-blue-500);
+  color: var(--color-grey-700);
   text-decoration: none;
 }
 
@@ -40,6 +40,15 @@ h6 {
   font-family: var(--font-title);
   margin: 0;
   padding: 0;
+}
+h1 {
+  font-size: 1.7rem;
+}
+h2 {
+  font-size: 1.2rem;
+}
+h4 {
+  font-size: 0.8rem;
 }
 
 // Widths
@@ -72,6 +81,12 @@ h6 {
 }
 .w-100 {
   width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  main {
+    margin-top: 4rem;
+  }
 }
 
 // ScrollBar

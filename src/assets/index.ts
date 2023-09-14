@@ -4,6 +4,7 @@ export { default as customer2 } from './img/customer2.png';
 export { default as customer3 } from './img/customer3.png';
 export { default as notfound } from './img/notfound.gif';
 export { default as blank_profile } from './img/blank_profile.png';
+export { default as seats } from './img/seats.png';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';
@@ -30,3 +31,7 @@ export { default as IconPhone } from './svg/IconPhone';
 export { default as IconMail } from './svg/IconMail';
 export { default as IconTrash } from './svg/IconTrash';
 export { default as IconClap } from './svg/IconClap';
+export { default as IconMasterpiece } from './svg/IconMasterpiece';
+export { default as IconCritic } from './svg/IconCritic';
+export { default as IconVote } from './svg/IconVote';
+export { default as IconSearchMovies } from './svg/IconSearchMovies';

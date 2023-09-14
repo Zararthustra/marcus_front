@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amaranth&family=Montserrat:wght@300;600&display=swap');
 
 // CSS vars
 :root {
   // Font
-  --font-text: 'Roboto', sans-serif;
-  --font-title: 'Anton', sans-serif;
+  --font-text: 'Montserrat', sans-serif;
+  --font-title: 'Amaranth', sans-serif;
 
   --font-xs: 0.7rem;
   --font-s: 0.8rem;
@@ -106,10 +106,13 @@
   --spacing-5: 3rem;
 
   // Border Radius
-  --rounded-sm: 3px;
-  --rounded-md: 5px;
-  --rounded-lg: 15px;
+  --rounded-s: 3px;
+  --rounded-m: 5px;
+  --rounded-l: 15px;
+  --rounded-xl: 20px;
   --rounded-full: 9999px;
+  --rounded-right: 0 99px 99px 0;
+  --rounded-left: 99px 0 0 99px;
 
   .br-s {
     border-radius: var(--rounded-s);
