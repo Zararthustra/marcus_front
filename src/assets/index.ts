@@ -32,6 +32,7 @@ export { default as IconPhone } from './svg/IconPhone';
 export { default as IconMail } from './svg/IconMail';
 export { default as IconTrash } from './svg/IconTrash';
 export { default as IconClap } from './svg/IconClap';
+export { default as IconClapLoader } from './svg/IconClapLoader';
 export { default as IconMasterpiece } from './svg/IconMasterpiece';
 export { default as IconCritic } from './svg/IconCritic';
 export { default as IconVote } from './svg/IconVote';

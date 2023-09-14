@@ -5,6 +5,7 @@ import { Critic } from '@components/index';
 import { useQueryCritics } from '@queries/index';
 
 import './Critics.scss';
+import { IconClapLoader } from '@assets/index';
 
 interface ICriticsProps {
   user?: number;
@@ -14,8 +15,12 @@ const Critics = ({ user }: ICriticsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: critics, isLoading } = useQueryCritics(currentPage, user);
 
-  if (isLoading) return <div>Loading</div>;
-  if (!!!critics) return <div>Error</div>;
+  if (isLoading)
+    return (
+      <IconClapLoader width={100} height={100} className="loader-cinema" />
+    );
+
+  if (!!!critics) return <div>Une erreur est survenue</div>;
   return (
     <div className="critics flex-col justify-center gap-1">
       <Pagination

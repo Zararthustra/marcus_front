@@ -1,0 +1,50 @@
+/*
+** Loader cinema
+*/
+.loader-cinema {
+  fill: black;
+  width: 7rem;
+}
+.loader-cinema path:nth-child(2) {
+  transform-origin: 0px 20px;
+  animation: clapOver 1s infinite ease;
+}
+.loader-cinema path:nth-child(1) {
+  transform-origin: 0px 20px;
+  animation: clapUnder 1s infinite ease;
+}
+
+@keyframes clapOver {
+  0% {
+    rotate: 0deg;
+  }
+  40% {
+    rotate: -10deg;
+  }
+  50% {
+    rotate: 10deg;
+  }
+  60% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+@keyframes clapUnder {
+  0% {
+    rotate: 0deg;
+  }
+  40% {
+    rotate: 5deg;
+  }
+  50% {
+    rotate: -3deg;
+  }
+  60% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
