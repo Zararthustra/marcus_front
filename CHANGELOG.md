@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/Zararthustra/marcus_front/compare/v0.0.4...v0.0.5) (2023-09-14)
+
+
+### Features
+
+* **Votes:** add votes (query, page, interface, style) + minor fixes ([eb5171b](https://github.com/Zararthustra/marcus_front/commit/eb5171b6522731f9c010eedbfa255d8f5ca23332))
+
 ### [0.0.4](https://github.com/Zararthustra/marcus_front/compare/v0.0.3...v0.0.4) (2023-09-14)
 
 ### [0.0.3](https://github.com/Zararthustra/marcus_front/compare/v0.0.2...v0.0.3) (2023-09-14)
