@@ -8,7 +8,7 @@ import {
   IconVote,
   seats
 } from '@assets/index';
-import { Critics } from '@components/index';
+import { Critics, Votes } from '@components/index';
 
 import './Cinema.scss';
 
@@ -62,6 +62,7 @@ const Cinema = () => {
               <div className="flex-col align-center">
                 {tab.title}
                 {index === 1 && <Critics />}
+                {index === 2 && <Votes />}
               </div>
             )
           }))}

@@ -8,3 +8,5 @@ export { default as Button } from './Button/Button';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as Critics } from './Critics/Critics';
 export { default as Critic } from './Critic/Critic';
+export { default as Votes } from './Votes/Votes';
+export { default as Vote } from './Vote/Vote';

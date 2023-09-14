@@ -1,6 +1,13 @@
 .critic {
+  width: 100%;
+  max-width: 40rem;
+
   &__content {
     text-align: justify;
     text-indent: 1rem;
+  }
+
+  footer a {
+    font-weight: 600;
   }
 }

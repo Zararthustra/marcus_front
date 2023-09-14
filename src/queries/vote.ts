@@ -2,7 +2,7 @@ import { App } from 'antd';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import axiosInstance from './axios';
-import { ICritic, IPagination } from '@interfaces/index';
+import { IVote, IPagination } from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
 
 // =====
@@ -16,15 +16,15 @@ import { toastObject, messageObject } from '@utils/formatters';
 // };
 
 // RETRIEVE
-const getCritics = async (
+const getVotes = async (
   pageNumber: number,
   userId?: number
-): Promise<IPagination<ICritic[]>> => {
+): Promise<IPagination<IVote[]>> => {
   let params;
   if (!!userId) params = { user_id: userId, page: pageNumber };
   else params = { page: pageNumber };
 
-  const { data } = await axiosInstance.get('/critics', {
+  const { data } = await axiosInstance.get('/votes', {
     params
   });
   return data;
@@ -86,12 +86,12 @@ const getCritics = async (
 // };
 
 // RETRIEVE
-export const useQueryCritics = (pageNumber: number, userId?: number) => {
+export const useQueryVotes = (pageNumber: number, userId?: number) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['critics', pageNumber, userId],
-    () => getCritics(pageNumber, userId),
+    ['votes', pageNumber, userId],
+    () => getVotes(pageNumber, userId),
     {
       // Stale 5min
       staleTime: 60_000 * 5,
