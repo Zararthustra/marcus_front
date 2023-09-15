@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/Zararthustra/marcus_front/compare/v0.0.6...v0.1.0) (2023-09-15)
+
 ### [0.0.6](https://github.com/Zararthustra/marcus_front/compare/v0.0.5...v0.0.6) (2023-09-15)
 
 
