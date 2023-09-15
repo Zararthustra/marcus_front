@@ -8,7 +8,7 @@ import {
   IconVote,
   seats
 } from '@assets/index';
-import { Critics, Masterpieces, Votes } from '@components/index';
+import { Critics, Masterpieces, Research, Votes } from '@components/index';
 
 import './Cinema.scss';
 
@@ -66,6 +66,7 @@ const Cinema = () => {
             key: index.toString(),
             children: (
               <div className="flex-col align-center">
+                {index === 0 && <Research />}
                 {index === 1 && <Critics />}
                 {index === 2 && <Votes />}
                 {index === 3 && <Masterpieces />}

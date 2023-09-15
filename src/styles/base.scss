@@ -94,18 +94,19 @@ h4 {
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: black;
+  background: white;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: white;
+  background: var(--color-primary-900);
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--light-color);
+  background: var(--color-primary-700);
 }
 
 ::selection {

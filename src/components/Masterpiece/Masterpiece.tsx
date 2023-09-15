@@ -42,7 +42,7 @@ const Masterpiece = ({
           alt={movieName}
         />
       )}
-      <div className="flex-col justify-center">
+      <div className="flex-col justify-center w-100">
         <header>
           <a href={`/cinema/${movieId}`}>
             <h2>{movieName}</h2>

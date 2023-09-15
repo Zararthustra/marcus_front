@@ -1,0 +1,24 @@
+.research {
+  &__input {
+    width: 95%;
+    max-width: 25rem;
+  }
+
+  &__button {
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-s);
+    padding: 0.4rem 0;
+    font-weight: 600;
+    background-color: var(--color-primary-700);
+    color: white;
+
+    &--movie {
+      border-right: 1px solid var(--color-slate-100);
+      border-radius: 0 0 0 3px;
+    }
+    &--tv {
+      border-radius: 0 0 3px 0;
+    }
+  }
+}

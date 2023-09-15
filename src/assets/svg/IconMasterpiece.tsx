@@ -1,8 +1,8 @@
 import { IIcon } from '@interfaces/index';
 
 const IconMasterpiece = ({
-  width = 35,
-  height = 35,
+  width = 32,
+  height = 32,
   className = '',
   style,
   color,

@@ -12,3 +12,6 @@ export { default as Votes } from './Votes/Votes';
 export { default as Vote } from './Vote/Vote';
 export { default as Masterpieces } from './Masterpieces/Masterpieces';
 export { default as Masterpiece } from './Masterpiece/Masterpiece';
+export { default as Research } from './Research/Research';
+export { default as Releases } from './Research/Releases';
+export { default as MovieItem } from './MovieItem/MovieItem';
