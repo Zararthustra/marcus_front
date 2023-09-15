@@ -6,6 +6,7 @@ export { default as notfound } from './img/notfound.gif';
 export { default as blank_profile } from './img/blank_profile.png';
 export { default as seats } from './img/seats.png';
 export { default as logo } from './img/logo.png';
+export { default as defaultImg } from './img/default_img.jpg';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';

@@ -10,3 +10,5 @@ export { default as Critics } from './Critics/Critics';
 export { default as Critic } from './Critic/Critic';
 export { default as Votes } from './Votes/Votes';
 export { default as Vote } from './Vote/Vote';
+export { default as Masterpieces } from './Masterpieces/Masterpieces';
+export { default as Masterpiece } from './Masterpiece/Masterpiece';

@@ -8,7 +8,7 @@ import {
   IconVote,
   seats
 } from '@assets/index';
-import { Critics, Votes } from '@components/index';
+import { Critics, Masterpieces, Votes } from '@components/index';
 
 import './Cinema.scss';
 
@@ -16,19 +16,19 @@ const Cinema = () => {
   const [activeKey, setActiveKey] = useState<number>(0);
   const tabs = [
     {
-      title: <h1 className="mb-2">Recherche</h1>,
+      name: 'Recherche',
       icon: IconSearchMovies
     },
     {
-      title: <h1 className="mb-2">Critiques</h1>,
+      name: 'Critiques',
       icon: IconCritic
     },
     {
-      title: <h1 className="mb-2">Votes</h1>,
+      name: 'Votes',
       icon: IconVote
     },
     {
-      title: <h1 className="mb-2">Chefs d'oeuvres</h1>,
+      name: "Chefs d'oeuvres",
       icon: IconMasterpiece
     }
   ];
@@ -43,26 +43,32 @@ const Cinema = () => {
           defaultActiveKey="0"
           size="small"
           centered
+          tabBarGutter={20}
           className="cinema__tabs"
           onChange={(key) => {
             setActiveKey(parseInt(key));
           }}
           items={tabs.map((tab, index) => ({
             label: (
-              <tab.icon
-                color={
-                  activeKey === index
-                    ? 'var(--color-primary-700)'
-                    : 'var(--color-grey-400)'
-                }
-              />
+              <div
+                className="flex-col align-center justify-end "
+                style={{ height: '3.5rem' }}>
+                <tab.icon
+                  color={
+                    activeKey === index
+                      ? 'var(--color-primary-700)'
+                      : 'var(--color-grey-400)'
+                  }
+                />
+                <p className="m-0 f-xs">{tab.name}</p>
+              </div>
             ),
             key: index.toString(),
             children: (
               <div className="flex-col align-center">
-                {tab.title}
                 {index === 1 && <Critics />}
                 {index === 2 && <Votes />}
+                {index === 3 && <Masterpieces />}
               </div>
             )
           }))}

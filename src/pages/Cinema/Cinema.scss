@@ -2,9 +2,8 @@
   &__header {
     img {
       width: 100%;
-      max-height: 30vw;
+      max-height: 20vw;
       object-fit: cover;
-      object-position: bottom;
     }
   }
 
@@ -18,7 +17,7 @@
   .cinema {
     &__header {
       img {
-        max-height: 12rem;
+        max-height: 8rem;
       }
     }
   }
