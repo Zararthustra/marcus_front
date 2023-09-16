@@ -14,24 +14,8 @@ import './Cinema.scss';
 
 const Cinema = () => {
   const [activeKey, setActiveKey] = useState<number>(0);
-  const tabs = [
-    {
-      name: 'Recherche',
-      icon: IconSearchMovies
-    },
-    {
-      name: 'Critiques',
-      icon: IconCritic
-    },
-    {
-      name: 'Votes',
-      icon: IconVote
-    },
-    {
-      name: "Chefs d'oeuvres",
-      icon: IconMasterpiece
-    }
-  ];
+  const tabs = [IconSearchMovies, IconCritic, IconVote, IconMasterpiece];
+
   return (
     <main className="cinema pb-5">
       <header className="cinema__header">
@@ -48,20 +32,15 @@ const Cinema = () => {
           onChange={(key) => {
             setActiveKey(parseInt(key));
           }}
-          items={tabs.map((tab, index) => ({
+          items={tabs.map((Tab, index) => ({
             label: (
-              <div
-                className="flex-col align-center justify-end "
-                style={{ height: '3.5rem' }}>
-                <tab.icon
-                  color={
-                    activeKey === index
-                      ? 'var(--color-primary-700)'
-                      : 'var(--color-grey-400)'
-                  }
-                />
-                <p className="m-0 f-xs">{tab.name}</p>
-              </div>
+              <Tab
+                color={
+                  activeKey === index
+                    ? 'var(--color-primary-700)'
+                    : 'var(--color-grey-400)'
+                }
+              />
             ),
             key: index.toString(),
             children: (

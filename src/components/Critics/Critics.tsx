@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pagination } from 'antd';
+import { Empty, Pagination } from 'antd';
 
 import { Critic } from '@components/index';
 import { IconClapLoader } from '@assets/index';
@@ -15,23 +15,23 @@ const Critics = ({ user }: ICriticsProps) => {
 
   if (isLoading)
     return (
-      <IconClapLoader width={100} height={100} className="loader-cinema" />
+      <div className="flex-col justify-center gap-1">
+        <h1 className="self-center mb-2">Critiques</h1>
+        <IconClapLoader width={100} height={100} className="loader-cinema" />
+      </div>
     );
 
-  if (!!!critics) return <div>Une erreur est survenue</div>;
+  if (!!!critics)
+    return (
+      <div className="flex-col justify-center gap-1">
+        <h1 className="self-center mb-2">Critiques</h1>
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+      </div>
+    );
+
   return (
     <div className="flex-col justify-center gap-1">
-      <Pagination
-        className="self-center mb-2"
-        total={critics.total}
-        onChange={(page) => setCurrentPage(page)}
-        // showTotal={(total, range) => `${range[0]}-${range[1]} sur ${total}`}
-        defaultPageSize={10}
-        showSizeChanger={false}
-        current={currentPage}
-        hideOnSinglePage
-        responsive
-      />
+      <h1 className="self-center mb-2">Critiques</h1>
 
       {critics.data.map((critic, index) => (
         <Critic
