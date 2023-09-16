@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/Zararthustra/marcus_front/compare/v0.1.2...v0.1.3) (2023-09-16)
+
+
+### Features
+
+* **Community:** add community (query, page, interface, style) ([18e8f82](https://github.com/Zararthustra/marcus_front/commit/18e8f82be0395bfb56ed18789fdbda62e10bd4fc))
+
 ### [0.1.2](https://github.com/Zararthustra/marcus_front/compare/v0.1.1...v0.1.2) (2023-09-16)
 
 
