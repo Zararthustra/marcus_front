@@ -3,9 +3,17 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import {
+  Cinema,
+  Community,
+  Home,
+  Movie,
+  Music,
+  NotFound,
+  TV
+} from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
 import { ModalReloadSW } from '@components/index';
-import { Cinema, Home, Movie, Music, NotFound, TV } from '@pages/index';
 
 const App = () => {
   const {
@@ -48,6 +56,8 @@ const App = () => {
               <Route element={<Movie />} path="/cinema/films/:movieId" />
               <Route element={<TV />} path="/cinema/series/:movieId" />
               <Route element={<Music />} path="/musique" />
+              <Route element={<Community />} path="/communaute" />
+              <Route element={<div>User</div>} path="/communaute/:userName" />
             </Route>
 
             {/* 404 */}

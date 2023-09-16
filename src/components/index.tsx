@@ -6,6 +6,7 @@ export { default as ModalReloadSW } from './Modals/ModalReloadSW';
 // Miscellaneous
 export { default as Button } from './Button/Button';
 export { default as Sidebar } from './Sidebar/Sidebar';
+export { default as CommunityItem } from './CommunityItem/CommunityItem';
 
 // Cinema
 export { default as Critics } from './Critics/Critics';

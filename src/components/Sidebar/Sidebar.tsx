@@ -9,7 +9,8 @@ import {
   IconSidebarClose,
   IconSidebarOpen,
   IconUser,
-  logo
+  logo,
+  IconCommunity
 } from '@assets/index';
 import { clearLS } from '@services/localStorageService';
 
@@ -105,6 +106,19 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                     onClick={() => navigate('/musique')}
                   />
                 </div>
+
+                {/* Community */}
+                <div
+                  className={
+                    location.pathname === '/communaute' ? 'active-item' : ''
+                  }>
+                  <IconCommunity
+                    width={35}
+                    height={35}
+                    className="sidebar__icon-item"
+                    onClick={() => navigate('/communaute')}
+                  />
+                </div>
               </div>
 
               {/* Logout */}
@@ -192,6 +206,24 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   </div>
                   <Link className="sidebar__link" to="/musique">
                     Musique
+                  </Link>
+                </div>
+
+                {/* Community */}
+                <div className="sidebar__item">
+                  <div
+                    className={
+                      location.pathname === '/communaute' ? 'active-item' : ''
+                    }>
+                    <IconCommunity
+                      width={35}
+                      height={35}
+                      className="sidebar__icon-item"
+                      onClick={() => navigate('/communaute')}
+                    />
+                  </div>
+                  <Link className="sidebar__link" to="/communaute">
+                    Communauté
                   </Link>
                 </div>
               </div>

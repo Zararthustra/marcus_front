@@ -11,3 +11,4 @@ export {
   useQueryMovie,
   useQueryTV
 } from './tmdb';
+export { useQueryCommunity } from './community';

@@ -38,3 +38,5 @@ export { default as IconMasterpiece } from './svg/IconMasterpiece';
 export { default as IconCritic } from './svg/IconCritic';
 export { default as IconVote } from './svg/IconVote';
 export { default as IconSearchMovies } from './svg/IconSearchMovies';
+export { default as IconCommunity } from './svg/IconCommunity';
+export { default as IconWatchlist } from './svg/IconWatchlist';

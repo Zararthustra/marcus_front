@@ -10,3 +10,4 @@ export type {
   ICast,
   ICrew
 } from './tmdb.interface';
+export type { ICommunity } from './community.interface';
