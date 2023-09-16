@@ -17,3 +17,6 @@ export { default as Masterpiece } from './Masterpieces/Masterpiece';
 export { default as Research } from './Research/Research';
 export { default as Releases } from './Research/Releases';
 export { default as MovieItem } from './MovieItem/MovieItem';
+export { default as MovieProviders } from './Movie/MovieProviders';
+export { default as MovieCredits } from './Movie/MovieCredits';
+export { default as MovieDescription } from './Movie/MovieDescription';

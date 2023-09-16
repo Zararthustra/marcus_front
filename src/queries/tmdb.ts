@@ -128,3 +128,57 @@ export const searchTv = async (
   });
   return data;
 };
+
+// Movie by ID
+const getMovie = async (movieId: string): Promise<IMovieResult> => {
+  const { data } = await tmdbInstance.get(`/movie/${movieId}`, {
+    params: {
+      append_to_response: 'videos,images,credits,watch/providers',
+      include_image_language: 'fr, null'
+    }
+  });
+  return data;
+};
+export const useQueryMovie = (movieId: string) => {
+  const { notification } = App.useApp();
+
+  return useQuery(['movie', movieId], () => getMovie(movieId), {
+    // Stale 5min
+    staleTime: 60_000 * 5,
+    onError: (error) =>
+      notification.error(
+        toastObject(
+          'error',
+          'Impossible de récupérer les données',
+          "Vérifiez votre connexion internet ou contactez l'administrateur"
+        )
+      )
+  });
+};
+
+// TV by ID
+const getTV = async (movieId: string): Promise<ITVResults> => {
+  const { data } = await tmdbInstance.get(`/tv/${movieId}`, {
+    params: {
+      append_to_response: 'videos,images,credits,watch/providers',
+      include_image_language: 'fr, null'
+    }
+  });
+  return data;
+};
+export const useQueryTV = (movieId: string) => {
+  const { notification } = App.useApp();
+
+  return useQuery(['tv', movieId], () => getTV(movieId), {
+    // Stale 5min
+    staleTime: 60_000 * 5,
+    onError: (error) =>
+      notification.error(
+        toastObject(
+          'error',
+          'Impossible de récupérer les données',
+          "Vérifiez votre connexion internet ou contactez l'administrateur"
+        )
+      )
+  });
+};

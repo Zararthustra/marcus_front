@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AppWrapper from '@services/AppWrapper';
 import { ModalReloadSW } from '@components/index';
-import { Cinema, Home, Movie, Music, NotFound } from '@pages/index';
+import { Cinema, Home, Movie, Music, NotFound, TV } from '@pages/index';
 
 const App = () => {
   const {
@@ -45,7 +45,8 @@ const App = () => {
             <Route element={<AppWrapper />}>
               <Route element={<Home />} path="/" />
               <Route element={<Cinema />} path="/cinema" />
-              <Route element={<Movie />} path="/cinema/:movieId" />
+              <Route element={<Movie />} path="/cinema/films/:movieId" />
+              <Route element={<TV />} path="/cinema/series/:movieId" />
               <Route element={<Music />} path="/musique" />
             </Route>
 

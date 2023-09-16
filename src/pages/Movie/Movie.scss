@@ -1,2 +1,91 @@
 .movie {
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    opacity: 0.7;
+    max-height: 21rem;
+  }
+
+  &__poster {
+    width: 20rem;
+    height: 27rem;
+    object-fit: cover;
+    box-shadow: var(--shadow-l);
+    border-radius: var(--rounded-s);
+  }
+
+  &__details {
+    max-width: 50rem;
+    width: 100%;
+
+    h1 {
+      text-align: center;
+      width: fit-content;
+      line-height: 26px;
+    }
+    p {
+      text-align: justify;
+      text-indent: 1rem;
+    }
+  }
+
+  &__persons {
+    width: 100%;
+    max-width: 45rem;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  &__person {
+    img {
+      width: 5.5rem;
+      height: 8rem;
+      object-fit: cover;
+    }
+    p {
+      text-align: center;
+      font-size: var(--font-s);
+      margin: 0;
+      line-height: 14px;
+    }
+  }
+
+  &__trailer {
+    width: 100%;
+    max-width: 50rem;
+
+    iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+  }
+
+  &__provider {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--rounded-s);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .movie {
+    margin-top: 4rem;
+
+    &__backdrop {
+      top: 4rem;
+    }
+    &__poster {
+      width: 10rem;
+      height: 15rem;
+    }
+    &__providers {
+      align-self: flex-start;
+    }
+  }
 }

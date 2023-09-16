@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { getPlatformUri } from '@utils/formatters';
+
 import './Critic.scss';
 
 interface ICriticProps {
@@ -8,6 +10,7 @@ interface ICriticProps {
   movieId: number;
   movieName: string;
   content: string;
+  platform: 'tv' | 'movie';
 }
 
 const Critic = ({
@@ -15,11 +18,12 @@ const Critic = ({
   userName,
   movieId,
   movieName,
-  content
+  content,
+  platform
 }: ICriticProps) => (
   <div className="critic">
     <header>
-      <a href={`/cinema/${movieId}`}>
+      <a href={`/cinema/${getPlatformUri(platform)}/${movieId}`}>
         <h2>{movieName}</h2>
       </a>
     </header>

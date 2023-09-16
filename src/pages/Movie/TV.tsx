@@ -6,14 +6,14 @@ import {
   MovieDescription,
   MovieProviders
 } from '@components/index';
-import { useQueryMovie } from '@queries/tmdb';
+import { useQueryTV } from '@queries/tmdb';
 import { IconClapLoader, defaultImg } from '@assets/index';
 
 import './Movie.scss';
 
-const Movie = () => {
+const TV = () => {
   const { movieId } = useParams();
-  const { data: movie, isLoading } = useQueryMovie(movieId as string);
+  const { data: movie, isLoading } = useQueryTV(movieId as string);
 
   if (isLoading)
     return (
@@ -33,20 +33,20 @@ const Movie = () => {
             ? `${import.meta.env.VITE_TMDB_IMG}/${movie.backdrop_path}`
             : defaultImg
         }
-        alt={movie.title}
+        alt={movie.name}
         className="movie__backdrop"
       />
 
       <MovieDescription
         overview={movie.overview}
-        title={movie.title}
+        title={movie.name}
         poster={movie.poster_path}
-        year={movie.release_date}
+        year={movie.first_air_date}
       />
 
       <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />
 
-      {!!movie.videos.results.length && (
+      {!!movie.videos.results.length && !!movie.videos.results[0].key && (
         <div className="movie__trailer my-4">
           <iframe
             src={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
@@ -65,4 +65,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default TV;

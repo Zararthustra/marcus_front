@@ -1,4 +1,29 @@
-export type { IRelease, IMovieResult, ITVResults };
+export type { IRelease, IMovieResult, ITVResults, ICast, ICrew };
+
+interface ICast {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string;
+  popularity: number;
+}
+interface ICrew {
+  id: number;
+  name: string;
+  job: string;
+  profile_path: string;
+  popularity: number;
+}
+
+interface IWatchProviders {
+  results: {
+    FR: {
+      flatrate: { logo_path: string; provider_name: string }[];
+      rent: { logo_path: string; provider_name: string }[];
+      buy: { logo_path: string; provider_name: string }[];
+    };
+  };
+}
 
 interface IMovieResult {
   id: number;
@@ -8,6 +33,13 @@ interface IMovieResult {
   overview: string;
   release_date: string;
   popularity: number;
+  credits: { cast: ICast[]; crew: ICrew[] };
+  videos: {
+    results: {
+      key: string;
+    }[];
+  };
+  'watch/providers': IWatchProviders;
 }
 
 interface ITVResults {
@@ -18,6 +50,13 @@ interface ITVResults {
   overview: string;
   first_air_date: string;
   popularity: number;
+  credits: { cast: ICast[]; crew: ICrew[] };
+  videos: {
+    results: {
+      key: string;
+    }[];
+  };
+  'watch/providers': IWatchProviders;
 }
 
 interface IRelease<T> {

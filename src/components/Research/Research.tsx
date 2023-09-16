@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Empty, Input } from 'antd';
+import { App, Empty, Input } from 'antd';
 
 import { IconSearch } from '@assets/index';
+import { messageObject } from '@utils/formatters';
 import { searchMovie, searchTv } from '@queries/index';
 import { MovieItem, Releases } from '@components/index';
 import { IMovieResult, IRelease, ITVResults } from '@interfaces/index';
@@ -11,17 +12,24 @@ import './Research.scss';
 interface IMovieItem extends IMovieResult, ITVResults {}
 
 const Research = () => {
+  const { message } = App.useApp();
   const [input, setInput] = useState<string>('');
   const [movies, setMovies] = useState<IRelease<Partial<IMovieItem>>>();
 
   const movieSearch = async () => {
-    if (input === '') return;
+    if (input === '') {
+      message.info(messageObject('info', "Entrez le nom d'un film"));
+      return;
+    }
     const response = await searchMovie(input);
     setMovies(response);
   };
 
   const tvSearch = async () => {
-    if (input === '') return;
+    if (input === '') {
+      message.info(messageObject('info', "Entrez le nom d'une série"));
+      return;
+    }
     const response = await searchTv(input);
     setMovies(response);
   };
@@ -57,7 +65,9 @@ const Research = () => {
       {!!!input && <Releases />}
 
       {/* Movies search */}
-      {!!movies && !!input && !!movies.total_results ? (
+      {!!movies &&
+        !!input &&
+        !!movies.total_results &&
         movies.results
           .sort((p1, p2) => {
             if (!!p1.popularity && !!p2.popularity) {
@@ -66,10 +76,7 @@ const Research = () => {
             }
             return 0;
           })
-          .map((movie, index) => <MovieItem key={index} movie={movie} />)
-      ) : (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-      )}
+          .map((movie, index) => <MovieItem key={index} movie={movie} />)}
     </div>
   );
 };

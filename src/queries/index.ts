@@ -7,5 +7,7 @@ export {
   useQueryDisney,
   useQueryAmazon,
   searchMovie,
-  searchTv
+  searchTv,
+  useQueryMovie,
+  useQueryTV
 } from './tmdb';

@@ -42,6 +42,7 @@ const Votes = ({ user }: IVotesProps) => {
             movieId={vote.movie_id}
             movieName={vote.movie_name}
             value={vote.value}
+            platform={vote.platform}
           />
         ))}
       </div>

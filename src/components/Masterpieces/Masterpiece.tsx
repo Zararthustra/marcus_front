@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { defaultImg } from '@assets/index';
 import { IMovieDetails } from '@interfaces/index';
+import { getPlatformUri } from '@utils/formatters';
 
 import './Masterpiece.scss';
 
@@ -12,6 +13,7 @@ interface IMasterpieceProps {
   movieId: number;
   movieName: string;
   movieDetails: IMovieDetails;
+  platform: 'tv' | 'movie';
 }
 
 const Masterpiece = ({
@@ -19,7 +21,8 @@ const Masterpiece = ({
   userName,
   movieId,
   movieName,
-  movieDetails
+  movieDetails,
+  platform
 }: IMasterpieceProps) => {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
 
@@ -44,7 +47,7 @@ const Masterpiece = ({
       )}
       <div className="flex-col justify-center w-100">
         <header>
-          <a href={`/cinema/${movieId}`}>
+          <a href={`/cinema/${getPlatformUri(platform)}/${movieId}`}>
             <h2>{movieName}</h2>
           </a>
         </header>

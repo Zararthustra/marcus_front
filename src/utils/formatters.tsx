@@ -117,7 +117,7 @@ export const messageObject = (
       icon: icon,
       content,
       key: key,
-      duration: type === 'loading' ? 200 : 4
+      duration: type === 'loading' ? 200 : 40
     };
 
   return {
@@ -125,3 +125,6 @@ export const messageObject = (
     content: content
   };
 };
+
+export const getPlatformUri = (platform: 'tv' | 'movie') =>
+  platform === 'tv' ? 'series' : 'films';

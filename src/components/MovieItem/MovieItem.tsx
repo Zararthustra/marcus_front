@@ -30,7 +30,7 @@ const MovieItem = ({ movie }: { movie: Partial<IMovieItem> }) => {
       )}
       <div className="flex-col justify-center w-100">
         <header>
-          <a href={`/cinema/${movie.id}`}>
+          <a href={`/cinema/${movie.title ? 'films' : 'series'}/${movie.id}`}>
             <h2>{movie.title || movie.name}</h2>
           </a>
         </header>

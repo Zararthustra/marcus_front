@@ -44,6 +44,7 @@ const Masterpieces = ({ user }: IMasterpiecesProps) => {
           movieId={masterpiece.movie_id}
           movieName={masterpiece.movie_name}
           movieDetails={masterpiece.movie_details}
+          platform={masterpiece.platform}
         />
       ))}
 

@@ -41,6 +41,7 @@ const Critics = ({ user }: ICriticsProps) => {
           movieId={critic.movie_id}
           movieName={critic.movie_name}
           content={critic.content}
+          platform={critic.platform}
         />
       ))}
 

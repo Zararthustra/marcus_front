@@ -34,7 +34,7 @@ const Releases = () => {
           {cinema.results.map((movie, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/cinema/${movie.id}`)}
+              onClick={() => navigate(`/cinema/films/${movie.id}`)}
               className="flex-col align-center">
               <img
                 className="releases__poster"
@@ -54,7 +54,7 @@ const Releases = () => {
           {netflix.results.map((movie, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/cinema/${movie.id}`)}
+              onClick={() => navigate(`/cinema/series/${movie.id}`)}
               className="flex-col align-center">
               <img
                 className="releases__poster"
@@ -74,7 +74,7 @@ const Releases = () => {
           {disney.results.map((movie, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/cinema/${movie.id}`)}
+              onClick={() => navigate(`/cinema/series/${movie.id}`)}
               className="flex-col align-center">
               <img
                 className="releases__poster"
@@ -94,7 +94,7 @@ const Releases = () => {
           {amazon.results.map((movie, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/cinema/${movie.id}`)}
+              onClick={() => navigate(`/cinema/series/${movie.id}`)}
               className="flex-col align-center">
               <img
                 className="releases__poster"
