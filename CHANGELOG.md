@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/Zararthustra/marcus_front/compare/v0.1.1...v0.1.2) (2023-09-16)
+
+
+### Features
+
+* **Movie:** add movie (query, page, interface, style) + minor fixes ([07f10af](https://github.com/Zararthustra/marcus_front/commit/07f10afabcc2e358e55cae1eeff79fa0b9c5c6c8))
+
+
+### Bug Fixes
+
+* build pwa types needs ([816dd8f](https://github.com/Zararthustra/marcus_front/commit/816dd8fa03899dd0fd563dc004a7e78cddaaf702))
+
 ### [0.1.1](https://github.com/Zararthustra/marcus_front/compare/v0.1.0...v0.1.1) (2023-09-16)
 
 
