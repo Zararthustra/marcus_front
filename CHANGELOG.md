@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/Zararthustra/marcus_front/compare/v0.1.0...v0.1.1) (2023-09-16)
+
+
+### Bug Fixes
+
+* refactor cinema ([ade4e9a](https://github.com/Zararthustra/marcus_front/commit/ade4e9ab01b35bd4af286526d6e4b73bdc5db831))
+
 ## [0.1.0](https://github.com/Zararthustra/marcus_front/compare/v0.0.6...v0.1.0) (2023-09-15)
 
 ### [0.0.6](https://github.com/Zararthustra/marcus_front/compare/v0.0.5...v0.0.6) (2023-09-15)
