@@ -23,9 +23,14 @@ export default defineConfig({
         scope: '/',
         start_url: '/',
         short_name: 'Marcus',
-        description: "Partage et critique de chefs d'oeuvre",
+        description: "Partage et critique de chefs d'oeuvres",
         name: 'Marcus',
         icons: [
+          {
+            src: 'favicon.ico',
+            sizes: '64x64 32x32 24x24 16x16',
+            type: 'image/x-icon'
+          },
           {
             src: '/logo-192.png',
             sizes: '192x192',

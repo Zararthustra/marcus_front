@@ -26,7 +26,7 @@
       "@queries/*": ["./src/queries/*"]
     }
   },
-  "include": ["src", "vite-env.d.ts", "node_modules/vite-plugin-pwa/client.d.ts"],
+  "include": ["src", "vite-env.d.ts", "node_modules/vite-plugin-pwa/**.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "types": [
     "vite-plugin-pwa/client"
