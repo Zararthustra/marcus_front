@@ -1,8 +1,10 @@
 import { Empty } from 'antd';
 
-import { IconClapLoader } from '@assets/index';
-import { useQueryCommunity } from '@queries/index';
 import { CommunityItem } from '@components/index';
+import { useQueryCommunity } from '@queries/index';
+import { IconClapLoader, community } from '@assets/index';
+
+import './Community.scss';
 
 const Community = () => {
   const { data: users, isLoading } = useQueryCommunity();
@@ -20,9 +22,29 @@ const Community = () => {
 
   return (
     <main
-      className="community mt-5 flex-col align-center gap-2"
+      className="community pb-5 flex-col align-center"
       style={{ minHeight: '55dvh' }}>
-      <h1>Communauté</h1>
+      <header className="community__header w-100">
+        <img src={community} alt="sièges de cinéma" />
+        <div className="flex align-center">
+          <div
+            className="w-100"
+            style={{
+              backgroundColor: 'var(--color-primary-700)',
+              height: '2px'
+            }}
+          />
+          <h1 className="my-1 px-2">Communauté</h1>
+          <div
+            className="w-100"
+            style={{
+              backgroundColor: 'var(--color-primary-700)',
+              height: '2px'
+            }}
+          />
+        </div>
+      </header>
+
       <div
         className="flex flex-wrap justify-center gap-1 mt-2"
         style={{ maxWidth: '50rem' }}>

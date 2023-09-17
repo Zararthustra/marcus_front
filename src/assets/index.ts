@@ -8,6 +8,7 @@ export { default as seats } from './img/seats.png';
 export { default as projector } from './img/projector.jpg';
 export { default as logo } from './img/logo.png';
 export { default as defaultImg } from './img/default_img.jpg';
+export { default as community } from './img/community.png';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';

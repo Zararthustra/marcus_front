@@ -20,6 +20,23 @@ const Cinema = () => {
     <main className="cinema pb-5">
       <header className="cinema__header">
         <img src={seats} alt="sièges de cinéma" />
+        <div className="flex align-center">
+          <div
+            className="w-100"
+            style={{
+              backgroundColor: 'var(--color-primary-700)',
+              height: '2px'
+            }}
+          />
+          <h1 className="my-1 px-2">Cinéma</h1>
+          <div
+            className="w-100"
+            style={{
+              backgroundColor: 'var(--color-primary-700)',
+              height: '2px'
+            }}
+          />
+        </div>
       </header>
 
       <div className="w-100 flex justify-center px-1">
