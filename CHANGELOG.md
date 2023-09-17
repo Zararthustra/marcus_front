@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/Zararthustra/marcus_front/compare/v0.1.3...v0.1.4) (2023-09-17)
+
+
+### Features
+
+* **Critics, Footer:** add footer and movie critics ([bee9044](https://github.com/Zararthustra/marcus_front/commit/bee90443abff4cf5e39250447f54290ce0378b9d))
+
 ### [0.1.3](https://github.com/Zararthustra/marcus_front/compare/v0.1.2...v0.1.3) (2023-09-16)
 
 
