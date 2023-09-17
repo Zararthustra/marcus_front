@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/Zararthustra/marcus_front/compare/v0.1.5...v0.1.6) (2023-09-17)
+
+
+### Features
+
+* **UserProfile:** add user profile (query, page, interface, style) + watchlists + minor fixes ([1b577c8](https://github.com/Zararthustra/marcus_front/commit/1b577c8b83b3079b6bbac3399e2e7954387b6313))
+
+
+### Bug Fixes
+
+* movie providers ([7988094](https://github.com/Zararthustra/marcus_front/commit/7988094e5e7977e15698bbc0d3c25cf15be6fe02))
+
 ### [0.1.5](https://github.com/Zararthustra/marcus_front/compare/v0.1.4...v0.1.5) (2023-09-17)
 
 ### [0.1.4](https://github.com/Zararthustra/marcus_front/compare/v0.1.3...v0.1.4) (2023-09-17)
