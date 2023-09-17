@@ -7,7 +7,7 @@ import './Footer.scss';
 const Footer = () => {
   const location = useLocation();
 
-  if (location.pathname === '/login') return;
+  if (location.pathname === '/login') return <></>;
 
   return (
     <footer

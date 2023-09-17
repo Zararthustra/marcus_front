@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/Zararthustra/marcus_front/compare/v0.2.0...v0.2.1) (2023-09-17)
+
+
+### Features
+
+* **Login:** add login (query, page, interface, style) + minor fixes ([c294972](https://github.com/Zararthustra/marcus_front/commit/c294972fe524bc38e081c5837d3fafbf1d611419))
+
+
+### Bug Fixes
+
+* page titles + community header ([6408b82](https://github.com/Zararthustra/marcus_front/commit/6408b8232013682b77007db883aa14bba704e054))
+
 ## [0.2.0](https://github.com/Zararthustra/marcus_front/compare/v0.1.6...v0.2.0) (2023-09-17)
 
 ### [0.1.6](https://github.com/Zararthustra/marcus_front/compare/v0.1.5...v0.1.6) (2023-09-17)
