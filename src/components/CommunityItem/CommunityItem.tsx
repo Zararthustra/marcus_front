@@ -24,7 +24,7 @@ const CommunityItem = ({
   return (
     <article
       className="communityItem"
-      onClick={() => navigate(`/communaute/${username}`)}>
+      onClick={() => navigate(`/communaute/${id}`)}>
       <header>{capitalizeFirstLetter(username)}</header>
       <footer className="flex justify-center align-center gap-05 py-05">
         <div className="flex-col justify-between align-center">

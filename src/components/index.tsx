@@ -14,6 +14,7 @@ export { default as CriticMovie } from './Critics/CriticMovie';
 export { default as Votes } from './Votes/Votes';
 export { default as Vote } from './Votes/Vote';
 export { default as Masterpieces } from './Masterpieces/Masterpieces';
+export { default as Watchlists } from './Masterpieces/Watchlists';
 export { default as Masterpiece } from './Masterpieces/Masterpiece';
 export { default as Research } from './Research/Research';
 export { default as Releases } from './Research/Releases';

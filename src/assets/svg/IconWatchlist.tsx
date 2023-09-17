@@ -1,8 +1,8 @@
 import { IIcon } from '@interfaces/index';
 
 const IconWatchlist = ({
-  width = 24,
-  height = 24,
+  width = 30,
+  height = 30,
   className = '',
   style,
   color,

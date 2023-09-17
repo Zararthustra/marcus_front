@@ -18,7 +18,7 @@ const Masterpieces = ({ user }: IMasterpiecesProps) => {
 
   if (isLoading)
     return (
-      <div className="flex-col justify-center gap-3">
+      <div className="flex-col align-center gap-3">
         <h1 className="self-center">Chefs d'oeuvres</h1>
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>

@@ -1,55 +1,53 @@
 import { useState } from 'react';
 import { Empty, Pagination } from 'antd';
 
-import { Vote } from '@components/index';
 import { IconClapLoader } from '@assets/index';
-import { useQueryVotes } from '@queries/index';
+import { Masterpiece } from '@components/index';
+import { useQueryWatchlists } from '@queries/index';
 
-interface IVotesProps {
+interface IWatchlistsProps {
   user?: number;
 }
 
-const Votes = ({ user }: IVotesProps) => {
+const Watchlists = ({ user }: IWatchlistsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: votes, isLoading } = useQueryVotes(currentPage, user);
+  const { data: watchlists, isLoading } = useQueryWatchlists(currentPage, user);
 
   if (isLoading)
     return (
       <div className="flex-col align-center gap-3">
-        <h1 className="self-center">Votes</h1>
+        <h1 className="self-center">Watchlist</h1>
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
     );
 
-  if (!!!votes)
+  if (!!!watchlists)
     return (
       <div className="flex-col justify-center gap-3">
-        <h1 className="self-center">Votes</h1>
+        <h1 className="self-center">Watchlist</h1>
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </div>
     );
 
   return (
     <div className="flex-col justify-center gap-3">
-      <h1 className="self-center">Votes</h1>
+      <h1 className="self-center">Watchlist</h1>
 
-      <div className="flex flex-wrap gap-05 justify-evenly">
-        {votes.data.map((vote, index) => (
-          <Vote
-            key={index}
-            userId={vote.user_id}
-            userName={vote.user_name}
-            movieId={vote.movie_id}
-            movieName={vote.movie_name}
-            value={vote.value}
-            platform={vote.platform}
-          />
-        ))}
-      </div>
+      {watchlists.data.map((movie, index) => (
+        <Masterpiece
+          key={index}
+          userId={movie.user_id}
+          userName={movie.user_name}
+          movieId={movie.movie_id}
+          movieName={movie.movie_name}
+          movieDetails={movie.movie_details}
+          platform={movie.platform}
+        />
+      ))}
 
       <Pagination
-        className="self-center"
-        total={votes.total}
+        className="self-center mb-2"
+        total={watchlists.total}
         onChange={(page) => setCurrentPage(page)}
         // showTotal={(total, range) => `${range[0]}-${range[1]} sur ${total}`}
         defaultPageSize={10}
@@ -62,4 +60,4 @@ const Votes = ({ user }: IVotesProps) => {
   );
 };
 
-export default Votes;
+export default Watchlists;

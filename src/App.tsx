@@ -10,7 +10,8 @@ import {
   Movie,
   Music,
   NotFound,
-  TV
+  TV,
+  UserProfile
 } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
 import { Footer, ModalReloadSW } from '@components/index';
@@ -52,12 +53,15 @@ const App = () => {
           <Routes>
             <Route element={<AppWrapper />}>
               <Route element={<Home />} path="/" />
+
               <Route element={<Cinema />} path="/cinema" />
               <Route element={<Movie />} path="/cinema/films/:movieId" />
               <Route element={<TV />} path="/cinema/series/:movieId" />
+
               <Route element={<Music />} path="/musique" />
+
               <Route element={<Community />} path="/communaute" />
-              <Route element={<div>User</div>} path="/communaute/:userName" />
+              <Route element={<UserProfile />} path="/communaute/:userId" />
             </Route>
 
             {/* 404 */}

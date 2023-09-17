@@ -15,7 +15,7 @@ const Critics = ({ user }: ICriticsProps) => {
 
   if (isLoading)
     return (
-      <div className="flex-col justify-center gap-1">
+      <div className="flex-col align-center gap-1">
         <h1 className="self-center mb-2">Critiques</h1>
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
@@ -30,7 +30,7 @@ const Critics = ({ user }: ICriticsProps) => {
     );
 
   return (
-    <div className="flex-col justify-center gap-1">
+    <div className="flex-col justify-center align-center gap-1 w-100">
       <h1 className="self-center mb-2">Critiques</h1>
 
       {critics.data.map((critic, index) => (

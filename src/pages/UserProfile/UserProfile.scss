@@ -1,0 +1,27 @@
+.UserProfile {
+  min-height: 60dvh;
+  &__header {
+    text-align: center;
+
+    img {
+      width: 100%;
+      max-height: 20vw;
+      object-fit: cover;
+    }
+  }
+
+  &__tabs {
+    width: 100%;
+    max-width: 80rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .UserProfile {
+    &__header {
+      img {
+        max-height: 8rem;
+      }
+    }
+  }
+}
