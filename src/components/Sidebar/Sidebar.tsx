@@ -10,12 +10,13 @@ import {
   IconSidebarOpen,
   IconUser,
   logo,
-  IconCommunity
+  IconCommunity,
+  IconMusic,
+  IconLogin
 } from '@assets/index';
-import { clearLS } from '@services/localStorageService';
+import { clearLS, getLS } from '@services/localStorageService';
 
 import './Sidebar.scss';
-import IconMusic from '@assets/svg/IconMusic';
 
 interface ISidebarProps {
   isOpenSidebar: boolean;
@@ -24,8 +25,10 @@ interface ISidebarProps {
 
 const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
   const navigate = useNavigate();
+  const isLogged = !!getLS('accessToken');
   const location = useLocation();
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+  console.log(isLogged);
 
   const handleReset = () => {
     clearLS();
@@ -121,18 +124,28 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                 </div>
               </div>
 
-              {/* Logout */}
-              <div className="flex-col align-center">
-                <IconOnOff
-                  width={35}
-                  height={35}
-                  className="sidebar__icon-logout"
-                  onClick={handleReset}
-                />
+              {/* Login */}
+              <div className="flex-col align-center gap-05">
+                {isLogged ? (
+                  <IconOnOff
+                    width={35}
+                    height={35}
+                    className="sidebar__icon-logout"
+                    onClick={handleReset}
+                  />
+                ) : (
+                  <IconLogin
+                    width={35}
+                    height={35}
+                    className="sidebar__icon-login"
+                    onClick={() => navigate('/login')}
+                  />
+                )}
+
                 <p
                   className="mt-0 mb-05 f-xs"
                   style={{
-                    color: 'var(--color-grey-300)'
+                    color: 'var(--color-grey-400)'
                   }}>
                   {APP_VERSION}
                 </p>
@@ -229,22 +242,38 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               </div>
 
               {/* Logout */}
-              <div className="flex-col">
-                <div className="sidebar__item">
-                  <IconOnOff
-                    width={35}
-                    height={35}
-                    className="sidebar__icon-logout"
-                    onClick={handleReset}
-                  />
-                  <div className="sidebar__link" onClick={handleReset}>
-                    Déconnexion
+              <div className="flex-col gap-05">
+                {isLogged ? (
+                  <div className="sidebar__item">
+                    <IconOnOff
+                      width={35}
+                      height={35}
+                      className="sidebar__icon-logout"
+                      onClick={handleReset}
+                    />
+                    <div className="sidebar__link" onClick={handleReset}>
+                      Déconnexion
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="sidebar__item">
+                    <IconLogin
+                      width={35}
+                      height={35}
+                      className="sidebar__icon-login"
+                      onClick={() => navigate('/login')}
+                    />
+                    <div
+                      className="sidebar__link"
+                      onClick={() => navigate('/login')}>
+                      Connexion
+                    </div>
+                  </div>
+                )}
                 <p
                   className="f-xs self-end mr-1 mt-0 mb-05"
                   style={{
-                    color: 'var(--color-grey-300)'
+                    color: 'var(--color-grey-400)'
                   }}>
                   Version {APP_VERSION}
                 </p>

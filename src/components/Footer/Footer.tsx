@@ -1,8 +1,14 @@
+import { useLocation } from 'react-router-dom';
+
 import { seats } from '@assets/index';
 
 import './Footer.scss';
 
 const Footer = () => {
+  const location = useLocation();
+
+  if (location.pathname === '/login') return;
+
   return (
     <footer
       className="footer flex-col justify-center align-center"

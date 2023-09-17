@@ -13,7 +13,7 @@ const IconLoader = ({
     width={width}
     height={height}
     onClick={onClick}
-    className={className}
+    className={'loader-default'}
     style={style}
     fill="none"
     viewBox={'0 0 24 24'}>
@@ -24,8 +24,8 @@ const IconLoader = ({
         x2="50%"
         y1="5.271%"
         y2="91.793%">
-        <stop offset="0%" stop-color="currentColor" />
-        <stop offset="100%" stop-color="currentColor" stop-opacity=".55" />
+        <stop offset="0%" stopColor="currentColor" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity=".55" />
       </linearGradient>
       <linearGradient
         id="mingcuteLoadingLine1"
@@ -33,8 +33,8 @@ const IconLoader = ({
         x2="50%"
         y1="8.877%"
         y2="90.415%">
-        <stop offset="0%" stop-color="currentColor" stop-opacity="0" />
-        <stop offset="100%" stop-color="currentColor" stop-opacity=".55" />
+        <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity=".55" />
       </linearGradient>
     </defs>
     <g fill="none">

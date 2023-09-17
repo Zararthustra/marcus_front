@@ -1,14 +1,12 @@
 // Images
-export { default as customer1 } from './img/customer1.png';
-export { default as customer2 } from './img/customer2.png';
-export { default as customer3 } from './img/customer3.png';
 export { default as notfound } from './img/notfound.gif';
-export { default as blank_profile } from './img/blank_profile.png';
 export { default as seats } from './img/seats.png';
 export { default as projector } from './img/projector.jpg';
 export { default as logo } from './img/logo.png';
 export { default as defaultImg } from './img/default_img.jpg';
 export { default as community } from './img/community.png';
+export { default as login } from './img/login.png';
+export { default as logologin } from './img/logo-login.png';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';
@@ -42,3 +40,4 @@ export { default as IconVote } from './svg/IconVote';
 export { default as IconSearchMovies } from './svg/IconSearchMovies';
 export { default as IconCommunity } from './svg/IconCommunity';
 export { default as IconWatchlist } from './svg/IconWatchlist';
+export { default as IconMusic } from './svg/IconMusic';

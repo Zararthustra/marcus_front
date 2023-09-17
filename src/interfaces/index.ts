@@ -11,3 +11,4 @@ export type {
   ICrew
 } from './tmdb.interface';
 export type { ICommunity } from './community.interface';
+export type { ILoginRequest, ILoginResponse } from './login.interface';

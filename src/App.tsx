@@ -7,6 +7,7 @@ import {
   Cinema,
   Community,
   Home,
+  Login,
   Movie,
   Music,
   NotFound,
@@ -51,6 +52,8 @@ const App = () => {
             updateServiceWorker={updateServiceWorker}
           />
           <Routes>
+            <Route element={<Login />} path="/login" />
+
             <Route element={<AppWrapper />}>
               <Route element={<Home />} path="/" />
 

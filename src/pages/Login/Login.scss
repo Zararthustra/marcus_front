@@ -1,0 +1,46 @@
+.login {
+  height: 100dvh;
+  &__logo {
+    object-fit: cover;
+    width: 13rem;
+    cursor: pointer;
+  }
+
+  &__img {
+    object-fit: cover;
+    height: 100vh;
+  }
+
+  &__no-account {
+    p {
+      font-size: var(--font-s);
+      margin: 0;
+    }
+    a {
+      text-align: center;
+      font-size: var(--font-s);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+
+  &__version {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: var(--color-grey-400);
+    font-size: var(--font-s);
+  }
+}
+
+@media (max-width: 800px) {
+  .login {
+    main {
+      width: 100%;
+    }
+
+    &__img {
+      display: none;
+    }
+  }
+}

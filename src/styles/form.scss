@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 25rem;
+
+  &__field {
+    margin: 0.5rem 0;
+  }
+
+  &__label {
+    font-family: var(--font-title);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  &__error {
+    margin: 5px 0 0;
+    color: var(--color-red-500);
+    font-size: var(--font-s);
+
+    strong,
+    i,
+    p {
+      margin: 0;
+      font-size: var(--font-s);
+    }
+  }
+}

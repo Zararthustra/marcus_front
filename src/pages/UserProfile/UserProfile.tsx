@@ -23,7 +23,6 @@ const UserProfile = () => {
   const tabs = [IconCritic, IconVote, IconMasterpiece, IconWatchlist];
 
   const { data: user, isLoading } = useQueryUser(userId);
-  console.log(user);
 
   if (isLoading)
     return (
