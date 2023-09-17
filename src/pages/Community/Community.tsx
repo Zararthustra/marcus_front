@@ -24,7 +24,7 @@ const Community = () => {
       style={{ minHeight: '55dvh' }}>
       <h1>Communauté</h1>
       <div
-        className="flex flex-wrap justify-center gap-1"
+        className="flex flex-wrap justify-center gap-1 mt-2"
         style={{ maxWidth: '50rem' }}>
         {users.map((user, index) => (
           <CommunityItem

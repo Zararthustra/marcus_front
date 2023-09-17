@@ -21,7 +21,7 @@ const Movie = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center mt-5">
+      <div className="movie flex justify-center mt-5">
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
     );
@@ -60,23 +60,28 @@ const Movie = () => {
         </div>
       )}
 
-      <MovieProviders
-        flatrate={movie['watch/providers'].results.FR?.flatrate}
-        rent={movie['watch/providers'].results.FR?.rent}
-        buy={movie['watch/providers'].results.FR?.buy}
-      />
+      {!!movie['watch/providers'].results.FR && (
+        <MovieProviders
+          flatrate={movie['watch/providers'].results.FR?.flatrate}
+          rent={movie['watch/providers'].results.FR?.rent}
+          buy={movie['watch/providers'].results.FR?.buy}
+        />
+      )}
 
-      {movieCritics && <h1 className="my-2">Critiques</h1>}
-      {movieCritics &&
-        movieCritics.data.map((critic, index) => (
-          <CriticMovie
-            key={index}
-            userId={critic.user_id}
-            userName={critic.user_name}
-            content={critic.content}
-            vote={critic.vote}
-          />
-        ))}
+      {!!movieCritics && !!movieCritics.data.length && (
+        <>
+          <h1 className="my-2">Critiques</h1>
+          {movieCritics.data.map((critic, index) => (
+            <CriticMovie
+              key={index}
+              userId={critic.user_id}
+              userName={critic.user_name}
+              content={critic.content}
+              vote={critic.vote}
+            />
+          ))}
+        </>
+      )}
     </main>
   );
 };
