@@ -14,4 +14,8 @@ export {
 } from './tmdb';
 export { useQueryCommunity } from './community';
 export { useQueryUser } from './user';
-export { useMutationLogin, useMutationReconnect } from './login';
+export {
+  useMutationLogin,
+  useMutationReconnect,
+  useMutationRegister
+} from './login';

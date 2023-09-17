@@ -11,6 +11,7 @@ import {
   Movie,
   Music,
   NotFound,
+  Register,
   TV,
   UserProfile
 } from '@pages/index';
@@ -53,6 +54,7 @@ const App = () => {
           />
           <Routes>
             <Route element={<Login />} path="/login" />
+            <Route element={<Register />} path="/register" />
 
             <Route element={<AppWrapper />}>
               <Route element={<Home />} path="/" />

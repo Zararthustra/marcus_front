@@ -1,4 +1,5 @@
 export { default as Login } from './Login/Login';
+export { default as Register } from './Login/Register';
 export { default as Home } from './Home/Home';
 export { default as Cinema } from './Cinema/Cinema';
 export { default as Movie } from './Movie/Movie';

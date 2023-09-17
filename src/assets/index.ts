@@ -7,6 +7,7 @@ export { default as defaultImg } from './img/default_img.jpg';
 export { default as community } from './img/community.png';
 export { default as login } from './img/login.png';
 export { default as logologin } from './img/logo-login.png';
+export { default as tickets } from './img/tickets.jpg';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';

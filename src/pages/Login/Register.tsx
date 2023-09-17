@@ -4,14 +4,14 @@ import { string, object } from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '@components/index';
-import { login, logologin } from '@assets/index';
-import { useMutationLogin } from '@queries/index';
+import { tickets, logologin } from '@assets/index';
+import { useMutationRegister } from '@queries/index';
 
 import './Login.scss';
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
-  const { mutate, isLoading, isError } = useMutationLogin();
+  const { mutate, isLoading, isError } = useMutationRegister();
 
   const onSubmitHandler = async (values: {
     username: string;
@@ -81,20 +81,20 @@ const Login = () => {
             disabled={!!errors.username || !!errors.password}
             loading={isLoading}
             className="my-3 w-100 px-0">
-            Se connecter
+            Créer mon compte
           </Button>
 
           <div className="login__no-account flex-col align-center my-1">
-            <p>Pas encore de compte ?</p>
-            <Link to={'/register'}>Créer un compte</Link>
+            <p>Déjà un compte ?</p>
+            <Link to={'/login'}>Se connecter</Link>
           </div>
         </form>
         <div className="login__version">Version: {APP_VERSION}</div>
       </main>
 
-      <img src={login} alt="Sièges de cinéma" className="login__img w-50" />
+      <img src={tickets} alt="Sièges de cinéma" className="login__img w-50" />
     </div>
   );
 };
 
-export default Login;
+export default Register;

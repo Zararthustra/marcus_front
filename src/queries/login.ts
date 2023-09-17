@@ -5,14 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 import {
+  getLS,
   setAccessToken,
   setLS,
   setRefreshToken
 } from '@services/localStorageService';
 import axiosInstance from './axios';
-import { toastObject } from '@utils/formatters';
+import { messageObject, toastObject } from '@utils/formatters';
 import { ILoginRequest, ILoginResponse } from '@interfaces/index';
 
+// Login
 const login = async (payload: ILoginRequest) => {
   const { data } = await axiosInstance.post<ILoginResponse>(`/token/`, payload);
   return data;
@@ -60,6 +62,7 @@ export const useMutationLogin = () => {
   });
 };
 
+// Reconnect
 const reconnect = async (refreshToken: string) => {
   const { data } = await axiosInstance.post<ILoginResponse>(`/token/refresh/`, {
     refresh: refreshToken
@@ -105,5 +108,54 @@ export const useMutationReconnect = () => {
           `Une erreur est survenue, veuillez vous reconnecter`
         )
       )
+  });
+};
+
+// Register
+const register = async (payload: ILoginRequest) => {
+  const { data } = await axiosInstance.post(`/register`, payload);
+  return data;
+};
+export const useMutationRegister = () => {
+  const navigate = useNavigate();
+  const { notification, message } = App.useApp();
+
+  return useMutation(register, {
+    onMutate: () => {
+      message.open(
+        messageObject(
+          'loading',
+          'Création de votre compte...',
+          'useMutationRegister'
+        )
+      );
+    },
+    onSuccess: (response) => {
+      message.success(
+        messageObject(
+          'success',
+          'Compte créé, vous pouvez vous connecter.',
+          'useMutationRegister'
+        )
+      );
+      navigate('/login');
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationRegister'
+        )
+      );
+      if (error.response?.status === 400)
+        notification.error(
+          toastObject(
+            'error',
+            'Compte existant',
+            'Veuillez choisir un autre nom de compte'
+          )
+        );
+    }
   });
 };
