@@ -7,7 +7,7 @@ interface IMovieProvidersProps {
 }
 
 const MovieProviders = ({ flatrate, rent, buy }: IMovieProvidersProps) => (
-  <div className="movie__providers my-2">
+  <div className="movie__providers my-2 tag--info p-1 br-m">
     {/* Flatrate */}
     {!!flatrate && <h3>À voir sur</h3>}
     {!!flatrate && (
@@ -22,6 +22,7 @@ const MovieProviders = ({ flatrate, rent, buy }: IMovieProvidersProps) => (
                 : defaultImg
             }
             alt={item.provider_name}
+            title={item.provider_name}
           />
         ))}
       </div>
@@ -41,6 +42,7 @@ const MovieProviders = ({ flatrate, rent, buy }: IMovieProvidersProps) => (
                 : defaultImg
             }
             alt={item.provider_name}
+            title={item.provider_name}
           />
         ))}
       </div>
@@ -60,6 +62,7 @@ const MovieProviders = ({ flatrate, rent, buy }: IMovieProvidersProps) => (
                 : defaultImg
             }
             alt={item.provider_name}
+            title={item.provider_name}
           />
         ))}
       </div>

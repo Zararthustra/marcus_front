@@ -1,4 +1,4 @@
-export { useQueryCritics } from './critic';
+export { useQueryCritics, useQueryMovieCritics } from './critic';
 export { useQueryVotes } from './vote';
 export { useQueryMasterpieces } from './masterpiece';
 export {

@@ -2,8 +2,8 @@ import { App } from 'antd';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import axiosInstance from './axios';
-import { ICritic, IPagination } from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
+import { ICritic, IMovieCritic, IPagination } from '@interfaces/index';
 
 // =====
 // Axios
@@ -27,6 +27,13 @@ const getCritics = async (
   const { data } = await axiosInstance.get('/critics', {
     params
   });
+  return data;
+};
+
+const getMovieCritics = async (
+  movieId: string
+): Promise<{ data: IMovieCritic[] }> => {
+  const { data } = await axiosInstance.get(`/critics?movie_id=${movieId}`);
   return data;
 };
 
@@ -105,6 +112,22 @@ export const useQueryCritics = (pageNumber: number, userId?: number) => {
         )
     }
   );
+};
+export const useQueryMovieCritics = (movieId: string) => {
+  const { notification } = App.useApp();
+
+  return useQuery(['critics', movieId], () => getMovieCritics(movieId), {
+    // Stale 5min
+    staleTime: 60_000 * 5,
+    onError: (error) =>
+      notification.error(
+        toastObject(
+          'error',
+          'Impossible de récupérer les données',
+          "Vérifiez votre connexion internet ou contactez l'administrateur"
+        )
+      )
+  });
 };
 
 // export const useQueryRetrieveOne = (id: number) => {

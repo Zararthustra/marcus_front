@@ -13,7 +13,7 @@ import {
   TV
 } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
-import { ModalReloadSW } from '@components/index';
+import { Footer, ModalReloadSW } from '@components/index';
 
 const App = () => {
   const {
@@ -63,6 +63,7 @@ const App = () => {
             {/* 404 */}
             <Route path="/*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </AntApp>
     </ConfigProvider>

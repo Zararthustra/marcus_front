@@ -1,0 +1,23 @@
+.footer {
+  padding: 2rem 0 10rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 45%;
+  margin-left: 3.5rem;
+  margin-top: 5rem;
+  color: white;
+  text-align: center;
+
+  a {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    margin-left: 0;
+    background-position: center;
+  }
+}

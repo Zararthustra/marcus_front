@@ -2,6 +2,8 @@ import { Empty } from 'antd';
 import { useParams } from 'react-router-dom';
 
 import {
+  Critic,
+  CriticMovie,
   MovieCredits,
   MovieDescription,
   MovieProviders
@@ -10,10 +12,12 @@ import { useQueryMovie } from '@queries/tmdb';
 import { IconClapLoader, defaultImg } from '@assets/index';
 
 import './Movie.scss';
+import { useQueryMovieCritics } from '@queries/critic';
 
 const Movie = () => {
   const { movieId } = useParams();
   const { data: movie, isLoading } = useQueryMovie(movieId as string);
+  const { data: movieCritics } = useQueryMovieCritics(movieId as string);
 
   if (isLoading)
     return (
@@ -61,6 +65,18 @@ const Movie = () => {
         rent={movie['watch/providers'].results.FR?.rent}
         buy={movie['watch/providers'].results.FR?.buy}
       />
+
+      {movieCritics && <h1 className="my-2">Critiques</h1>}
+      {movieCritics &&
+        movieCritics.data.map((critic, index) => (
+          <CriticMovie
+            key={index}
+            userId={critic.user_id}
+            userName={critic.user_name}
+            content={critic.content}
+            vote={critic.vote}
+          />
+        ))}
     </main>
   );
 };

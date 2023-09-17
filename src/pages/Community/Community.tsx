@@ -19,7 +19,9 @@ const Community = () => {
     return <Empty className="mt-5" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 
   return (
-    <main className="community mt-5 flex-col align-center gap-2">
+    <main
+      className="community mt-5 flex-col align-center gap-2"
+      style={{ minHeight: '55dvh' }}>
       <h1>Communauté</h1>
       <div
         className="flex flex-wrap justify-center gap-1"
