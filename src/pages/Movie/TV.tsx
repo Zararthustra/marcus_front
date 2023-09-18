@@ -2,22 +2,40 @@ import { Empty } from 'antd';
 import { useParams } from 'react-router-dom';
 
 import {
+  Button,
+  CriticMovie,
   MovieCredits,
   MovieDescription,
   MovieProviders
 } from '@components/index';
-import { useQueryTV } from '@queries/tmdb';
-import { IconClapLoader, defaultImg } from '@assets/index';
+import {
+  IconClapLoader,
+  IconCritic,
+  IconVote,
+  defaultImg
+} from '@assets/index';
+import {
+  useQueryTV,
+  useQueryMasterpieces,
+  useQueryMovieCritics,
+  useQueryWatchlists
+} from '@queries/index';
+import { getLS } from '@services/localStorageService';
 
 import './Movie.scss';
 
 const TV = () => {
   const { movieId } = useParams();
+  const userId = parseInt(getLS('userId'));
+  const userName = getLS('name');
   const { data: movie, isLoading } = useQueryTV(movieId as string);
+  const { data: masterpieces } = useQueryMasterpieces(undefined, userId);
+  const { data: watchlists } = useQueryWatchlists(undefined, userId);
+  const { data: movieCritics } = useQueryMovieCritics(movieId as string);
 
   if (isLoading)
     return (
-      <div className="flex justify-center mt-5">
+      <div className="movie flex justify-center mt-5">
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
     );
@@ -38,11 +56,27 @@ const TV = () => {
       />
 
       <MovieDescription
+        movieId={movie.id}
+        userName={userName}
+        platform="tv"
         overview={movie.overview}
         title={movie.name}
         poster={movie.poster_path}
         year={movie.first_air_date}
+        masterpieces={masterpieces?.data}
+        watchlists={watchlists?.data}
       />
+
+      <div className="movie__buttons flex gap-05 mb-3">
+        <Button primary>
+          <IconCritic width={20} height={20} />
+          <p className="m-0">Critiquer</p>
+        </Button>
+        <Button primary>
+          <IconVote width={20} height={20} />
+          <p className="m-0">Voter</p>
+        </Button>
+      </div>
 
       <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />
 
@@ -61,6 +95,21 @@ const TV = () => {
         rent={movie['watch/providers'].results.FR?.rent}
         buy={movie['watch/providers'].results.FR?.buy}
       />
+
+      {!!movieCritics && !!movieCritics.data.length && (
+        <>
+          <h1 className="my-2">Critiques</h1>
+          {movieCritics.data.map((critic, index) => (
+            <CriticMovie
+              key={index}
+              userId={critic.user_id}
+              userName={critic.user_name}
+              content={critic.content}
+              vote={critic.vote}
+            />
+          ))}
+        </>
+      )}
     </main>
   );
 };

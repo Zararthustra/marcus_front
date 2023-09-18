@@ -1,23 +1,75 @@
 import { App } from 'antd';
+import { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import {
+  IMasterpiece,
+  IMasterpieceRequest,
+  IPagination
+} from '@interfaces/index';
 import axiosInstance from './axios';
-import { IMasterpiece, IPagination } from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
 
-// =====
-// Axios
-// =====
-
 // CREATE
-// const create = async (payload: any) => {
-//   const { data } = await axiosInstance.post('/endpoint', payload);
-//   return data;
-// };
+// ================================================================
+const addWatchlists = async (payload: IMasterpieceRequest) => {
+  const { data } = await axiosInstance.post('/watchlists', payload);
+  return data;
+};
+export const useMutationAddWatchlist = () => {
+  const queryClient = useQueryClient();
+  const { message, notification } = App.useApp();
+
+  return useMutation(addWatchlists, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Ajout...', 'useMutationCreateWatchlist')
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(['watchlists']);
+
+      message.success(
+        messageObject(
+          'success',
+          'Ajouté à ma watchlist',
+          'useMutationCreateWatchlist'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationCreateWatchlist'
+        )
+      );
+      if (error.response?.status === 401)
+        notification.error(
+          toastObject(
+            'error',
+            'Compte requis',
+            'Veuillez vous connecter ou créer un compte.'
+          )
+        );
+      else
+        notification.error(
+          toastObject(
+            'error',
+            'Ajout impossible',
+            "Vérifiez votre connexion internet ou contactez l'administrateur"
+          )
+        );
+    }
+  });
+};
+// ================================================================
 
 // RETRIEVE
+// ================================================================
 const getWatchlists = async (
-  pageNumber: number,
+  pageNumber?: number,
   userId?: number
 ): Promise<IPagination<IMasterpiece[]>> => {
   let params;
@@ -29,64 +81,7 @@ const getWatchlists = async (
   });
   return data;
 };
-
-// const retrieveOne = async (id: number): Promise<any> => {
-//   const { data } = await axiosInstance.get(`/endpoint/${id}`);
-//   return data;
-// };
-
-// UPDATE
-// const update = async ({ payload, id }: { payload: any; id: number }) => {
-//   const { data } = await axiosInstance.patch(`/endpoint/${id}`, payload);
-//   return data;
-// };
-
-// DELETE
-// const remove = async (id: number): Promise<any> => {
-//   await axiosInstance.delete(`/endpoint/${id}`, {
-//     params: {
-//       id_param: id
-//     }
-//   });
-// };
-
-// =========
-// Mutations
-// =========
-
-// CREATE
-// export const useMutationCreate = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(create, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject('loading', 'Création...', 'useMutationCreate')
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-
-//       message.success(messageObject('success', 'Créé', 'useMutationCreate'));
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationCreate')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Impossible de créer la séance',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
-
-// RETRIEVE
-export const useQueryWatchlists = (pageNumber: number, userId?: number) => {
+export const useQueryWatchlists = (pageNumber?: number, userId?: number) => {
   const { notification } = App.useApp();
 
   return useQuery(
@@ -106,88 +101,53 @@ export const useQueryWatchlists = (pageNumber: number, userId?: number) => {
     }
   );
 };
-
-// export const useQueryRetrieveOne = (id: number) => {
-//   const { notification } = App.useApp();
-
-//   return useQuery(['someQuery', id], () => retrieveOne(id), {
-//     // Stale 5min
-//     staleTime: 60_000 * 5,
-//     onError: (error) =>
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Impossible de récupérer les données',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       )
-//   });
-// };
-
-// UPDATE
-// export const useMutationUpdate = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(update, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject(
-//           'loading',
-//           'Modification en cours...',
-//           'useMutationUpdate'
-//         )
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-//       message.success(
-//         messageObject('success', 'Modification réussie', 'useMutationUpdate')
-//       );
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationUpdate')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Modification échouée',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
+// ================================================================
 
 // DELETE
-// export const useMutationDelete = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
+// ================================================================
+const delWatchlists = async (movieId: number): Promise<any> => {
+  await axiosInstance.delete(`/watchlists`, {
+    params: {
+      movie_id: movieId
+    }
+  });
+};
+export const useMutationDelWatchlist = () => {
+  const queryClient = useQueryClient();
+  const { message, notification } = App.useApp();
 
-//   return useMutation(remove, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject('loading', 'Suppression en cours...', 'useMutationDelete')
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-//       message.success(
-//         messageObject('success', 'Suppression réussie', 'useMutationDelete')
-//       );
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationDelete')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Suppression échouée',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
+  return useMutation(delWatchlists, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Suppression...', 'useMutationDeleteWatchlist')
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(['watchlists']);
+      message.success(
+        messageObject(
+          'success',
+          'Supprimé de ma watchlist',
+          'useMutationDeleteWatchlist'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationDeleteWatchlist'
+        )
+      );
+      notification.error(
+        toastObject(
+          'error',
+          'Suppression échouée',
+          "Vérifiez votre connexion internet ou contactez l'administrateur"
+        )
+      );
+    }
+  });
+};
+// ================================================================

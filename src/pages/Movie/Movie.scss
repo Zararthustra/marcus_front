@@ -34,6 +34,48 @@
     }
   }
 
+  &__buttons {
+    button {
+      width: 6.8rem;
+    }
+  }
+
+  &__button {
+    position: relative;
+    border: none;
+    transition: all 0.7s ease;
+    padding: 0.6rem;
+
+    &:hover {
+      background-color: transparent;
+      color: var(--color-primary-500);
+    }
+
+    &::after {
+      content: '';
+      width: 12px;
+      height: 2px;
+      background-color: var(--color-primary-700);
+      border-radius: var(--rounded-full);
+      position: absolute;
+      bottom: 7px;
+      left: 2px;
+      z-index: 999;
+    }
+    // Add ::before element only on the <add> button (del by default)
+    &--add::before {
+      content: '';
+      height: 12px;
+      width: 2px;
+      background-color: var(--color-primary-700);
+      border-radius: var(--rounded-full);
+      position: absolute;
+      bottom: 2px;
+      left: 7px;
+      z-index: 999;
+    }
+  }
+
   &__persons {
     width: 100%;
     max-width: 45rem;
@@ -84,6 +126,12 @@
     &__poster {
       width: 10rem;
       height: 15rem;
+    }
+    &__buttons {
+      width: 100%;
+      button {
+        width: 100%;
+      }
     }
     &__providers {
       width: 100%;

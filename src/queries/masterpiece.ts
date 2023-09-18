@@ -1,23 +1,75 @@
 import { App } from 'antd';
+import { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import {
+  IMasterpiece,
+  IMasterpieceRequest,
+  IPagination
+} from '@interfaces/index';
 import axiosInstance from './axios';
-import { IMasterpiece, IPagination } from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
 
-// =====
-// Axios
-// =====
-
 // CREATE
-// const create = async (payload: any) => {
-//   const { data } = await axiosInstance.post('/endpoint', payload);
-//   return data;
-// };
+// ================================================================
+const addMasterpieces = async (payload: IMasterpieceRequest) => {
+  const { data } = await axiosInstance.post('/masterpieces', payload);
+  return data;
+};
+export const useMutationAddMasterpiece = () => {
+  const queryClient = useQueryClient();
+  const { message, notification } = App.useApp();
+
+  return useMutation(addMasterpieces, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Ajout...', 'useMutationCreateMasterpiece')
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(['masterpieces']);
+
+      message.success(
+        messageObject(
+          'success',
+          "Ajouté aux chefs d'oeuvres",
+          'useMutationCreateMasterpiece'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationCreateMasterpiece'
+        )
+      );
+      if (error.response?.status === 401)
+        notification.error(
+          toastObject(
+            'error',
+            'Compte requis',
+            "Pour ajouter un chef d'oeuvre, veuillez vous connecter ou créer un compte."
+          )
+        );
+      else
+        notification.error(
+          toastObject(
+            'error',
+            'Ajout impossible',
+            "Vérifiez votre connexion internet ou contactez l'administrateur"
+          )
+        );
+    }
+  });
+};
+// ================================================================
 
 // RETRIEVE
+// ================================================================
 const getMasterpieces = async (
-  pageNumber: number,
+  pageNumber?: number,
   userId?: number
 ): Promise<IPagination<IMasterpiece[]>> => {
   let params;
@@ -29,64 +81,7 @@ const getMasterpieces = async (
   });
   return data;
 };
-
-// const retrieveOne = async (id: number): Promise<any> => {
-//   const { data } = await axiosInstance.get(`/endpoint/${id}`);
-//   return data;
-// };
-
-// UPDATE
-// const update = async ({ payload, id }: { payload: any; id: number }) => {
-//   const { data } = await axiosInstance.patch(`/endpoint/${id}`, payload);
-//   return data;
-// };
-
-// DELETE
-// const remove = async (id: number): Promise<any> => {
-//   await axiosInstance.delete(`/endpoint/${id}`, {
-//     params: {
-//       id_param: id
-//     }
-//   });
-// };
-
-// =========
-// Mutations
-// =========
-
-// CREATE
-// export const useMutationCreate = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(create, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject('loading', 'Création...', 'useMutationCreate')
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-
-//       message.success(messageObject('success', 'Créé', 'useMutationCreate'));
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationCreate')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Impossible de créer la séance',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
-
-// RETRIEVE
-export const useQueryMasterpieces = (pageNumber: number, userId?: number) => {
+export const useQueryMasterpieces = (pageNumber?: number, userId?: number) => {
   const { notification } = App.useApp();
 
   return useQuery(
@@ -106,88 +101,57 @@ export const useQueryMasterpieces = (pageNumber: number, userId?: number) => {
     }
   );
 };
-
-// export const useQueryRetrieveOne = (id: number) => {
-//   const { notification } = App.useApp();
-
-//   return useQuery(['someQuery', id], () => retrieveOne(id), {
-//     // Stale 5min
-//     staleTime: 60_000 * 5,
-//     onError: (error) =>
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Impossible de récupérer les données',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       )
-//   });
-// };
-
-// UPDATE
-// export const useMutationUpdate = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(update, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject(
-//           'loading',
-//           'Modification en cours...',
-//           'useMutationUpdate'
-//         )
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-//       message.success(
-//         messageObject('success', 'Modification réussie', 'useMutationUpdate')
-//       );
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationUpdate')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Modification échouée',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
+// ================================================================
 
 // DELETE
-// export const useMutationDelete = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
+// ================================================================
+const delMasterpieces = async (movieId: number): Promise<any> => {
+  await axiosInstance.delete(`/masterpieces`, {
+    params: {
+      movie_id: movieId
+    }
+  });
+};
+export const useMutationDelMasterpiece = () => {
+  const queryClient = useQueryClient();
+  const { message, notification } = App.useApp();
 
-//   return useMutation(remove, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject('loading', 'Suppression en cours...', 'useMutationDelete')
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-//       message.success(
-//         messageObject('success', 'Suppression réussie', 'useMutationDelete')
-//       );
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationDelete')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Suppression échouée',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
+  return useMutation(delMasterpieces, {
+    onMutate: () => {
+      message.open(
+        messageObject(
+          'loading',
+          'Suppression...',
+          'useMutationDeleteMasterpiece'
+        )
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(['masterpieces']);
+      message.success(
+        messageObject(
+          'success',
+          "Supprimé des chefs d'oeuvres",
+          'useMutationDeleteMasterpiece'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationDeleteMasterpiece'
+        )
+      );
+      notification.error(
+        toastObject(
+          'error',
+          'Suppression échouée',
+          "Vérifiez votre connexion internet ou contactez l'administrateur"
+        )
+      );
+    }
+  });
+};
+// ================================================================

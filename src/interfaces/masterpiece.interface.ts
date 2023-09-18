@@ -1,4 +1,4 @@
-export type { IMasterpiece, IMovieDetails };
+export type { IMasterpiece, IMovieDetails, IMasterpieceRequest };
 
 interface IMovieDetails {
   poster_path: string;
@@ -15,4 +15,10 @@ interface IMasterpiece {
   platform: 'tv' | 'movie';
   user_id: number;
   user_name: string;
+}
+
+interface IMasterpieceRequest {
+  movie_id: number;
+  movie_name: string;
+  platform: 'tv' | 'movie';
 }

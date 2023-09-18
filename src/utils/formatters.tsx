@@ -117,7 +117,7 @@ export const messageObject = (
       icon: icon,
       content,
       key: key,
-      duration: type === 'loading' ? 200 : 40
+      duration: type === 'loading' ? 200 : 4
     };
 
   return {

@@ -1,7 +1,15 @@
 export { useQueryCritics, useQueryMovieCritics } from './critic';
 export { useQueryVotes } from './vote';
-export { useQueryMasterpieces } from './masterpiece';
-export { useQueryWatchlists } from './watchlist';
+export {
+  useQueryMasterpieces,
+  useMutationAddMasterpiece,
+  useMutationDelMasterpiece
+} from './masterpiece';
+export {
+  useQueryWatchlists,
+  useMutationAddWatchlist,
+  useMutationDelWatchlist
+} from './watchlist';
 export {
   useQueryCinema,
   useQueryNetflix,

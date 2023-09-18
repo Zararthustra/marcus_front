@@ -16,6 +16,7 @@ import {
   UserProfile
 } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
+import ScrollToTop from '@services/ScrollToTop';
 import { Footer, ModalReloadSW } from '@components/index';
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
       }}>
       <AntApp>
         <BrowserRouter>
+          <ScrollToTop />
           <ModalReloadSW
             offlineReady={offlineReady}
             needRefresh={needRefresh}

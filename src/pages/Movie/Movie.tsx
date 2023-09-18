@@ -2,21 +2,35 @@ import { Empty } from 'antd';
 import { useParams } from 'react-router-dom';
 
 import {
-  Critic,
+  Button,
   CriticMovie,
   MovieCredits,
   MovieDescription,
   MovieProviders
 } from '@components/index';
-import { useQueryMovie } from '@queries/tmdb';
-import { IconClapLoader, defaultImg } from '@assets/index';
+import {
+  IconClapLoader,
+  IconCritic,
+  IconVote,
+  defaultImg
+} from '@assets/index';
+import {
+  useQueryMasterpieces,
+  useQueryMovie,
+  useQueryMovieCritics,
+  useQueryWatchlists
+} from '@queries/index';
+import { getLS } from '@services/localStorageService';
 
 import './Movie.scss';
-import { useQueryMovieCritics } from '@queries/critic';
 
 const Movie = () => {
   const { movieId } = useParams();
+  const userId = parseInt(getLS('userId'));
+  const userName = getLS('name');
   const { data: movie, isLoading } = useQueryMovie(movieId as string);
+  const { data: masterpieces } = useQueryMasterpieces(undefined, userId);
+  const { data: watchlists } = useQueryWatchlists(undefined, userId);
   const { data: movieCritics } = useQueryMovieCritics(movieId as string);
 
   if (isLoading)
@@ -42,11 +56,27 @@ const Movie = () => {
       />
 
       <MovieDescription
+        movieId={movie.id}
+        userName={userName}
+        platform="movie"
         overview={movie.overview}
         title={movie.title}
         poster={movie.poster_path}
         year={movie.release_date}
+        masterpieces={masterpieces?.data}
+        watchlists={watchlists?.data}
       />
+
+      <div className="movie__buttons flex gap-05 mb-3">
+        <Button primary>
+          <IconCritic width={20} height={20} />
+          <p className="m-0">Critiquer</p>
+        </Button>
+        <Button primary>
+          <IconVote width={20} height={20} />
+          <p className="m-0">Voter</p>
+        </Button>
+      </div>
 
       <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />
 

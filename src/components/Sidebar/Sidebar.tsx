@@ -28,7 +28,6 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
   const isLogged = !!getLS('accessToken');
   const location = useLocation();
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
-  console.log(isLogged);
 
   const handleReset = () => {
     clearLS();
