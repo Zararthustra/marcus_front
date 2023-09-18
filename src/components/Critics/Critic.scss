@@ -3,7 +3,9 @@
   max-width: 40rem;
 
   header {
-    width: fit-content;
+    svg {
+      cursor: pointer;
+    }
   }
 
   &__content {

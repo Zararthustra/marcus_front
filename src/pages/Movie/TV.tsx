@@ -1,9 +1,11 @@
 import { Empty } from 'antd';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
   Button,
   CriticMovie,
+  ModalCritic,
   MovieCredits,
   MovieDescription,
   MovieProviders
@@ -28,10 +30,21 @@ const TV = () => {
   const { movieId } = useParams();
   const userId = parseInt(getLS('userId'));
   const userName = getLS('name');
+  const [isCriticizing, setIsCriticizing] = useState<boolean>(false);
+  const [hasCriticized, setHasCriticized] = useState<boolean>(false);
   const { data: movie, isLoading } = useQueryTV(movieId as string);
   const { data: masterpieces } = useQueryMasterpieces(undefined, userId);
   const { data: watchlists } = useQueryWatchlists(undefined, userId);
   const { data: movieCritics } = useQueryMovieCritics(movieId as string);
+
+  useEffect(() => {
+    if (!!movieCritics)
+      setHasCriticized(
+        !!movieCritics.data.filter(
+          (item) => item.user_name === userName && !!item.content
+        ).length
+      );
+  }, [movieCritics]);
 
   if (isLoading)
     return (
@@ -44,73 +57,87 @@ const TV = () => {
     return <Empty className="mt-5" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 
   return (
-    <main className="movie flex-col align-center w-100 px-1">
-      <img
-        src={
-          !!movie.backdrop_path
-            ? `${import.meta.env.VITE_TMDB_IMG}/${movie.backdrop_path}`
-            : defaultImg
-        }
-        alt={movie.name}
-        className="movie__backdrop"
-      />
-
-      <MovieDescription
+    <>
+      <ModalCritic
         movieId={movie.id}
-        userName={userName}
+        movieName={movie.name}
+        showModal={isCriticizing}
         platform="tv"
-        overview={movie.overview}
-        title={movie.name}
-        poster={movie.poster_path}
-        year={movie.first_air_date}
-        masterpieces={masterpieces?.data}
-        watchlists={watchlists?.data}
+        setShowModal={setIsCriticizing}
       />
 
-      <div className="movie__buttons flex gap-05 mb-3">
-        <Button primary>
-          <IconCritic width={20} height={20} />
-          <p className="m-0">Critiquer</p>
-        </Button>
-        <Button primary>
-          <IconVote width={20} height={20} />
-          <p className="m-0">Voter</p>
-        </Button>
-      </div>
+      <main className="movie flex-col align-center w-100 px-1">
+        <img
+          src={
+            !!movie.backdrop_path
+              ? `${import.meta.env.VITE_TMDB_IMG}/${movie.backdrop_path}`
+              : defaultImg
+          }
+          alt={movie.name}
+          className="movie__backdrop"
+        />
 
-      <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />
+        <MovieDescription
+          movieId={movie.id}
+          userName={userName}
+          platform="tv"
+          overview={movie.overview}
+          title={movie.name}
+          poster={movie.poster_path}
+          year={movie.first_air_date}
+          masterpieces={masterpieces?.data}
+          watchlists={watchlists?.data}
+        />
 
-      {!!movie.videos.results.length && !!movie.videos.results[0].key && (
-        <div className="movie__trailer my-4">
-          <iframe
-            src={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen></iframe>
+        <div className="movie__buttons flex gap-05 mb-3">
+          {!hasCriticized && (
+            <Button primary onClick={() => setIsCriticizing(true)}>
+              <IconCritic width={20} height={20} />
+              <p className="m-0">Critiquer</p>
+            </Button>
+          )}
+          <Button primary>
+            <IconVote width={20} height={20} />
+            <p className="m-0">Voter</p>
+          </Button>
         </div>
-      )}
 
-      <MovieProviders
-        flatrate={movie['watch/providers'].results.FR?.flatrate}
-        rent={movie['watch/providers'].results.FR?.rent}
-        buy={movie['watch/providers'].results.FR?.buy}
-      />
+        <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />
 
-      {!!movieCritics && !!movieCritics.data.length && (
-        <>
-          <h1 className="my-2">Critiques</h1>
-          {movieCritics.data.map((critic, index) => (
-            <CriticMovie
-              key={index}
-              userId={critic.user_id}
-              userName={critic.user_name}
-              content={critic.content}
-              vote={critic.vote}
-            />
-          ))}
-        </>
-      )}
-    </main>
+        {!!movie.videos.results.length && !!movie.videos.results[0].key && (
+          <div className="movie__trailer my-4">
+            <iframe
+              src={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
+          </div>
+        )}
+
+        <MovieProviders
+          flatrate={movie['watch/providers'].results.FR?.flatrate}
+          rent={movie['watch/providers'].results.FR?.rent}
+          buy={movie['watch/providers'].results.FR?.buy}
+        />
+
+        {!!movieCritics && !!movieCritics.data.length && (
+          <>
+            <h1 className="my-2">Critiques</h1>
+            {movieCritics.data.map((critic, index) => (
+              <CriticMovie
+                key={index}
+                userId={critic.user_id}
+                userName={critic.user_name}
+                movieId={movie.id}
+                movieName={movie.name}
+                content={critic.content}
+                vote={critic.vote}
+              />
+            ))}
+          </>
+        )}
+      </main>
+    </>
   );
 };
 

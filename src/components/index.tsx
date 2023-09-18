@@ -1,5 +1,7 @@
 // Modals
 export { default as ModalReloadSW } from './Modals/ModalReloadSW';
+export { default as ModalCritic } from './Modals/ModalCritic';
+export { default as ModalCriticDelete } from './Modals/ModalCriticDelete';
 
 // Miscellaneous
 export { default as Button } from './Button/Button';

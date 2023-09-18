@@ -1,21 +1,74 @@
 import { App } from 'antd';
+import { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import {
+  ICritic,
+  ICriticRequest,
+  IMovieCritic,
+  IPagination
+} from '@interfaces/index';
 import axiosInstance from './axios';
 import { toastObject, messageObject } from '@utils/formatters';
-import { ICritic, IMovieCritic, IPagination } from '@interfaces/index';
-
-// =====
-// Axios
-// =====
 
 // CREATE
-// const create = async (payload: any) => {
-//   const { data } = await axiosInstance.post('/endpoint', payload);
-//   return data;
-// };
+// ================================================================
+const createCritic = async (payload: ICriticRequest) => {
+  const { data } = await axiosInstance.post('/critics', payload);
+  return data;
+};
+export const useMutationCreateCritic = () => {
+  const queryClient = useQueryClient();
+  const { message, notification } = App.useApp();
+
+  return useMutation(createCritic, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Ajout...', 'useMutationCreateCritic')
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(['critics']);
+
+      message.success(
+        messageObject(
+          'success',
+          'Critique ajoutée. Merci pour votre contribution !',
+          'useMutationCreateCritic'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationCreateCritic'
+        )
+      );
+      if (error.response?.status === 401)
+        notification.error(
+          toastObject(
+            'error',
+            'Compte requis',
+            'Pour ajouter une critique, veuillez vous connecter ou créer un compte.'
+          )
+        );
+      else
+        notification.error(
+          toastObject(
+            'error',
+            'Ajout impossible',
+            `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${error.response?.status}`
+          )
+        );
+    }
+  });
+};
+// ================================================================
 
 // RETRIEVE
+// ================================================================
 const getCritics = async (
   pageNumber: number,
   userId?: number
@@ -29,70 +82,6 @@ const getCritics = async (
   });
   return data;
 };
-
-const getMovieCritics = async (
-  movieId: string
-): Promise<{ data: IMovieCritic[] }> => {
-  const { data } = await axiosInstance.get(`/critics?movie_id=${movieId}`);
-  return data;
-};
-
-// const retrieveOne = async (id: number): Promise<any> => {
-//   const { data } = await axiosInstance.get(`/endpoint/${id}`);
-//   return data;
-// };
-
-// UPDATE
-// const update = async ({ payload, id }: { payload: any; id: number }) => {
-//   const { data } = await axiosInstance.patch(`/endpoint/${id}`, payload);
-//   return data;
-// };
-
-// DELETE
-// const remove = async (id: number): Promise<any> => {
-//   await axiosInstance.delete(`/endpoint/${id}`, {
-//     params: {
-//       id_param: id
-//     }
-//   });
-// };
-
-// =========
-// Mutations
-// =========
-
-// CREATE
-// export const useMutationCreate = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(create, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject('loading', 'Création...', 'useMutationCreate')
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-
-//       message.success(messageObject('success', 'Créé', 'useMutationCreate'));
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationCreate')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Impossible de créer la séance',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
-
-// RETRIEVE
 export const useQueryCritics = (pageNumber: number, userId?: number) => {
   const { notification } = App.useApp();
 
@@ -102,16 +91,25 @@ export const useQueryCritics = (pageNumber: number, userId?: number) => {
     {
       // Stale 5min
       staleTime: 60_000 * 5,
-      onError: (error) =>
+      onError: (error: AxiosError) =>
         notification.error(
           toastObject(
             'error',
             'Impossible de récupérer les données',
-            "Vérifiez votre connexion internet ou contactez l'administrateur"
+            `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${error.response?.status}`
           )
         )
     }
   );
+};
+// ================================================================
+
+// ================================================================
+const getMovieCritics = async (
+  movieId: string
+): Promise<{ data: IMovieCritic[] }> => {
+  const { data } = await axiosInstance.get(`/critics?movie_id=${movieId}`);
+  return data;
 };
 export const useQueryMovieCritics = (movieId: string) => {
   const { notification } = App.useApp();
@@ -119,35 +117,73 @@ export const useQueryMovieCritics = (movieId: string) => {
   return useQuery(['critics', movieId], () => getMovieCritics(movieId), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${error.response?.status}`
         )
       )
   });
 };
+// ================================================================
 
-// export const useQueryRetrieveOne = (id: number) => {
-//   const { notification } = App.useApp();
+// DELETE
+// ================================================================
+const deleteCritic = async (movieId: number): Promise<any> => {
+  await axiosInstance.delete('/critics', {
+    params: {
+      movie_id: movieId
+    }
+  });
+};
+export const useMutationDeleteCritic = () => {
+  const queryClient = useQueryClient();
+  const { message, notification } = App.useApp();
 
-//   return useQuery(['someQuery', id], () => retrieveOne(id), {
-//     // Stale 5min
-//     staleTime: 60_000 * 5,
-//     onError: (error) =>
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Impossible de récupérer les données',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       )
-//   });
-// };
+  return useMutation(deleteCritic, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Suppression...', 'useMutationDeleteCritic')
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(['critics']);
+      message.success(
+        messageObject(
+          'success',
+          'Critique supprimée',
+          'useMutationDeleteCritic'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject(
+          'error',
+          `Une erreur est survenue. Code : ${error.response?.status}`,
+          'useMutationDeleteCritic'
+        )
+      );
+      notification.error(
+        toastObject(
+          'error',
+          'Suppression échouée',
+          `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${error.response?.status}`
+        )
+      );
+    }
+  });
+};
+// ================================================================
 
 // UPDATE
+// ================================================================
+// const update = async ({ payload, id }: { payload: any; id: number }) => {
+//   const { data } = await axiosInstance.patch(`/endpoint/${id}`, payload);
+//   return data;
+// };
 // export const useMutationUpdate = () => {
 //   const queryClient = useQueryClient();
 //   const { message, notification } = App.useApp();
@@ -182,35 +218,4 @@ export const useQueryMovieCritics = (movieId: string) => {
 //     }
 //   });
 // };
-
-// DELETE
-// export const useMutationDelete = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(remove, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject('loading', 'Suppression en cours...', 'useMutationDelete')
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-//       message.success(
-//         messageObject('success', 'Suppression réussie', 'useMutationDelete')
-//       );
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationDelete')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Suppression échouée',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };
+// ================================================================

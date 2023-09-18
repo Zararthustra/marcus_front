@@ -1,10 +1,11 @@
 import { IIcon } from '@interfaces/index';
 
-const IconTrash = ({ size = 20, className = '', color }: IIcon) => (
+const IconTrash = ({ size = 20, className = '', color, onClick }: IIcon) => (
   <svg
     className={className}
     height={size}
     width={size}
+    onClick={onClick}
     fill={color ?? 'currentColor'}
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg">

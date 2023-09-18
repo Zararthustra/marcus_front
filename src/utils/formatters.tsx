@@ -45,7 +45,9 @@ export const toastObject = (
       break;
 
     case 'loading':
-      icon = <IconLoader width={24} height={24} />;
+      icon = (
+        <IconLoader width={24} height={24} color="var(--color-primary-700)" />
+      );
       color = 'var(--color-primary-700)';
       break;
 
@@ -102,7 +104,9 @@ export const messageObject = (
       break;
 
     case 'loading':
-      icon = <IconLoader width={24} height={24} />;
+      icon = (
+        <IconLoader width={24} height={24} color="var(--color-primary-700)" />
+      );
       color = 'var(--color-primary-700)';
       break;
 

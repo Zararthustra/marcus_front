@@ -132,10 +132,10 @@
   }
 
   // Transitions
-  --transition-all-1: all 0.3s;
-  --transition-all-2: all 0.5s;
-  --transition-all-3: all 0.7s;
-  --transition-all-4: all 0.7s;
+  --transition-1: 0.3s;
+  --transition-2: 0.5s;
+  --transition-3: 0.7s;
+  --transition-4: 1s;
   --transition-bezier: cubic-bezier(0.48, 1.1, 0.8, 1.15);
 }
 

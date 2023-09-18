@@ -16,7 +16,7 @@
     }
     &:hover {
       opacity: 0.9;
-      transition: var(--transition-1);
+      transition: all var(--transition-1);
     }
   }
 
@@ -31,7 +31,7 @@
 
     &:hover {
       background-color: var(--color-primary-700);
-      transition: var(--transition-1);
+      transition: all var(--transition-1);
       color: var(--color-white);
     }
   }

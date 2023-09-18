@@ -1,4 +1,4 @@
-export type { ICritic, IMovieCritic };
+export type { ICritic, IMovieCritic, ICriticRequest };
 
 interface ICritic {
   content: string;
@@ -14,4 +14,11 @@ interface IMovieCritic {
   user_name: string;
   content: string;
   vote: number;
+}
+
+interface ICriticRequest {
+  content: string;
+  movie_id: number;
+  movie_name: string;
+  platform: 'tv' | 'movie';
 }
