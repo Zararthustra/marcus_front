@@ -11,6 +11,9 @@
     line-height: 20px;
   }
 
+  &__del {
+    cursor: pointer;
+  }
   &__author {
     font-size: var(--font-xs);
     align-self: flex-end;

@@ -2,6 +2,8 @@
 export { default as ModalReloadSW } from './Modals/ModalReloadSW';
 export { default as ModalCritic } from './Modals/ModalCritic';
 export { default as ModalCriticDelete } from './Modals/ModalCriticDelete';
+export { default as ModalVote } from './Modals/ModalVote';
+export { default as ModalVoteDelete } from './Modals/ModalVoteDelete';
 
 // Miscellaneous
 export { default as Button } from './Button/Button';

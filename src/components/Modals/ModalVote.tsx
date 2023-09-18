@@ -1,11 +1,12 @@
-import { App, Input, Modal } from 'antd';
+import { App, Modal, Rate } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@components/index';
 import { messageObject } from '@utils/formatters';
-import { useMutationCreateCritic } from '@queries/index';
+import { useMutationCreateVote } from '@queries/index';
+import { IconVote } from '@assets/index';
 
-interface IModalCriticProps {
+interface IModalVoteProps {
   movieName: string;
   movieId: number;
   platform: 'tv' | 'movie';
@@ -13,43 +14,43 @@ interface IModalCriticProps {
   setShowModal: (value: boolean) => void;
 }
 
-const ModalCritic = ({
+const ModalVote = ({
   movieName,
   movieId,
   platform,
   showModal,
   setShowModal
-}: IModalCriticProps) => {
+}: IModalVoteProps) => {
   const { message } = App.useApp();
-  const { mutate, isSuccess, isLoading } = useMutationCreateCritic();
-  const [critic, setCritic] = useState({
-    content: '',
+  const { mutate, isSuccess, isLoading } = useMutationCreateVote();
+  const [vote, setCritic] = useState({
+    value: 0,
     movie_id: movieId,
     movie_name: movieName,
     platform: platform
   });
 
-  const handleInputChange = (e: any) => {
-    const { value } = e.target;
+  const handleInputChange = (value: number) => {
+    console.log(value);
     setCritic((prevFormData) => ({
       ...prevFormData,
-      content: value
+      value: value
     }));
   };
 
   const handleSubmit = () => {
-    if (!!!critic.content) {
-      message.error(messageObject('error', 'Votre critique est vide'));
+    if (!!!vote.value) {
+      message.error(messageObject('error', 'Sélectionnez une étoile'));
       return;
     }
-    mutate(critic);
+    mutate(vote);
   };
 
   useEffect(() => {
     if (isSuccess) {
       setCritic((prevFormData) => ({
         ...prevFormData,
-        content: ''
+        value: 0
       }));
       setShowModal(false);
     }
@@ -72,23 +73,17 @@ const ModalCritic = ({
       <div className="flex-col align-center">
         <h2>{movieName}</h2>
 
-        <div className="form__field w-100 mb-2">
-          <label className="form__label" htmlFor="critic">
-            Critique
-          </label>
-          <Input.TextArea
-            id="critic"
-            showCount
-            maxLength={2000}
-            placeholder="À quoi reconnaît-on un vrai grand film ? À son succès critique ? Trop facile. À son succès public ? Trop commode..."
-            rows={8}
-            value={critic.content}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Rate
+          allowHalf
+          id="vote"
+          character={<IconVote width={50} height={50} />}
+          className="my-2"
+          value={vote.value}
+          onChange={handleInputChange}
+        />
       </div>
     </Modal>
   );
 };
 
-export default ModalCritic;
+export default ModalVote;

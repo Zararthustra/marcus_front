@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { getPlatformUri } from '@utils/formatters';
 
 import './Vote.scss';
+import { useState } from 'react';
+import { getLS } from '@services/localStorageService';
+import { ModalVoteDelete } from '..';
+import { IconTrash } from '@assets/index';
 
 interface IVoteProps {
   userId: number;
@@ -22,16 +26,39 @@ const Vote = ({
   value,
   platform
 }: IVoteProps) => {
+  const isOwner = getLS('name') === userName;
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
   return (
-    <div className="vote flex-col align-center justify-between">
-      <Rate allowHalf disabled defaultValue={value} />
-      <a href={`/cinema/${getPlatformUri(platform)}/${movieId}`}>
-        <h2>{movieName}</h2>
-      </a>
-      <Link className="vote__author" to={`/communaute/${userId}`}>
-        {userName}
-      </Link>
-    </div>
+    <>
+      <ModalVoteDelete
+        setShowModal={setIsDeleting}
+        showModal={isDeleting}
+        movieId={movieId}
+        movieName={movieName}
+      />
+
+      <div className="vote flex-col align-center justify-between">
+        <Rate allowHalf disabled defaultValue={value} />
+        <a href={`/cinema/${getPlatformUri(platform)}/${movieId}`}>
+          <h2>{movieName}</h2>
+        </a>
+        <div className="flex align-center justify-between w-100">
+          {isOwner ? (
+            <IconTrash
+              className="vote__del"
+              color="var(--color-primary-500)"
+              onClick={() => setIsDeleting(true)}
+            />
+          ) : (
+            <div />
+          )}
+          <Link className="vote__author" to={`/communaute/${userId}`}>
+            {userName}
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
 

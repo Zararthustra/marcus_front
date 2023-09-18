@@ -6,6 +6,7 @@ import {
   Button,
   CriticMovie,
   ModalCritic,
+  ModalVote,
   MovieCredits,
   MovieDescription,
   MovieProviders
@@ -20,7 +21,8 @@ import {
   useQueryTV,
   useQueryMasterpieces,
   useQueryMovieCritics,
-  useQueryWatchlists
+  useQueryWatchlists,
+  useQueryVotes
 } from '@queries/index';
 import { getLS } from '@services/localStorageService';
 
@@ -32,10 +34,14 @@ const TV = () => {
   const userName = getLS('name');
   const [isCriticizing, setIsCriticizing] = useState<boolean>(false);
   const [hasCriticized, setHasCriticized] = useState<boolean>(false);
+  const [hasVoted, setHasVoted] = useState<boolean>(false);
+  const [isVoting, setIsVoting] = useState<boolean>(false);
+
   const { data: movie, isLoading } = useQueryTV(movieId as string);
   const { data: masterpieces } = useQueryMasterpieces(undefined, userId);
   const { data: watchlists } = useQueryWatchlists(undefined, userId);
   const { data: movieCritics } = useQueryMovieCritics(movieId as string);
+  const { data: votes } = useQueryVotes(undefined, userId);
 
   useEffect(() => {
     if (!!movieCritics)
@@ -45,6 +51,18 @@ const TV = () => {
         ).length
       );
   }, [movieCritics]);
+
+  useEffect(() => {
+    if (!!votes)
+      setHasVoted(
+        !!votes.data.filter(
+          (item) =>
+            item.movie_id === parseInt(movieId as string) &&
+            item.user_name === userName &&
+            !!item.value
+        ).length
+      );
+  }, [votes]);
 
   if (isLoading)
     return (
@@ -64,6 +82,13 @@ const TV = () => {
         showModal={isCriticizing}
         platform="tv"
         setShowModal={setIsCriticizing}
+      />
+      <ModalVote
+        movieId={movie.id}
+        movieName={movie.name}
+        showModal={isVoting}
+        platform="tv"
+        setShowModal={setIsVoting}
       />
 
       <main className="movie flex-col align-center w-100 px-1">
@@ -96,10 +121,12 @@ const TV = () => {
               <p className="m-0">Critiquer</p>
             </Button>
           )}
-          <Button primary>
-            <IconVote width={20} height={20} />
-            <p className="m-0">Voter</p>
-          </Button>
+          {!hasVoted && (
+            <Button primary onClick={() => setIsVoting(true)}>
+              <IconVote width={20} height={20} />
+              <p className="m-0">Voter</p>
+            </Button>
+          )}
         </div>
 
         <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />

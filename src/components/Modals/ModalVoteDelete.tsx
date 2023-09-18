@@ -3,26 +3,22 @@ import { useEffect } from 'react';
 
 import { Button } from '@components/index';
 import { IconTrash, IconWarning } from '@assets/index';
-import { useMutationDeleteCritic } from '@queries/index';
+import { useMutationDeleteVote } from '@queries/index';
 
-interface IModalCriticDeleteProps {
+interface IModalVoteDeleteProps {
   movieName: string;
   movieId: number;
   showModal: boolean;
   setShowModal: (value: boolean) => void;
 }
 
-const ModalCriticDelete = ({
+const ModalVoteDelete = ({
   movieName,
   movieId,
   showModal,
   setShowModal
-}: IModalCriticDeleteProps) => {
-  const {
-    mutate: deleteCritic,
-    isLoading,
-    isSuccess
-  } = useMutationDeleteCritic();
+}: IModalVoteDeleteProps) => {
+  const { mutate: deleteVote, isLoading, isSuccess } = useMutationDeleteVote();
 
   useEffect(() => {
     if (isSuccess) setShowModal(false);
@@ -39,7 +35,7 @@ const ModalCriticDelete = ({
           <Button
             primary
             loading={isLoading}
-            onClick={() => deleteCritic(movieId)}>
+            onClick={() => deleteVote(movieId)}>
             <IconTrash />
             Supprimer
           </Button>
@@ -52,7 +48,7 @@ const ModalCriticDelete = ({
         <div className="flex align-center gap-1 py-05 my-2 tag--warning br-s">
           <IconWarning className="sidebar__icon" />
           <p className="m-0 f-s">
-            Vous êtes sur le point de supprimer votre critique sur{' '}
+            Vous êtes sur le point de supprimer votre vote pour{' '}
             <strong className="f-m">{movieName}</strong>.
           </p>
         </div>
@@ -61,4 +57,4 @@ const ModalCriticDelete = ({
   );
 };
 
-export default ModalCriticDelete;
+export default ModalVoteDelete;

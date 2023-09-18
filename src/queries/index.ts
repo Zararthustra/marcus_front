@@ -4,7 +4,11 @@ export {
   useMutationCreateCritic,
   useMutationDeleteCritic
 } from './critic';
-export { useQueryVotes } from './vote';
+export {
+  useQueryVotes,
+  useMutationCreateVote,
+  useMutationDeleteVote
+} from './vote';
 export {
   useQueryMasterpieces,
   useMutationAddMasterpiece,
