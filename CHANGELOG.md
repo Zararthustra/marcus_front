@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/Zararthustra/marcus_front/compare/v0.3.0...v0.3.1) (2023-09-18)
+
+
+### Features
+
+* **Watchlist, Masterpiece:** add & delete Watchlist & Masterpiece buttons + add scrollToTop between pages + minor fixes ([dd1531e](https://github.com/Zararthustra/marcus_front/commit/dd1531e3a81abc0e0e3ca1cd615da7f81b501f5a))
+
 ## [0.3.0](https://github.com/Zararthustra/marcus_front/compare/v0.2.2...v0.3.0) (2023-09-17)
 
 ### [0.2.2](https://github.com/Zararthustra/marcus_front/compare/v0.2.0...v0.2.2) (2023-09-17)
