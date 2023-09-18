@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/Zararthustra/marcus_front/compare/v0.3.2...v0.3.3) (2023-09-18)
+
+
+### Features
+
+* **Votes:** add create & delete votes (modal, query, interface) ([ea3c239](https://github.com/Zararthustra/marcus_front/commit/ea3c2392f8e83ec1db738f3feb79d33619badba0))
+
 ### [0.3.2](https://github.com/Zararthustra/marcus_front/compare/v0.3.1...v0.3.2) (2023-09-18)
 
 
