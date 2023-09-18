@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/Zararthustra/marcus_front/compare/v0.3.1...v0.3.2) (2023-09-18)
+
+
+### Features
+
+* **Critics:** add create critic (query, interface, modal) ([c91db0b](https://github.com/Zararthustra/marcus_front/commit/c91db0b63464ef4a9c75c654e56e11fd657aa7ee))
+
 ### [0.3.1](https://github.com/Zararthustra/marcus_front/compare/v0.3.0...v0.3.1) (2023-09-18)
 
 
