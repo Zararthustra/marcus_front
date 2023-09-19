@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/Zararthustra/marcus_front/compare/v1.1.0...v1.1.1) (2023-09-19)
+
+
+### Bug Fixes
+
+* crash if no token in LS ([c9954e7](https://github.com/Zararthustra/marcus_front/commit/c9954e7b5bd4e5f6227a07348232fcc1aa8ff6c4))
+
 ## [1.1.0](https://github.com/Zararthustra/marcus_front/compare/v1.0.0...v1.1.0) (2023-09-19)
 
 
