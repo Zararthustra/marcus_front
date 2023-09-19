@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Zararthustra/marcus_front/compare/v1.0.0...v1.1.0) (2023-09-19)
+
+
+### Features
+
+* **ModalReconnect:** add reconnection modal on expired token ([1556b7f](https://github.com/Zararthustra/marcus_front/commit/1556b7fe7551157c397cf013a7a5b96110ca67b0))
+
+
+### Bug Fixes
+
+* update logo & standardize error messages ([a543706](https://github.com/Zararthustra/marcus_front/commit/a543706697613083229e2c775a5eac372ae3e9a8))
+
 ## [1.0.0](https://github.com/Zararthustra/marcus_front/compare/v0.3.3...v1.0.0) (2023-09-18)
 
 ### [0.3.3](https://github.com/Zararthustra/marcus_front/compare/v0.3.2...v0.3.3) (2023-09-18)
