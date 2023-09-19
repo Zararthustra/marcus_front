@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Zararthustra/marcus_front/compare/v1.1.1...v1.2.0) (2023-09-19)
+
+
+### Features
+
+* **Home, CICD:** add home page + CICD script ([41026cc](https://github.com/Zararthustra/marcus_front/commit/41026cc8473db752d0b4e188d122b849cb559c92))
+
 ### [1.1.1](https://github.com/Zararthustra/marcus_front/compare/v1.1.0...v1.1.1) (2023-09-19)
 
 
