@@ -32,7 +32,11 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
 
   const now = Math.floor(Date.now() / 1000);
-  const accessToken = jwt_decode<any>(getLS('accessToken')).exp;
+  const dummyToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+  const accessToken = jwt_decode<any>(
+    !!getLS('accessToken') ? getLS('accessToken') : dummyToken
+  ).exp;
   const showReconnectModal = accessToken < now;
 
   const handleLogout = () => {
