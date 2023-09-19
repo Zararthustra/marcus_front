@@ -1,0 +1,38 @@
+.homeCard {
+  height: 20rem;
+  width: 20rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: var(--rounded-m);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: scale var(--transition-1);
+
+  &:hover {
+    scale: 1.05;
+  }
+
+  &__blur {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 80%);
+
+    h2 {
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .homeCard {
+    height: 10.5rem;
+    width: 100%;
+    border-radius: 0;
+  }
+}

@@ -11,6 +11,7 @@ export { default as Button } from './Button/Button';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as CommunityItem } from './CommunityItem/CommunityItem';
 export { default as Footer } from './Footer/Footer';
+export { default as HomeCard } from './HomeCard/HomeCard';
 
 // Cinema
 export { default as Critics } from './Critics/Critics';
