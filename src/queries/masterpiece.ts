@@ -38,27 +38,22 @@ export const useMutationAddMasterpiece = () => {
       );
     },
     onError: (error: AxiosError) => {
-      message.error(
-        messageObject(
-          'error',
-          `Une erreur est survenue. Code : ${error.response?.status}`,
-          'useMutationCreateMasterpiece'
-        )
-      );
       if (error.response?.status === 401)
-        notification.error(
-          toastObject(
+        message.error(
+          messageObject(
             'error',
-            'Compte requis',
-            "Pour ajouter un chef d'oeuvre, veuillez vous connecter ou créer un compte."
+            'Veuillez vous connecter ou créer un compte.',
+            'useMutationCreateMasterpiece'
           )
         );
       else
-        notification.error(
-          toastObject(
+        message.error(
+          messageObject(
             'error',
-            'Ajout impossible',
-            "Vérifiez votre connexion internet ou contactez l'administrateur"
+            `Une erreur est survenue. Code : ${
+              error.response ? error.response.status : error.message
+            }`,
+            'useMutationCreateMasterpiece'
           )
         );
     }
@@ -90,12 +85,14 @@ export const useQueryMasterpieces = (pageNumber?: number, userId?: number) => {
     {
       // Stale 5min
       staleTime: 60_000 * 5,
-      onError: (error) =>
+      onError: (error: AxiosError) =>
         notification.error(
           toastObject(
             'error',
             'Impossible de récupérer les données',
-            "Vérifiez votre connexion internet ou contactez l'administrateur"
+            `Vérifiez votre connexion internet ou contactez l'administrateur. Code : ${
+              error.response ? error.response.status : error.message
+            }`
           )
         )
     }
@@ -140,15 +137,10 @@ export const useMutationDelMasterpiece = () => {
       message.error(
         messageObject(
           'error',
-          `Une erreur est survenue. Code : ${error.response?.status}`,
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`,
           'useMutationDeleteMasterpiece'
-        )
-      );
-      notification.error(
-        toastObject(
-          'error',
-          'Suppression échouée',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
         )
       );
     }

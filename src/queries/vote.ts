@@ -34,27 +34,22 @@ export const useMutationCreateVote = () => {
       );
     },
     onError: (error: AxiosError) => {
-      message.error(
-        messageObject(
-          'error',
-          `Une erreur est survenue. Code : ${error.response?.status}`,
-          'useMutationCreateVote'
-        )
-      );
       if (error.response?.status === 401)
-        notification.error(
-          toastObject(
+        message.error(
+          messageObject(
             'error',
-            'Compte requis',
-            'Pour voter, veuillez vous connecter ou créer un compte.'
+            'Veuillez vous connecter ou créer un compte.',
+            'useMutationCreateVote'
           )
         );
       else
-        notification.error(
-          toastObject(
+        message.error(
+          messageObject(
             'error',
-            'Ajout impossible',
-            `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${error.response?.status}`
+            `Une erreur est survenue. Code : ${
+              error.response ? error.response.status : error.message
+            }`,
+            'useMutationCreateVote'
           )
         );
     }
@@ -86,12 +81,14 @@ export const useQueryVotes = (pageNumber?: number, userId?: number) => {
     {
       // Stale 5min
       staleTime: 60_000 * 5,
-      onError: (error) =>
+      onError: (error: AxiosError) =>
         notification.error(
           toastObject(
             'error',
             'Impossible de récupérer les données',
-            "Vérifiez votre connexion internet ou contactez l'administrateur"
+            `Une erreur est survenue. Code : ${
+              error.response ? error.response.status : error.message
+            }`
           )
         )
     }
@@ -128,15 +125,10 @@ export const useMutationDeleteVote = () => {
       message.error(
         messageObject(
           'error',
-          `Une erreur est survenue. Code : ${error.response?.status}`,
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`,
           'useMutationDeleteVote'
-        )
-      );
-      notification.error(
-        toastObject(
-          'error',
-          'Suppression échouée',
-          `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${error.response?.status}`
         )
       );
     }

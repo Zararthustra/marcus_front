@@ -1,5 +1,5 @@
 import { App } from 'antd';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { toastObject, messageObject } from '@utils/formatters';
@@ -26,12 +26,14 @@ export const useQueryCinema = () => {
   return useQuery(['cinema'], () => getCinemaReleases(), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
         )
       )
   });
@@ -50,12 +52,14 @@ export const useQueryNetflix = () => {
   return useQuery(['netflix'], () => getNetflixReleases(), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
         )
       )
   });
@@ -74,12 +78,14 @@ export const useQueryDisney = () => {
   return useQuery(['disney'], () => getDisneyReleases(), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
         )
       )
   });
@@ -98,12 +104,14 @@ export const useQueryAmazon = () => {
   return useQuery(['amazon'], () => getAmazonReleases(), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
         )
       )
   });
@@ -145,12 +153,14 @@ export const useQueryMovie = (movieId: string) => {
   return useQuery(['movie', movieId], () => getMovie(movieId), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
         )
       )
   });
@@ -172,12 +182,14 @@ export const useQueryTV = (movieId: string) => {
   return useQuery(['tv', movieId], () => getTV(movieId), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    onError: (error) =>
+    onError: (error: AxiosError) =>
       notification.error(
         toastObject(
           'error',
           'Impossible de récupérer les données',
-          "Vérifiez votre connexion internet ou contactez l'administrateur"
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
         )
       )
   });

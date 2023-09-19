@@ -56,7 +56,7 @@ export const useMutationLogin = () => {
         toastObject(
           'error',
           'Connexion impossible',
-          'Email ou mot de passe incorrect.'
+          'Nom de compte ou mot de passe incorrect.'
         )
       )
   });
@@ -141,19 +141,22 @@ export const useMutationRegister = () => {
       navigate('/login');
     },
     onError: (error: AxiosError) => {
-      message.error(
-        messageObject(
-          'error',
-          `Une erreur est survenue. Code : ${error.response?.status}`,
-          'useMutationRegister'
-        )
-      );
       if (error.response?.status === 400)
-        notification.error(
-          toastObject(
+        message.error(
+          messageObject(
             'error',
-            'Compte existant',
-            'Veuillez choisir un autre nom de compte'
+            'Compte existant, veuillez choisir un autre nom de compte',
+            'useMutationRegister'
+          )
+        );
+      else
+        message.error(
+          messageObject(
+            'error',
+            `Une erreur est survenue. Code : ${
+              error.response ? error.response.status : error.message
+            }`,
+            'useMutationRegister'
           )
         );
     }
