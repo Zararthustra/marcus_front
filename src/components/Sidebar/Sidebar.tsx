@@ -1,4 +1,5 @@
-import { useContext, useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
+import { useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ import {
   IconMusic,
   IconLogin
 } from '@assets/index';
+import { ModalReconnect } from '@components/index';
 import { clearLS, getLS } from '@services/localStorageService';
 
 import './Sidebar.scss';
@@ -29,7 +31,11 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
   const location = useLocation();
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
 
-  const handleReset = () => {
+  const now = Math.floor(Date.now() / 1000);
+  const accessToken = jwt_decode<any>(getLS('accessToken')).exp;
+  const showReconnectModal = accessToken < now;
+
+  const handleLogout = () => {
     clearLS();
     navigate(0);
   };
@@ -61,6 +67,11 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
             ? 'sidebar-items sidebar-items--open flex-col'
             : 'sidebar-items sidebar-items--close flex-col align-center'
         }>
+        <ModalReconnect
+          showReconnectModal={showReconnectModal}
+          logout={handleLogout}
+        />
+
         {/* Closed */}
         {!isOpenSidebar && (
           <>
@@ -130,7 +141,7 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                     width={35}
                     height={35}
                     className="sidebar__icon-logout"
-                    onClick={handleReset}
+                    onClick={handleLogout}
                   />
                 ) : (
                   <IconLogin
@@ -248,9 +259,9 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                       width={35}
                       height={35}
                       className="sidebar__icon-logout"
-                      onClick={handleReset}
+                      onClick={handleLogout}
                     />
-                    <div className="sidebar__link" onClick={handleReset}>
+                    <div className="sidebar__link" onClick={handleLogout}>
                       Déconnexion
                     </div>
                   </div>
