@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/Zararthustra/marcus_front/compare/v1.2.0...v1.3.0) (2023-09-24)
+
+
+### Features
+
+* **Music:** add landing page + research (query, style, interface) ([c765f1a](https://github.com/Zararthustra/marcus_front/commit/c765f1a0fd086af2d64302cf3964a38909b13638))
+
 ## [1.2.0](https://github.com/Zararthustra/marcus_front/compare/v1.1.1...v1.2.0) (2023-09-19)
 
 
