@@ -36,3 +36,9 @@ export {
   useMutationReconnect,
   useMutationRegister
 } from './login';
+export {
+  useMutationLogSpotify,
+  useQueryArtist,
+  useQueryArtistAlbums,
+  useQuerySearch
+} from './spotify';

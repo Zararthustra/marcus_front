@@ -22,9 +22,15 @@ export { default as Vote } from './Votes/Vote';
 export { default as Masterpieces } from './Masterpieces/Masterpieces';
 export { default as Watchlists } from './Masterpieces/Watchlists';
 export { default as Masterpiece } from './Masterpieces/Masterpiece';
-export { default as Research } from './Research/Research';
-export { default as Releases } from './Research/Releases';
-export { default as MovieItem } from './MovieItem/MovieItem';
-export { default as MovieProviders } from './Movie/MovieProviders';
-export { default as MovieCredits } from './Movie/MovieCredits';
-export { default as MovieDescription } from './Movie/MovieDescription';
+export { default as Research } from './Cinema/Research/Research';
+export { default as Releases } from './Cinema/Research/Releases';
+export { default as MovieItem } from './Cinema/MovieItem/MovieItem';
+export { default as MovieProviders } from './Cinema/Movie/MovieProviders';
+export { default as MovieCredits } from './Cinema/Movie/MovieCredits';
+export { default as MovieDescription } from './Cinema/Movie/MovieDescription';
+
+// Music
+export { default as Player } from './Music/Player/Player';
+export { default as ResearchMusic } from './Music/Research/Research';
+export { default as ArtistItem } from './Music/MusicItem/ArtistItem';
+export { default as TrackItem } from './Music/MusicItem/TrackItem';

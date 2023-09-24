@@ -4,6 +4,7 @@ import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import {
+  Artist,
   Cinema,
   Community,
   Home,
@@ -66,6 +67,7 @@ const App = () => {
               <Route element={<TV />} path="/cinema/series/:movieId" />
 
               <Route element={<Music />} path="/musique" />
+              <Route element={<Artist />} path="/musique/:artistId" />
 
               <Route element={<Community />} path="/communaute" />
               <Route element={<UserProfile />} path="/communaute/:userId" />

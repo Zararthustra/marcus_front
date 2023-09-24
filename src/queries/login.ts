@@ -51,14 +51,24 @@ export const useMutationLogin = () => {
         );
       }
     },
-    onError: (error) =>
-      notification.error(
-        toastObject(
-          'error',
-          'Connexion impossible',
-          'Nom de compte ou mot de passe incorrect.'
-        )
-      )
+    onError: (error: AxiosError) => {
+      if (error.response?.status === 401)
+        notification.error(
+          toastObject(
+            'error',
+            'Connexion impossible',
+            'Nom de compte ou mot de passe incorrect.'
+          )
+        );
+      else
+        notification.error(
+          toastObject(
+            'error',
+            `Une erreur est survenue`,
+            `Code : ${error.response ? error.response.status : error.message}`
+          )
+        );
+    }
   });
 };
 

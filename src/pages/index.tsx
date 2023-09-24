@@ -8,3 +8,4 @@ export { default as Music } from './Music/Music';
 export { default as Community } from './Community/Community';
 export { default as UserProfile } from './UserProfile/UserProfile';
 export { default as NotFound } from './NotFound/NotFound';
+export { default as Artist } from './Artist/Artist';

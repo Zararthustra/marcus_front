@@ -1,0 +1,44 @@
+.musicItem {
+  cursor: pointer;
+
+  img {
+    min-width: 4rem;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: var(--rounded-s);
+  }
+
+  h3 {
+    line-height: 20px;
+    max-width: 22ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__album {
+    margin: 0rem 0 0.5rem;
+
+    line-height: 22px;
+    max-width: 22ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__authors {
+    color: var(--color-grey-500);
+  }
+
+  audio {
+    display: none;
+  }
+
+  &__button {
+    color: var(--color-primary-700);
+
+    &:hover {
+      color: var(--color-primary-500);
+    }
+  }
+}

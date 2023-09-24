@@ -16,3 +16,4 @@ export type {
 } from './tmdb.interface';
 export type { ICommunity } from './community.interface';
 export type { ILoginRequest, ILoginResponse } from './login.interface';
+export type { ISearchArtist, ISearchTrack } from './spotify.interface';

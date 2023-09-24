@@ -6,7 +6,7 @@ import {
   IconMasterpiece,
   IconSearchMovies,
   IconVote,
-  seats
+  projector
 } from '@assets/index';
 import { Critics, Masterpieces, Research, Votes } from '@components/index';
 
@@ -17,9 +17,9 @@ const Cinema = () => {
   const tabs = [IconSearchMovies, IconCritic, IconVote, IconMasterpiece];
 
   return (
-    <main className="cinema pb-5">
+    <main className="cinema">
       <header className="cinema__header">
-        <img src={seats} alt="sièges de cinéma" />
+        <img src={projector} alt="projecteur" />
         <div className="flex align-center">
           <div
             className="w-100"
