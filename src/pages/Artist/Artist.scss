@@ -1,3 +1,54 @@
 .artist {
-  min-height: 55dvh;
+  min-height: 65dvh;
+  margin-top: 12rem;
+
+  header {
+    overflow: hidden;
+
+    h1 {
+      white-space: nowrap;
+    }
+    .player {
+      width: 30rem;
+    }
+  }
+
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    max-height: 21rem;
+  }
+
+  &__infos {
+    padding: 2rem;
+    border-radius: var(--rounded-l);
+    background-color: var(--color-slate-100);
+    max-width: 30rem;
+    width: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 15rem;
+    object-fit: cover;
+    border-radius: var(--rounded-s);
+    box-shadow: var(--shadow-l);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .artist {
+    header {
+      flex-direction: column;
+      align-items: center;
+    }
+    &__infos {
+      background-color: transparent;
+    }
+  }
 }

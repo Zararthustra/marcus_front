@@ -40,5 +40,6 @@ export {
   useMutationLogSpotify,
   useQueryArtist,
   useQueryArtistAlbums,
-  useQuerySearch
+  useQuerySearch,
+  useQueryTopTracks
 } from './spotify';

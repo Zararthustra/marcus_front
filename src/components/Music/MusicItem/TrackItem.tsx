@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { IconPause, IconPlay, defaultImg } from '@assets/index';
 
@@ -24,7 +23,6 @@ interface ITrackItemProps {
 }
 
 const TrackItem = ({ name, preview_url, album, artists }: ITrackItemProps) => {
-  const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
@@ -40,7 +38,7 @@ const TrackItem = ({ name, preview_url, album, artists }: ITrackItemProps) => {
   };
 
   return (
-    <div className="musicItem flex align-center gap-1 px-1">
+    <div className="musicItem trackItem flex align-center gap-1 px-1">
       <img
         src={!!album.images.length ? album.images[2].url : defaultImg}
         alt={name}
@@ -51,12 +49,12 @@ const TrackItem = ({ name, preview_url, album, artists }: ITrackItemProps) => {
         <p className="musicItem__album f-xs">{album.name}</p>
         <div className="musicItem__authors flex flex-wrap">
           {artists.map((artist) => (
-            <p
+            <a
               className="m-0 f-xs mr-05 f-b"
               key={artist.id}
-              onClick={() => navigate(`/musique/${artist.id}`)}>
+              href={`/musique/${artist.id}`}>
               {artist.name}
-            </p>
+            </a>
           ))}
         </div>
       </div>

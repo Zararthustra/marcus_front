@@ -14,6 +14,7 @@ import {
 import {
   IconClapLoader,
   IconCritic,
+  IconShare,
   IconVote,
   defaultImg
 } from '@assets/index';
@@ -125,6 +126,19 @@ const TV = () => {
             <Button primary onClick={() => setIsVoting(true)}>
               <IconVote width={20} height={20} />
               <p className="m-0">Voter</p>
+            </Button>
+          )}
+          {!!navigator.share && (
+            <Button
+              onClick={() =>
+                navigator.share({
+                  text: "Voici une série que j'ai découvert",
+                  title: movie.name,
+                  url: window.location.href
+                })
+              }>
+              <IconShare />
+              Partager
             </Button>
           )}
         </div>

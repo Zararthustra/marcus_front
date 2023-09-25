@@ -15,9 +15,9 @@ const ArtistItem = ({ id, name, genres, images }: IArtistItemProps) => {
   const navigate = useNavigate();
 
   return (
-    <div
+    <a
       className="musicItem flex align-center gap-1 px-1"
-      onClick={() => navigate(`/musique/${id}`)}>
+      href={`/musique/${id}`}>
       <img src={!!images.length ? images[1].url : defaultImg} alt={name} />
       <div className="flex-col w-100">
         <h2>{name}</h2>
@@ -29,7 +29,7 @@ const ArtistItem = ({ id, name, genres, images }: IArtistItemProps) => {
           ))}
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

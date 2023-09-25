@@ -4,7 +4,14 @@ import axios, { AxiosError, AxiosInstance } from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { toastObject, messageObject } from '@utils/formatters';
-import { ISearchArtist, ISearchTrack } from '@interfaces/index';
+import {
+  IAlbum,
+  IArtist,
+  ISearchArtist,
+  ISearchTrack,
+  ISpotifyPagination,
+  ITrack
+} from '@interfaces/index';
 import { getLS, setLS } from '@services/localStorageService';
 import { useNavigate } from 'react-router-dom';
 
@@ -58,7 +65,7 @@ export const useMutationLogSpotify = () => {
 
 // Artist
 // ================================================================
-const getArtist = async (artist_id: string): Promise<any> => {
+const getArtist = async (artist_id: string): Promise<IArtist> => {
   const { data } = await spotifyInstance.get(`artists/${artist_id}`);
   return data;
 };
@@ -89,8 +96,15 @@ export const useQueryArtist = (artist_id: string) => {
 
 // Artist Albums
 // ================================================================
-const getArtistAlbums = async (artist_id: string): Promise<any> => {
-  const { data } = await spotifyInstance.get(`artists/${artist_id}/albums`);
+const getArtistAlbums = async (
+  artist_id: string
+): Promise<ISpotifyPagination<IAlbum[]>> => {
+  const { data } = await spotifyInstance.get(`artists/${artist_id}/albums`, {
+    params: {
+      include_groups: 'album',
+      market: 'FR'
+    }
+  });
   return data;
 };
 export const useQueryArtistAlbums = (artist_id: string) => {
@@ -98,6 +112,46 @@ export const useQueryArtistAlbums = (artist_id: string) => {
   const { mutate: loginSpotify } = useMutationLogSpotify();
 
   return useQuery(['albums', artist_id], () => getArtistAlbums(artist_id), {
+    // Stale 5min
+    staleTime: 60_000 * 5,
+    retry: 1,
+    onError: (error: AxiosError) => {
+      if ([400, 401].includes(error.response?.status as number)) loginSpotify();
+
+      notification.error(
+        toastObject(
+          'error',
+          'Impossible de récupérer les données',
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
+        )
+      );
+    }
+  });
+};
+// ================================================================
+
+// Artist Top Tracks
+// ================================================================
+const getTopTracks = async (
+  artist_id: string
+): Promise<{ tracks: ITrack[] }> => {
+  const { data } = await spotifyInstance.get(
+    `artists/${artist_id}/top-tracks`,
+    {
+      params: {
+        market: 'FR'
+      }
+    }
+  );
+  return data;
+};
+export const useQueryTopTracks = (artist_id: string) => {
+  const { notification } = App.useApp();
+  const { mutate: loginSpotify } = useMutationLogSpotify();
+
+  return useQuery(['tracks', artist_id], () => getTopTracks(artist_id), {
     // Stale 5min
     staleTime: 60_000 * 5,
     retry: 1,
@@ -140,7 +194,7 @@ export const useQuerySearch = (query: string, type?: 'artist' | 'track') => {
   return useQuery([type, query], () => searchMusic(query, type), {
     // Stale 5min
     staleTime: 60_000 * 5,
-    enabled: !!type,
+    enabled: !!type && !!query,
     retry: 1,
     onError: (error: AxiosError) => {
       if ([400, 401].includes(error.response?.status as number)) loginSpotify();

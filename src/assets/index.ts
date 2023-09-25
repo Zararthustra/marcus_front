@@ -45,3 +45,4 @@ export { default as IconWatchlist } from './svg/IconWatchlist';
 export { default as IconMusic } from './svg/IconMusic';
 export { default as IconPlay } from './svg/IconPlay';
 export { default as IconPause } from './svg/IconPause';
+export { default as IconShare } from './svg/IconShare';

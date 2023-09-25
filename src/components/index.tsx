@@ -5,6 +5,7 @@ export { default as ModalCriticDelete } from './Modals/ModalCriticDelete';
 export { default as ModalVote } from './Modals/ModalVote';
 export { default as ModalVoteDelete } from './Modals/ModalVoteDelete';
 export { default as ModalReconnect } from './Modals/ModalReconnect';
+export { default as ModalPlayer } from './Modals/ModalPlayer';
 
 // Miscellaneous
 export { default as Button } from './Button/Button';
@@ -31,6 +32,8 @@ export { default as MovieDescription } from './Cinema/Movie/MovieDescription';
 
 // Music
 export { default as Player } from './Music/Player/Player';
+export { default as TrackPlayer } from './Music/Player/TrackPlayer';
 export { default as ResearchMusic } from './Music/Research/Research';
 export { default as ArtistItem } from './Music/MusicItem/ArtistItem';
 export { default as TrackItem } from './Music/MusicItem/TrackItem';
+export { default as AlbumItem } from './Music/MusicItem/AlbumItem';

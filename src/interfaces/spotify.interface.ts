@@ -1,45 +1,56 @@
-export type { ISearchArtist, ISearchTrack };
+export type {
+  ISearchArtist,
+  ISearchTrack,
+  ISpotifyPagination,
+  IArtist,
+  IAlbum,
+  ITrack
+};
 
-interface ISearchArtist {
-  artists: {
-    items: {
-      genres: string[];
-      id: string;
-      name: string;
-      popularity: number;
-      images: {
-        url: string;
-      }[];
-    }[];
-    total: number;
-    limit: number;
-    offset: number;
-  };
+interface ISpotifyPagination<T> {
+  items: T;
+  total: number;
+  limit: number;
+  offset: number;
 }
 
+interface IArtist {
+  name: string;
+  id: string;
+  images: {
+    url: string;
+  }[];
+  genres: string[];
+}
+interface ISearchArtist {
+  artists: ISpotifyPagination<IArtist[]>;
+}
+
+interface IAlbum {
+  id: string;
+  name: string;
+  images: {
+    url: string;
+  }[];
+  artists: {
+    id: string;
+    name: string;
+  }[];
+  release_date: string;
+  total_tracks: number;
+}
+
+interface ITrack {
+  preview_url: string | null;
+  id: string;
+  name: string;
+  popularity: number;
+  album: IAlbum;
+  artists: {
+    id: string;
+    name: string;
+  }[];
+}
 interface ISearchTrack {
-  tracks: {
-    items: {
-      preview_url: string | null;
-      id: string;
-      name: string;
-      popularity: number;
-      album: {
-        id: string;
-        images: {
-          url: string;
-        }[];
-        name: string;
-        release_date: string;
-        total_tracks: number;
-      };
-      artists: {
-        id: string;
-        name: string;
-      }[];
-    }[];
-    total: number;
-    limit: number;
-    offset: number;
-  };
+  tracks: ISpotifyPagination<ITrack[]>;
 }
