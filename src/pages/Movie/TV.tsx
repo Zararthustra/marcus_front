@@ -138,7 +138,7 @@ const TV = () => {
                 })
               }>
               <IconShare />
-              Partager
+              <p className="m-0">Partager</p>
             </Button>
           )}
         </div>

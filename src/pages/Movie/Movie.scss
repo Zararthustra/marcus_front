@@ -38,6 +38,9 @@
     button {
       width: 6.8rem;
     }
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   &__button {
@@ -129,7 +132,11 @@
     }
     &__buttons {
       width: 100%;
+      p {
+        font-size: var(--font-s);
+      }
       button {
+        gap: 0.5rem !important;
         width: 100%;
       }
     }

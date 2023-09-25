@@ -137,8 +137,8 @@ const Movie = () => {
                   url: window.location.href
                 })
               }>
-              <IconShare />
-              Partager
+              <IconShare width={20} height={20} />
+              <p className="m-0">Partager</p>
             </Button>
           )}
         </div>
