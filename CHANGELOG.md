@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Zararthustra/marcus_front/compare/v1.4.0...v1.5.0) (2023-10-08)
+
+
+### Features
+
+* **Music:** add Critic + some fixes + some refactor ([bc2b12c](https://github.com/Zararthustra/marcus_front/commit/bc2b12c147bc7886cdf96f85206a2c12bab80af7))
+
+
+### Bug Fixes
+
+* movie buttons on mobile ([ac3cd83](https://github.com/Zararthustra/marcus_front/commit/ac3cd83a667c11753edde6c121d5232fa69227e0))
+
 ## [1.4.0](https://github.com/Zararthustra/marcus_front/compare/v1.3.0...v1.4.0) (2023-09-25)
 
 
