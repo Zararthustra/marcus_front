@@ -1,6 +1,12 @@
 export type { IIcon } from './icon.interface';
 export type { IPagination } from './api.interface';
-export type { ICritic, IMovieCritic, ICriticRequest } from './critic.interface';
+export type {
+  ICritic,
+  IMovieCritic,
+  ICriticRequest,
+  ICriticMusic,
+  ICriticMusicRequest
+} from './critic.interface';
 export type { IVote, IVoteRequest } from './vote.interface';
 export type {
   IMasterpiece,

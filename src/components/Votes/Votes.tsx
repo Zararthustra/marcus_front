@@ -16,22 +16,22 @@ const Votes = ({ user }: IVotesProps) => {
   if (isLoading)
     return (
       <div className="flex-col align-center gap-3">
-        <h1 className="self-center">Votes</h1>
+        {!!!user && <h1 className="self-center">Votes</h1>}
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
     );
 
-  if (!!!votes)
+  if (!!!votes || votes.total === 0)
     return (
       <div className="flex-col justify-center gap-3">
-        <h1 className="self-center">Votes</h1>
+        {!!!user && <h1 className="self-center">Votes</h1>}
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </div>
     );
 
   return (
     <div className="flex-col justify-center gap-3">
-      <h1 className="self-center">Votes</h1>
+      {!!!user && <h1 className="self-center">Votes</h1>}
 
       <div className="flex flex-wrap gap-05 justify-evenly">
         {votes.data.map((vote, index) => (

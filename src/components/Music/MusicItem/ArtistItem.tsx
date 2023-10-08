@@ -21,9 +21,9 @@ const ArtistItem = ({ id, name, genres, images }: IArtistItemProps) => {
       <img src={!!images.length ? images[1].url : defaultImg} alt={name} />
       <div className="flex-col w-100">
         <h2>{name}</h2>
-        <div className="musicItem__authors flex flex-wrap">
+        <div className="musicItem__authors flex flex-wrap gap-05 mt-05">
           {genres.map((gender, index) => (
-            <p className="m-0 f-xs mr-05" key={index}>
+            <p className="m-0 f-xs tag--primary br-full px-05" key={index}>
               {gender}
             </p>
           ))}

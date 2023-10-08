@@ -1,18 +1,27 @@
 import { useState } from 'react';
 import { Empty, Tabs } from 'antd';
 import { useParams } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 import {
+  IconClap,
   IconClapLoader,
   IconCritic,
   IconMasterpiece,
+  IconMusic,
   IconVote,
   IconWatchlist,
   projector
 } from '@assets/index';
 import { useQueryUser } from '@queries/index';
 import { capitalizeFirstLetter } from '@utils/formatters';
-import { Critics, Masterpieces, Votes, Watchlists } from '@components/index';
+import {
+  Critics,
+  Masterpieces,
+  MusicCritics,
+  Votes,
+  Watchlists
+} from '@components/index';
 
 import './UserProfile.scss';
 
@@ -20,6 +29,7 @@ const UserProfile = () => {
   const uriParams = useParams();
   const userId = parseInt(uriParams.userId as string);
   const [activeKey, setActiveKey] = useState<number>(0);
+  const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
   const tabs = [IconCritic, IconVote, IconMasterpiece, IconWatchlist];
 
   const { data: user, isLoading } = useQueryUser(userId);
@@ -90,12 +100,39 @@ const UserProfile = () => {
             ),
             key: index.toString(),
             children: (
-              <div className="flex-col align-center">
-                {index === 0 && <Critics user={userId} />}
-                {index === 1 && <Votes user={userId} />}
-                {index === 2 && <Masterpieces user={userId} />}
-                {index === 3 && <Watchlists user={userId} />}
-              </div>
+              <>
+                <Tabs
+                  size="small"
+                  centered
+                  tabPosition={isMobile ? 'top' : 'left'}
+                  items={[
+                    {
+                      key: '0',
+                      label: <IconClap width={30} height={30} />,
+                      children: (
+                        <div className="flex-col align-center">
+                          {index === 0 && <Critics user={userId} />}
+                          {index === 1 && <Votes user={userId} />}
+                          {index === 2 && <Masterpieces user={userId} />}
+                          {index === 3 && <Watchlists user={userId} />}
+                        </div>
+                      )
+                    },
+                    {
+                      key: '1',
+                      label: <IconMusic width={30} height={30} />,
+                      children: (
+                        <div className="flex-col align-center">
+                          {index === 0 && <MusicCritics user={userId} />}
+                          {index === 1 && <h2>Bientôt disponible</h2>}
+                          {index === 2 && <h2>Bientôt disponible</h2>}
+                          {index === 3 && <h2>Bientôt disponible</h2>}
+                        </div>
+                      )
+                    }
+                  ]}
+                />
+              </>
             )
           }))}
         />

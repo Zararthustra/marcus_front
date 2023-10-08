@@ -47,6 +47,10 @@ export const useMutationLogSpotify = () => {
   return useMutation(logSpotify, {
     onSuccess: (response) => {
       setLS('spotify_AT', response.access_token);
+      setLS(
+        'spotify_exp',
+        Math.floor(Date.now() / 1000) + parseInt(response.expires_in)
+      );
       navigate(0);
     },
     onError: (error: AxiosError) => {

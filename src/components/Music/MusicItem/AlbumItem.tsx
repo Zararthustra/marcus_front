@@ -5,8 +5,12 @@ import './MusicItem.scss';
 
 interface AlbumItemProps {
   album: IAlbum;
-  selectedAlbum: string;
-  setSelectedAlbum: (value: string) => void;
+  selectedAlbum: {
+    albumId: string;
+    albumName: string;
+    imageUrl: string;
+  };
+  setSelectedAlbum: (value: any) => void;
 }
 
 const AlbumItem = ({
@@ -17,9 +21,15 @@ const AlbumItem = ({
   return (
     <div
       className={`musicItem albumItem flex align-center gap-1 p-1 br-s ${
-        selectedAlbum === album.id ? 'albumItem--selected' : ''
+        selectedAlbum.albumId === album.id ? 'albumItem--selected' : ''
       }`}
-      onClick={() => setSelectedAlbum(album.id)}>
+      onClick={() =>
+        setSelectedAlbum({
+          albumId: album.id,
+          albumName: album.name,
+          imageUrl: !!album.images.length ? album.images[1].url : defaultImg
+        })
+      }>
       <img
         src={!!album.images.length ? album.images[1].url : defaultImg}
         alt={album.name}

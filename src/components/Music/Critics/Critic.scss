@@ -1,0 +1,24 @@
+.critic {
+  width: 100%;
+  max-width: 40rem;
+
+  header {
+    svg {
+      cursor: pointer;
+    }
+    & > a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__content {
+    text-align: justify;
+    text-indent: 1rem;
+  }
+
+  footer a {
+    font-weight: 600;
+  }
+}

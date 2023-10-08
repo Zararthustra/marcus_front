@@ -2,34 +2,38 @@ import { App } from 'antd';
 import { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import axiosInstance from './axios';
+import {
+  IMasterpiece,
+  IMasterpieceRequest,
+  IPagination
+} from '@interfaces/index';
+import axiosInstance from '../axios';
 import { toastObject, messageObject } from '@utils/formatters';
-import { IVote, IPagination, IVoteRequest } from '@interfaces/index';
 
 // CREATE
 // ================================================================
-const createVote = async (payload: IVoteRequest) => {
-  const { data } = await axiosInstance.post('/votes', payload);
+const addWatchlists = async (payload: IMasterpieceRequest) => {
+  const { data } = await axiosInstance.post('/watchlists', payload);
   return data;
 };
-export const useMutationCreateVote = () => {
+export const useMutationAddWatchlist = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(createVote, {
+  return useMutation(addWatchlists, {
     onMutate: () => {
       message.open(
-        messageObject('loading', 'Ajout...', 'useMutationCreateVote')
+        messageObject('loading', 'Ajout...', 'useMutationCreateWatchlist')
       );
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries(['votes']);
+      queryClient.invalidateQueries(['watchlists']);
 
       message.success(
         messageObject(
           'success',
-          'À Voté ! Merci pour votre contribution.',
-          'useMutationCreateVote'
+          'Ajouté à ma watchlist',
+          'useMutationCreateWatchlist'
         )
       );
     },
@@ -39,7 +43,7 @@ export const useMutationCreateVote = () => {
           messageObject(
             'error',
             'Veuillez vous connecter ou créer un compte.',
-            'useMutationCreateVote'
+            'useMutationCreateWatchlist'
           )
         );
       else
@@ -49,35 +53,35 @@ export const useMutationCreateVote = () => {
             `Une erreur est survenue. Code : ${
               error.response ? error.response.status : error.message
             }`,
-            'useMutationCreateVote'
+            'useMutationCreateWatchlist'
           )
         );
     }
   });
 };
-
 // ================================================================
+
 // RETRIEVE
 // ================================================================
-const getVotes = async (
+const getWatchlists = async (
   pageNumber?: number,
   userId?: number
-): Promise<IPagination<IVote[]>> => {
+): Promise<IPagination<IMasterpiece[]>> => {
   let params;
   if (!!userId) params = { user_id: userId, page: pageNumber };
   else params = { page: pageNumber };
 
-  const { data } = await axiosInstance.get('/votes', {
+  const { data } = await axiosInstance.get('/watchlists', {
     params
   });
   return data;
 };
-export const useQueryVotes = (pageNumber?: number, userId?: number) => {
+export const useQueryWatchlists = (pageNumber?: number, userId?: number) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['votes', pageNumber, userId],
-    () => getVotes(pageNumber, userId),
+    ['watchlists', pageNumber, userId],
+    () => getWatchlists(pageNumber, userId),
     {
       // Stale 5min
       staleTime: 60_000 * 5,
@@ -86,7 +90,7 @@ export const useQueryVotes = (pageNumber?: number, userId?: number) => {
           toastObject(
             'error',
             'Impossible de récupérer les données',
-            `Une erreur est survenue. Code : ${
+            `Vérifiez votre connexion internet ou contactez l'administrateur. Code : ${
               error.response ? error.response.status : error.message
             }`
           )
@@ -98,27 +102,31 @@ export const useQueryVotes = (pageNumber?: number, userId?: number) => {
 
 // DELETE
 // ================================================================
-const deleteVote = async (movieId: number): Promise<any> => {
-  await axiosInstance.delete('/votes', {
+const delWatchlists = async (movieId: number): Promise<any> => {
+  await axiosInstance.delete(`/watchlists`, {
     params: {
       movie_id: movieId
     }
   });
 };
-export const useMutationDeleteVote = () => {
+export const useMutationDelWatchlist = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(deleteVote, {
+  return useMutation(delWatchlists, {
     onMutate: () => {
       message.open(
-        messageObject('loading', 'Suppression...', 'useMutationDeleteVote')
+        messageObject('loading', 'Suppression...', 'useMutationDeleteWatchlist')
       );
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries(['votes']);
+      queryClient.invalidateQueries(['watchlists']);
       message.success(
-        messageObject('success', 'Vote supprimé', 'useMutationDeleteVote')
+        messageObject(
+          'success',
+          'Supprimé de ma watchlist',
+          'useMutationDeleteWatchlist'
+        )
       );
     },
     onError: (error: AxiosError) => {
@@ -128,50 +136,10 @@ export const useMutationDeleteVote = () => {
           `Une erreur est survenue. Code : ${
             error.response ? error.response.status : error.message
           }`,
-          'useMutationDeleteVote'
+          'useMutationDeleteWatchlist'
         )
       );
     }
   });
 };
 // ================================================================
-
-// UPDATE
-// const update = async ({ payload, id }: { payload: any; id: number }) => {
-//   const { data } = await axiosInstance.patch(`/endpoint/${id}`, payload);
-//   return data;
-// };
-// export const useMutationUpdate = () => {
-//   const queryClient = useQueryClient();
-//   const { message, notification } = App.useApp();
-
-//   return useMutation(update, {
-//     onMutate: () => {
-//       message.open(
-//         messageObject(
-//           'loading',
-//           'Modification en cours...',
-//           'useMutationUpdate'
-//         )
-//       );
-//     },
-//     onSuccess: (response) => {
-//       queryClient.invalidateQueries(['someQuery']);
-//       message.success(
-//         messageObject('success', 'Modification réussie', 'useMutationUpdate')
-//       );
-//     },
-//     onError: (error) => {
-//       message.error(
-//         messageObject('error', 'Une erreur est survenue', 'useMutationUpdate')
-//       );
-//       notification.error(
-//         toastObject(
-//           'error',
-//           'Modification échouée',
-//           "Vérifiez votre connexion internet ou contactez l'administrateur"
-//         )
-//       );
-//     }
-//   });
-// };

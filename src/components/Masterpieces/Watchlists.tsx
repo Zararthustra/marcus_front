@@ -16,22 +16,22 @@ const Watchlists = ({ user }: IWatchlistsProps) => {
   if (isLoading)
     return (
       <div className="flex-col align-center gap-3">
-        <h1 className="self-center">Watchlist</h1>
+        {!!!user && <h1 className="self-center">Watchlist</h1>}
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
     );
 
-  if (!!!watchlists)
+  if (!!!watchlists || watchlists.total === 0)
     return (
       <div className="flex-col justify-center gap-3">
-        <h1 className="self-center">Watchlist</h1>
+        {!!!user && <h1 className="self-center">Watchlist</h1>}
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </div>
     );
 
   return (
     <div className="flex-col justify-center gap-3">
-      <h1 className="self-center">Watchlist</h1>
+      {!!!user && <h1 className="self-center">Watchlist</h1>}
 
       {watchlists.data.map((movie, index) => (
         <Masterpiece

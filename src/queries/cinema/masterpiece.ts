@@ -7,7 +7,7 @@ import {
   IMasterpieceRequest,
   IPagination
 } from '@interfaces/index';
-import axiosInstance from './axios';
+import axiosInstance from '../axios';
 import { toastObject, messageObject } from '@utils/formatters';
 
 // CREATE

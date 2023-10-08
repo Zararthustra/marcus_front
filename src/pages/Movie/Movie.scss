@@ -63,7 +63,6 @@
       position: absolute;
       bottom: 7px;
       left: 2px;
-      z-index: 999;
     }
     // Add ::before element only on the <add> button (del by default)
     &--add::before {
@@ -75,7 +74,6 @@
       position: absolute;
       bottom: 2px;
       left: 7px;
-      z-index: 999;
     }
   }
 

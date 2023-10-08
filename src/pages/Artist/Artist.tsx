@@ -1,4 +1,4 @@
-import { Empty } from 'antd';
+import { Empty, Tabs } from 'antd';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -6,30 +6,53 @@ import { useMediaQuery } from 'react-responsive';
 import {
   useQueryArtist,
   useQueryArtistAlbums,
+  useQueryArtistCritics,
   useQueryTopTracks
 } from '@queries/index';
-import { IconShare, defaultImg } from '@assets/index';
+import {
+  IconCritic,
+  IconInfo,
+  IconShare,
+  IconVote,
+  defaultImg
+} from '@assets/index';
 import {
   AlbumItem,
   Button,
-  ModalPlayer,
+  ModalMusicCritic,
+  ModalAlbum,
   Player,
-  TrackPlayer
+  TrackPlayer,
+  CriticMusic
 } from '@components/index';
 
 import './Artist.scss';
 
 const Artist = () => {
   const { artistId } = useParams();
-  const [selectedAlbum, setSelectedAlbum] = useState<string>('');
+  const [isCriticizing, setIsCriticizing] = useState<boolean>(false);
+  const [selectedAlbum, setSelectedAlbum] = useState({
+    albumId: '',
+    albumName: '',
+    imageUrl: ''
+  });
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
   const { data: artist } = useQueryArtist(artistId as string);
   const { data: topTracks } = useQueryTopTracks(artistId as string);
   const { data: albums } = useQueryArtistAlbums(artistId as string);
+  const { data: critics, isLoading } = useQueryArtistCritics(
+    artistId as string
+  );
 
   useEffect(() => {
     if (albums && !!albums.items.length && !isMobile)
-      setSelectedAlbum(albums.items[0].id);
+      setSelectedAlbum({
+        albumId: albums.items[0].id,
+        albumName: albums.items[0].name,
+        imageUrl: !!albums.items[0].images[1].url
+          ? albums.items[0].images[1].url
+          : defaultImg
+      });
   }, [albums]);
 
   if (!!!artist)
@@ -37,6 +60,18 @@ const Artist = () => {
 
   return (
     <div className="artist flex-col align-center">
+      {!!selectedAlbum.albumId && (
+        <ModalMusicCritic
+          albumId={selectedAlbum.albumId}
+          albumName={selectedAlbum.albumName}
+          imageUrl={selectedAlbum.imageUrl}
+          artistId={artistId as string}
+          artistName={artist.name}
+          showModal={isCriticizing}
+          setShowModal={setIsCriticizing}
+        />
+      )}
+
       {!!albums?.items[0] && (
         <img
           src={
@@ -58,13 +93,37 @@ const Artist = () => {
           />
           {!!selectedAlbum &&
             (isMobile ? (
-              <ModalPlayer
-                setShowModal={setSelectedAlbum}
-                showModal={!!selectedAlbum}
-                uri={'album/' + selectedAlbum}
+              <ModalAlbum
+                setIsCriticizing={setIsCriticizing}
+                setSelectedAlbum={setSelectedAlbum}
+                selectedAlbum={selectedAlbum}
+                hasCriticized={
+                  !!critics?.data.some(
+                    (item) => item.album_id === selectedAlbum.albumId
+                  )
+                }
               />
             ) : (
-              <Player uri={'album/' + selectedAlbum} height={400} />
+              <>
+                <Player uri={'album/' + selectedAlbum.albumId} height={400} />
+                <div className="flex w-100 gap-1">
+                  {!critics?.data.some(
+                    (item) => item.album_id === selectedAlbum.albumId
+                  ) && (
+                    <Button
+                      primary
+                      className="w-100"
+                      onClick={() => setIsCriticizing(true)}>
+                      <IconCritic width={20} height={20} />
+                      <p className="m-0">Critiquer</p>
+                    </Button>
+                  )}
+                  <Button primary disabled className="w-100">
+                    <IconVote width={20} height={20} />
+                    <p className="m-0">Voter</p>
+                  </Button>
+                </div>
+              </>
             ))}
         </div>
 
@@ -131,18 +190,76 @@ const Artist = () => {
         </div>
       </header>
 
-      {!!albums?.items.length && <h2 className="my-2">Albums</h2>}
       {!!albums?.items.length && (
-        <div className="flex flex-wrap justify-center gap-05">
-          {albums.items.map((album, index) => (
-            <AlbumItem
-              album={album}
-              key={index}
-              setSelectedAlbum={setSelectedAlbum}
-              selectedAlbum={selectedAlbum}
-            />
-          ))}
-        </div>
+        <Tabs
+          defaultActiveKey="0"
+          size="small"
+          centered
+          tabBarGutter={20}
+          className="cinema__tabs mt-5"
+          items={[
+            {
+              label: <h2>Albums</h2>,
+              key: '0',
+              children: (
+                <div className="flex-col align-center gap-05">
+                  <div className="mb-2 mt-05 tag--info br-full flex align-center">
+                    <IconInfo size={20} />
+                    <p className="m-05 f-s">
+                      Sélectionnez un album pour l'écouter
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-05">
+                    {albums.items.map((album, index) => (
+                      <AlbumItem
+                        album={album}
+                        key={index}
+                        setSelectedAlbum={setSelectedAlbum}
+                        selectedAlbum={selectedAlbum}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            },
+            {
+              label: <h2>Critiques ({critics?.total})</h2>,
+              key: '1',
+              children:
+                critics && critics.total > 0 ? (
+                  <div className="flex flex-wrap justify-center gap-05 mt-2 px-1">
+                    {critics.data.map((critic, index) => (
+                      <CriticMusic
+                        key={index}
+                        id={critic.id}
+                        content={critic.content}
+                        userId={critic.user.id}
+                        userName={critic.user.username}
+                        albumId={critic.album_id}
+                        albumName={critic.album_name}
+                        artistId={critic.artist_id}
+                        artistName={critic.artist_name}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <Empty
+                    className="mt-5"
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                  />
+                )
+            },
+            {
+              label: <h2>Votes</h2>,
+              key: '2',
+              children: (
+                <div className="flex flex-wrap justify-center gap-05">
+                  <h2 className="my-5">Bientôt disponible</h2>
+                </div>
+              )
+            }
+          ]}
+        />
       )}
     </div>
   );

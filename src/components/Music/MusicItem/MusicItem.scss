@@ -28,6 +28,11 @@
 
   &__authors {
     color: var(--color-grey-500);
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   audio {

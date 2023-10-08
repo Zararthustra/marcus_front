@@ -31,7 +31,6 @@ const ModalVote = ({
   });
 
   const handleInputChange = (value: number) => {
-    console.log(value);
     setCritic((prevFormData) => ({
       ...prevFormData,
       value: value

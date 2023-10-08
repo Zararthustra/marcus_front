@@ -3,38 +3,39 @@ import { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
-  ICritic,
-  ICriticRequest,
+  ICriticMusic,
+  ICriticMusicRequest,
   IMovieCritic,
   IPagination
 } from '@interfaces/index';
-import axiosInstance from './axios';
+import axiosInstance from '../axios';
 import { toastObject, messageObject } from '@utils/formatters';
 
 // CREATE
 // ================================================================
-const createCritic = async (payload: ICriticRequest) => {
-  const { data } = await axiosInstance.post('/critics', payload);
+const createMusicCritic = async (payload: ICriticMusicRequest) => {
+  const { data } = await axiosInstance.post('/music/critics', payload);
   return data;
 };
-export const useMutationCreateCritic = () => {
+export const useMutationCreateAlbumCritic = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(createCritic, {
+  return useMutation(createMusicCritic, {
     onMutate: () => {
       message.open(
-        messageObject('loading', 'Ajout...', 'useMutationCreateCritic')
+        messageObject('loading', 'Ajout...', 'useMutationCreateAlbumCritic')
       );
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries(['critics']);
+      queryClient.invalidateQueries(['music', 'critics']);
+      queryClient.invalidateQueries(['artist', 'critics']);
 
       message.success(
         messageObject(
           'success',
           'Critique ajoutée. Merci pour votre contribution !',
-          'useMutationCreateCritic'
+          'useMutationCreateAlbumCritic'
         )
       );
     },
@@ -44,7 +45,7 @@ export const useMutationCreateCritic = () => {
           messageObject(
             'error',
             'Veuillez vous connecter ou créer un compte.',
-            'useMutationCreateCritic'
+            'useMutationCreateAlbumCritic'
           )
         );
       else
@@ -54,7 +55,7 @@ export const useMutationCreateCritic = () => {
             `Une erreur est survenue. Code : ${
               error.response ? error.response.status : error.message
             }`,
-            'useMutationCreateCritic'
+            'useMutationCreateAlbumCritic'
           )
         );
     }
@@ -64,25 +65,25 @@ export const useMutationCreateCritic = () => {
 
 // RETRIEVE
 // ================================================================
-const getCritics = async (
+const getMusicCritics = async (
   pageNumber: number,
   userId?: number
-): Promise<IPagination<ICritic[]>> => {
+): Promise<IPagination<ICriticMusic[]>> => {
   let params;
   if (!!userId) params = { user_id: userId, page: pageNumber };
   else params = { page: pageNumber };
 
-  const { data } = await axiosInstance.get('/critics', {
+  const { data } = await axiosInstance.get('/music/critics', {
     params
   });
   return data;
 };
-export const useQueryCritics = (pageNumber: number, userId?: number) => {
+export const useQueryMusicCritics = (pageNumber: number, userId?: number) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['critics', pageNumber, userId],
-    () => getCritics(pageNumber, userId),
+    ['music', 'critics', pageNumber, userId],
+    () => getMusicCritics(pageNumber, userId),
     {
       // Stale 5min
       staleTime: 60_000 * 5,
@@ -102,58 +103,68 @@ export const useQueryCritics = (pageNumber: number, userId?: number) => {
 // ================================================================
 
 // ================================================================
-const getMovieCritics = async (
-  movieId: string
-): Promise<{ data: IMovieCritic[] }> => {
-  const { data } = await axiosInstance.get(`/critics?movie_id=${movieId}`);
+const getArtistCritics = async (
+  artistId: string
+): Promise<IPagination<ICriticMusic[]>> => {
+  const { data } = await axiosInstance.get('/music/critics', {
+    params: { artist_id: artistId }
+  });
   return data;
 };
-export const useQueryMovieCritics = (movieId: string) => {
+export const useQueryArtistCritics = (artistId: string) => {
   const { notification } = App.useApp();
 
-  return useQuery(['critics', movieId], () => getMovieCritics(movieId), {
-    // Stale 5min
-    staleTime: 60_000 * 5,
-    onError: (error: AxiosError) =>
-      notification.error(
-        toastObject(
-          'error',
-          'Impossible de récupérer les données',
-          `Vérifiez votre connexion internet ou contactez l'administrateur. Code: ${
-            error.response ? error.response.status : error.message
-          }`
+  return useQuery(
+    ['artist', 'critics', artistId],
+    () => getArtistCritics(artistId),
+    {
+      // Stale 5min
+      staleTime: 60_000 * 5,
+      onError: (error: AxiosError) =>
+        notification.error(
+          toastObject(
+            'error',
+            'Impossible de récupérer les données',
+            `Vérifiez votre connexion internet ou contactez l'administrateur. Code : ${
+              error.response ? error.response.status : error.message
+            }`
+          )
         )
-      )
-  });
+    }
+  );
 };
 // ================================================================
 
 // DELETE
 // ================================================================
-const deleteCritic = async (movieId: number): Promise<any> => {
-  await axiosInstance.delete('/critics', {
+const deleteMusicCritic = async (id: string): Promise<any> => {
+  await axiosInstance.delete('/music/critics', {
     params: {
-      movie_id: movieId
+      id: id
     }
   });
 };
-export const useMutationDeleteCritic = () => {
+export const useMutationDeleteMusicCritic = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(deleteCritic, {
+  return useMutation(deleteMusicCritic, {
     onMutate: () => {
       message.open(
-        messageObject('loading', 'Suppression...', 'useMutationDeleteCritic')
+        messageObject(
+          'loading',
+          'Suppression...',
+          'useMutationDeleteMusicCritic'
+        )
       );
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries(['critics']);
+      queryClient.invalidateQueries(['music', 'critics']);
       message.success(
         messageObject(
           'success',
           'Critique supprimée',
-          'useMutationDeleteCritic'
+          'useMutationDeleteMusicCritic'
         )
       );
     },
@@ -164,7 +175,7 @@ export const useMutationDeleteCritic = () => {
           `Une erreur est survenue. Code : ${
             error.response ? error.response.status : error.message
           }`,
-          'useMutationDeleteCritic'
+          'useMutationDeleteMusicCritic'
         )
       );
     }

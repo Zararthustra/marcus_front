@@ -1,5 +1,5 @@
-import jwt_decode from 'jwt-decode';
 import { useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import {
   IconLogin
 } from '@assets/index';
 import { ModalReconnect } from '@components/index';
+import { useMutationLogSpotify } from '@queries/index';
 import { clearLS, getLS } from '@services/localStorageService';
 
 import './Sidebar.scss';
@@ -30,6 +31,7 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
   const isLogged = !!getLS('accessToken');
   const location = useLocation();
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+  const { mutate: loginSpotify } = useMutationLogSpotify();
 
   const now = Math.floor(Date.now() / 1000);
   const dummyToken =
@@ -45,6 +47,13 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
   };
 
   useEffect(() => {
+    // Connect/Reconnect to Spotify API
+    const spotifyExpiredAt = getLS('spotify_exp');
+
+    if (!!!spotifyExpiredAt) loginSpotify();
+    else if (parseInt(spotifyExpiredAt) < now) loginSpotify();
+
+    // Close sidebar on new page
     if (isMobile) setIsOpenSidebar(false);
   }, [location.pathname]);
 

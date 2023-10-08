@@ -1,24 +1,44 @@
+// Cinema
 export {
   useQueryCritics,
   useQueryMovieCritics,
   useMutationCreateCritic,
   useMutationDeleteCritic
-} from './critic';
+} from './cinema/critic';
 export {
   useQueryVotes,
   useMutationCreateVote,
   useMutationDeleteVote
-} from './vote';
+} from './cinema/vote';
 export {
   useQueryMasterpieces,
   useMutationAddMasterpiece,
   useMutationDelMasterpiece
-} from './masterpiece';
+} from './cinema/masterpiece';
 export {
   useQueryWatchlists,
   useMutationAddWatchlist,
   useMutationDelWatchlist
-} from './watchlist';
+} from './cinema/watchlist';
+
+// Music
+export {
+  useMutationCreateAlbumCritic,
+  useMutationDeleteMusicCritic,
+  useQueryMusicCritics,
+  useQueryArtistCritics
+} from './music/critic';
+
+// Others
+export { useQueryCommunity } from './community';
+export { useQueryUser } from './user';
+export {
+  useMutationLogin,
+  useMutationReconnect,
+  useMutationRegister
+} from './login';
+
+// APIs
 export {
   useQueryCinema,
   useQueryNetflix,
@@ -29,13 +49,6 @@ export {
   useQueryMovie,
   useQueryTV
 } from './tmdb';
-export { useQueryCommunity } from './community';
-export { useQueryUser } from './user';
-export {
-  useMutationLogin,
-  useMutationReconnect,
-  useMutationRegister
-} from './login';
 export {
   useMutationLogSpotify,
   useQueryArtist,
