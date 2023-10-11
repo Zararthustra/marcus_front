@@ -7,7 +7,12 @@ export type {
   ICriticMusic,
   ICriticMusicRequest
 } from './critic.interface';
-export type { IVote, IVoteRequest } from './vote.interface';
+export type {
+  IVote,
+  IVoteRequest,
+  IVoteMusic,
+  IVoteMusicRequest
+} from './vote.interface';
 export type {
   IMasterpiece,
   IMovieDetails,

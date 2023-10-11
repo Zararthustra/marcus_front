@@ -28,6 +28,12 @@ export {
   useQueryMusicCritics,
   useQueryArtistCritics
 } from './music/critic';
+export {
+  useMutationCreateMusicVote,
+  useMutationDeleteMusicVote,
+  useQueryMusicVotes,
+  useQueryArtistVotes
+} from './music/vote';
 
 // Others
 export { useQueryCommunity } from './community';

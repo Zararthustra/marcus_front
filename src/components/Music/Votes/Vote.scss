@@ -1,0 +1,33 @@
+.vote {
+  width: 15rem;
+  height: 9rem;
+  padding: 0.7rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--rounded-m);
+
+  h2 {
+    text-align: center;
+    line-height: 20px;
+  }
+
+  &__del {
+    cursor: pointer;
+  }
+  &__artist {
+    font-size: var(--font-s);
+    font-weight: 600;
+    color: var(--color-grey-400);
+  }
+  &__author {
+    font-size: var(--font-xs);
+    align-self: flex-end;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .vote {
+    width: 10rem;
+    height: 10rem;
+  }
+}

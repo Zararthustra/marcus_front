@@ -7,6 +7,7 @@ import {
   useQueryArtist,
   useQueryArtistAlbums,
   useQueryArtistCritics,
+  useQueryArtistVotes,
   useQueryTopTracks
 } from '@queries/index';
 import {
@@ -23,7 +24,9 @@ import {
   ModalAlbum,
   Player,
   TrackPlayer,
-  CriticMusic
+  CriticMusic,
+  ModalMusicVote,
+  MusicVote
 } from '@components/index';
 
 import './Artist.scss';
@@ -31,6 +34,7 @@ import './Artist.scss';
 const Artist = () => {
   const { artistId } = useParams();
   const [isCriticizing, setIsCriticizing] = useState<boolean>(false);
+  const [isVoting, setIsVoting] = useState<boolean>(false);
   const [selectedAlbum, setSelectedAlbum] = useState({
     albumId: '',
     albumName: '',
@@ -40,9 +44,8 @@ const Artist = () => {
   const { data: artist } = useQueryArtist(artistId as string);
   const { data: topTracks } = useQueryTopTracks(artistId as string);
   const { data: albums } = useQueryArtistAlbums(artistId as string);
-  const { data: critics, isLoading } = useQueryArtistCritics(
-    artistId as string
-  );
+  const { data: critics } = useQueryArtistCritics(artistId as string);
+  const { data: votes } = useQueryArtistVotes(artistId as string);
 
   useEffect(() => {
     if (albums && !!albums.items.length && !isMobile)
@@ -69,6 +72,17 @@ const Artist = () => {
           artistName={artist.name}
           showModal={isCriticizing}
           setShowModal={setIsCriticizing}
+        />
+      )}
+      {!!selectedAlbum.albumId && (
+        <ModalMusicVote
+          albumId={selectedAlbum.albumId}
+          albumName={selectedAlbum.albumName}
+          imageUrl={selectedAlbum.imageUrl}
+          artistId={artistId as string}
+          artistName={artist.name}
+          showModal={isVoting}
+          setShowModal={setIsVoting}
         />
       )}
 
@@ -118,10 +132,17 @@ const Artist = () => {
                       <p className="m-0">Critiquer</p>
                     </Button>
                   )}
-                  <Button primary disabled className="w-100">
-                    <IconVote width={20} height={20} />
-                    <p className="m-0">Voter</p>
-                  </Button>
+                  {!votes?.data.some(
+                    (item) => item.album_id === selectedAlbum.albumId
+                  ) && (
+                    <Button
+                      primary
+                      className="w-100"
+                      onClick={() => setIsVoting(true)}>
+                      <IconVote width={20} height={20} />
+                      <p className="m-0">Voter</p>
+                    </Button>
+                  )}
                 </div>
               </>
             ))}
@@ -199,7 +220,7 @@ const Artist = () => {
           className="cinema__tabs mt-5"
           items={[
             {
-              label: <h2>Albums</h2>,
+              label: <h2>Albums ({albums.total})</h2>,
               key: '0',
               children: (
                 <div className="flex-col align-center gap-05">
@@ -250,13 +271,31 @@ const Artist = () => {
                 )
             },
             {
-              label: <h2>Votes</h2>,
+              label: <h2>Votes ({votes?.total})</h2>,
               key: '2',
-              children: (
-                <div className="flex flex-wrap justify-center gap-05">
-                  <h2 className="my-5">Bientôt disponible</h2>
-                </div>
-              )
+              children:
+                votes && votes.total > 0 ? (
+                  <div className="flex flex-wrap justify-evenly gap-05 mt-2 px-1">
+                    {votes.data.map((vote, index) => (
+                      <MusicVote
+                        key={index}
+                        user={vote.user}
+                        id={vote.id}
+                        albumId={vote.album_id}
+                        albumName={vote.album_name}
+                        value={vote.value}
+                        artistId={vote.artist_id}
+                        artistName={vote.artist_name}
+                        imageUrl={vote.image_url}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <Empty
+                    className="mt-5"
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                  />
+                )
             }
           ]}
         />

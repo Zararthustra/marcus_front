@@ -6,7 +6,7 @@ import { getPlatformUri } from '@utils/formatters';
 import './Vote.scss';
 import { useState } from 'react';
 import { getLS } from '@services/localStorageService';
-import { ModalVoteDelete } from '..';
+import { ModalVoteDelete } from '../..';
 import { IconTrash } from '@assets/index';
 
 interface IVoteProps {
