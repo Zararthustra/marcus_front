@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/Zararthustra/marcus_front/compare/v1.5.0...v1.6.0) (2023-10-11)
+
+
+### Features
+
+* **Music:** add Votes ([7e15596](https://github.com/Zararthustra/marcus_front/commit/7e1559682cb1b486f4e0bd97b1ca260809468cfc))
+
 ## [1.5.0](https://github.com/Zararthustra/marcus_front/compare/v1.4.0...v1.5.0) (2023-10-08)
 
 
