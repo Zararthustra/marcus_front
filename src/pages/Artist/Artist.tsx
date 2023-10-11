@@ -110,11 +110,21 @@ const Artist = () => {
             (isMobile ? (
               <ModalAlbum
                 setIsCriticizing={setIsCriticizing}
+                setIsVoting={setIsVoting}
                 setSelectedAlbum={setSelectedAlbum}
                 selectedAlbum={selectedAlbum}
                 hasCriticized={
                   !!critics?.data.some(
-                    (item) => item.album_id === selectedAlbum.albumId
+                    (item) =>
+                      item.album_id === selectedAlbum.albumId &&
+                      item.user.id.toString() === getLS('userId')
+                  )
+                }
+                hasVoted={
+                  !!votes?.data.some(
+                    (item) =>
+                      item.album_id === selectedAlbum.albumId &&
+                      item.user.id.toString() === getLS('userId')
                   )
                 }
               />

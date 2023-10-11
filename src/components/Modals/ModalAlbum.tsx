@@ -5,6 +5,7 @@ import { IconCritic, IconVote } from '@assets/index';
 
 interface IModalAlbumProps {
   hasCriticized: boolean;
+  hasVoted: boolean;
   selectedAlbum: {
     albumId: string;
     albumName: string;
@@ -12,13 +13,16 @@ interface IModalAlbumProps {
   };
   setSelectedAlbum: (value: any) => void;
   setIsCriticizing: (value: boolean) => void;
+  setIsVoting: (value: boolean) => void;
 }
 
 const ModalAlbum = ({
   selectedAlbum,
   hasCriticized,
+  hasVoted,
   setSelectedAlbum,
-  setIsCriticizing
+  setIsCriticizing,
+  setIsVoting
 }: IModalAlbumProps) => {
   return (
     <Modal
@@ -36,10 +40,12 @@ const ModalAlbum = ({
               <p className="m-0">Critiquer</p>
             </Button>
           )}
-          <Button primary disabled className="w-100">
-            <IconVote width={20} height={20} />
-            <p className="m-0">Voter</p>
-          </Button>
+          {!hasVoted && (
+            <Button primary className="w-100" onClick={() => setIsVoting(true)}>
+              <IconVote width={20} height={20} />
+              <p className="m-0">Voter</p>
+            </Button>
+          )}
         </div>
       }
       onCancel={() =>
