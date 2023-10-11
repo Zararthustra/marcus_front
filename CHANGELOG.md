@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/Zararthustra/marcus_front/compare/v1.6.1...v1.7.0) (2023-10-11)
+
+
+### Features
+
+* **Music:** add album preview on critic & vote items ([a37ca70](https://github.com/Zararthustra/marcus_front/commit/a37ca70da99cb228d45382cdf1fa07aaa0357fd4))
+* **Music:** add Vote on mobile ([7bd347b](https://github.com/Zararthustra/marcus_front/commit/7bd347b56a430d3ef8b8c16f1e49f2d48d3fb095))
+
 ### [1.6.1](https://github.com/Zararthustra/marcus_front/compare/v1.6.0...v1.6.1) (2023-10-11)
 
 
