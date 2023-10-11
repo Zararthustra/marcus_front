@@ -30,6 +30,7 @@ import {
 } from '@components/index';
 
 import './Artist.scss';
+import { getLS } from '@services/localStorageService';
 
 const Artist = () => {
   const { artistId } = useParams();
@@ -122,7 +123,9 @@ const Artist = () => {
                 <Player uri={'album/' + selectedAlbum.albumId} height={400} />
                 <div className="flex w-100 gap-1">
                   {!critics?.data.some(
-                    (item) => item.album_id === selectedAlbum.albumId
+                    (item) =>
+                      item.album_id === selectedAlbum.albumId &&
+                      item.user.id.toString() === getLS('userId')
                   ) && (
                     <Button
                       primary
@@ -133,7 +136,9 @@ const Artist = () => {
                     </Button>
                   )}
                   {!votes?.data.some(
-                    (item) => item.album_id === selectedAlbum.albumId
+                    (item) =>
+                      item.album_id === selectedAlbum.albumId &&
+                      item.user.id.toString() === getLS('userId')
                   ) && (
                     <Button
                       primary
