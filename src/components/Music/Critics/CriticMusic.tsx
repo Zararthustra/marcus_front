@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IconTrash } from '@assets/index';
 import { getLS } from '@services/localStorageService';
 import { capitalizeFirstLetter } from '@utils/formatters';
-import { ModalMusicCriticDelete } from '@components/index';
+import { ModalAlbum, ModalMusicCriticDelete } from '@components/index';
 
 import './Critic.scss';
 
@@ -31,6 +31,11 @@ const CriticMusic = ({
 }: ICriticMusicProps) => {
   const isOwner = getLS('name') === userName;
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [selectedAlbum, setSelectedAlbum] = useState({
+    albumId: '',
+    albumName: '',
+    imageUrl: ''
+  });
 
   return (
     <>
@@ -41,12 +46,26 @@ const CriticMusic = ({
         albumName={albumName}
       />
 
+      <ModalAlbum
+        setSelectedAlbum={setSelectedAlbum}
+        selectedAlbum={selectedAlbum}
+      />
+
       <div className="critic">
         <header>
           <div className="flex justify-between align-center">
-            <Link to={`/musique/${artistId}`}>
-              <h2>{albumName}</h2>
-            </Link>
+            <h2
+              style={{ cursor: 'pointer' }}
+              onClick={() =>
+                setSelectedAlbum({
+                  albumId,
+                  albumName,
+                  imageUrl: ''
+                })
+              }>
+              {albumName}
+            </h2>
+
             {isOwner && (
               <IconTrash
                 color="var(--color-primary-500)"

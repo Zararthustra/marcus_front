@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { IconTrash } from '@assets/index';
 import { getLS } from '@services/localStorageService';
-import { ModalMusicVoteDelete } from '@components/index';
+import { ModalAlbum, ModalMusicVoteDelete } from '@components/index';
 import { capitalizeFirstLetter } from '@utils/formatters';
 
 import './Vote.scss';
@@ -35,6 +35,11 @@ const Vote = ({
 }: IVoteProps) => {
   const isOwner = getLS('name') === user.username;
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [selectedAlbum, setSelectedAlbum] = useState({
+    albumId: '',
+    albumName: '',
+    imageUrl: ''
+  });
 
   return (
     <>
@@ -45,11 +50,22 @@ const Vote = ({
         albumName={albumName}
       />
 
-      <div className="vote flex-col align-center justify-between">
+      <ModalAlbum
+        setSelectedAlbum={setSelectedAlbum}
+        selectedAlbum={selectedAlbum}
+      />
+
+      <div
+        className="vote flex-col align-center justify-between"
+        onClick={() =>
+          setSelectedAlbum({
+            albumId,
+            albumName,
+            imageUrl
+          })
+        }>
         <Rate allowHalf disabled defaultValue={value} />
-        <Link to={`/musique/${artistId}`}>
-          <h2>{albumName}</h2>
-        </Link>
+        <h2>{albumName}</h2>
         <Link className="vote__artist" to={`/musique/${artistId}`}>
           {capitalizeFirstLetter(artistName)}
         </Link>

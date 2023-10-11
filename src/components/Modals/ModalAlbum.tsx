@@ -4,16 +4,16 @@ import { Button, Player } from '@components/index';
 import { IconCritic, IconVote } from '@assets/index';
 
 interface IModalAlbumProps {
-  hasCriticized: boolean;
-  hasVoted: boolean;
+  hasCriticized?: boolean;
+  hasVoted?: boolean;
   selectedAlbum: {
     albumId: string;
     albumName: string;
     imageUrl: string;
   };
   setSelectedAlbum: (value: any) => void;
-  setIsCriticizing: (value: boolean) => void;
-  setIsVoting: (value: boolean) => void;
+  setIsCriticizing?: (value: boolean) => void;
+  setIsVoting?: (value: boolean) => void;
 }
 
 const ModalAlbum = ({
@@ -31,7 +31,7 @@ const ModalAlbum = ({
       width={400}
       footer={
         <div className="flex w-100 gap-1">
-          {!hasCriticized && (
+          {!hasCriticized && setIsCriticizing && (
             <Button
               primary
               className="w-100"
@@ -40,7 +40,7 @@ const ModalAlbum = ({
               <p className="m-0">Critiquer</p>
             </Button>
           )}
-          {!hasVoted && (
+          {!hasVoted && setIsVoting && (
             <Button primary className="w-100" onClick={() => setIsVoting(true)}>
               <IconVote width={20} height={20} />
               <p className="m-0">Voter</p>
