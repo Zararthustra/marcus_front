@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/Zararthustra/marcus_front/compare/v1.6.0...v1.6.1) (2023-10-11)
+
+
+### Bug Fixes
+
+* critic & vote button ([571c899](https://github.com/Zararthustra/marcus_front/commit/571c8999809bb137a00ff7a30811a7d8c63224d1))
+
 ## [1.6.0](https://github.com/Zararthustra/marcus_front/compare/v1.5.0...v1.6.0) (2023-10-11)
 
 
