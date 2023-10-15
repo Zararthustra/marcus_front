@@ -1,6 +1,6 @@
-import { Empty, Tabs } from 'antd';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Empty, Pagination, Tabs } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 
 import {
@@ -35,6 +35,7 @@ import { getLS } from '@services/localStorageService';
 const Artist = () => {
   const { artistId } = useParams();
   const [isCriticizing, setIsCriticizing] = useState<boolean>(false);
+  const [pageAlbum, setPageAlbum] = useState<number>(1);
   const [isVoting, setIsVoting] = useState<boolean>(false);
   const [selectedAlbum, setSelectedAlbum] = useState({
     albumId: '',
@@ -44,7 +45,7 @@ const Artist = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
   const { data: artist } = useQueryArtist(artistId as string);
   const { data: topTracks } = useQueryTopTracks(artistId as string);
-  const { data: albums } = useQueryArtistAlbums(artistId as string);
+  const { data: albums } = useQueryArtistAlbums(artistId as string, pageAlbum);
   const { data: critics } = useQueryArtistCritics(artistId as string);
   const { data: votes } = useQueryArtistVotes(artistId as string);
 
@@ -245,6 +246,18 @@ const Artist = () => {
                       Sélectionnez un album pour l'écouter
                     </p>
                   </div>
+
+                  <Pagination
+                    className="self-center mb-2"
+                    total={albums.total}
+                    onChange={(page) => setPageAlbum(page)}
+                    defaultPageSize={20}
+                    showSizeChanger={false}
+                    current={pageAlbum}
+                    responsive
+                    hideOnSinglePage
+                  />
+
                   <div className="flex flex-wrap justify-center gap-05">
                     {albums.items.map((album, index) => (
                       <AlbumItem
@@ -255,6 +268,17 @@ const Artist = () => {
                       />
                     ))}
                   </div>
+
+                  <Pagination
+                    className="self-center mt-2"
+                    total={albums.total}
+                    onChange={(page) => setPageAlbum(page)}
+                    defaultPageSize={20}
+                    showSizeChanger={false}
+                    current={pageAlbum}
+                    responsive
+                    hideOnSinglePage
+                  />
                 </div>
               )
             },

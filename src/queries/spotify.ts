@@ -101,38 +101,46 @@ export const useQueryArtist = (artist_id: string) => {
 // Artist Albums
 // ================================================================
 const getArtistAlbums = async (
-  artist_id: string
+  artist_id: string,
+  page: number
 ): Promise<ISpotifyPagination<IAlbum[]>> => {
   const { data } = await spotifyInstance.get(`artists/${artist_id}/albums`, {
     params: {
       include_groups: 'album',
-      market: 'FR'
+      market: 'FR',
+      limit: 20,
+      offset: (page - 1) * 20
     }
   });
   return data;
 };
-export const useQueryArtistAlbums = (artist_id: string) => {
+export const useQueryArtistAlbums = (artist_id: string, page: number) => {
   const { notification } = App.useApp();
   const { mutate: loginSpotify } = useMutationLogSpotify();
 
-  return useQuery(['albums', artist_id], () => getArtistAlbums(artist_id), {
-    // Stale 5min
-    staleTime: 60_000 * 5,
-    retry: 1,
-    onError: (error: AxiosError) => {
-      if ([400, 401].includes(error.response?.status as number)) loginSpotify();
+  return useQuery(
+    ['albums', artist_id, page],
+    () => getArtistAlbums(artist_id, page),
+    {
+      // Stale 5min
+      staleTime: 60_000 * 5,
+      retry: 1,
+      onError: (error: AxiosError) => {
+        if ([400, 401].includes(error.response?.status as number))
+          loginSpotify();
 
-      notification.error(
-        toastObject(
-          'error',
-          'Impossible de récupérer les données',
-          `Une erreur est survenue. Code : ${
-            error.response ? error.response.status : error.message
-          }`
-        )
-      );
+        notification.error(
+          toastObject(
+            'error',
+            'Impossible de récupérer les données',
+            `Une erreur est survenue. Code : ${
+              error.response ? error.response.status : error.message
+            }`
+          )
+        );
+      }
     }
-  });
+  );
 };
 // ================================================================
 
