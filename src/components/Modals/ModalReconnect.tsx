@@ -14,7 +14,7 @@ const ModalReconnect = ({
   showReconnectModal,
   logout
 }: IModalReconnectProps) => {
-  const { mutate } = useMutationReconnect();
+  const { mutate, isLoading } = useMutationReconnect();
 
   return (
     <Modal
@@ -27,6 +27,7 @@ const ModalReconnect = ({
           <Button
             onClick={() => mutate(getLS('refreshToken'))}
             primary
+            loading={isLoading}
             style={{ fontWeight: 600 }}>
             Se reconnecter
           </Button>
