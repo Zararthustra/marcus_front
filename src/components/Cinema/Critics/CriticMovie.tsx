@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { IconTrash } from '@assets/index';
 import { getLS } from '@services/localStorageService';
 import { ModalCriticDelete } from '@components/index';
+import { capitalizeFirstLetter } from '@utils/formatters';
 
 import './Critic.scss';
 
@@ -39,7 +40,7 @@ const CriticMovie = ({
       <div className="critic">
         <header className="flex justify-between align-center">
           <a href={`/communaute/${userId}`}>
-            <h2>{userName}</h2>
+            <h2>{capitalizeFirstLetter(userName)}</h2>
           </a>
           {isOwner && (
             <IconTrash
