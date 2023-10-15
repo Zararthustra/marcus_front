@@ -39,9 +39,11 @@ const Vote = ({
       />
 
       <div className="vote flex-col align-center justify-between">
-        <Rate allowHalf disabled defaultValue={value} />
+        <Rate allowHalf disabled value={value} />
         <a href={`/cinema/${getPlatformUri(platform)}/${movieId}`}>
-          <h2>{movieName}</h2>
+          <h2>
+            {movieName.length > 28 ? movieName.slice(0, 25) + '...' : movieName}
+          </h2>
         </a>
         <div className="flex align-center justify-between w-100">
           {isOwner ? (

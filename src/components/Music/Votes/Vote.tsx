@@ -64,8 +64,10 @@ const Vote = ({
             imageUrl
           })
         }>
-        <Rate allowHalf disabled defaultValue={value} />
-        <h2>{albumName}</h2>
+        <Rate allowHalf disabled value={value} />
+        <h2>
+          {albumName.length > 28 ? albumName.slice(0, 25) + '...' : albumName}
+        </h2>
         <Link className="vote__artist" to={`/musique/${artistId}`}>
           {capitalizeFirstLetter(artistName)}
         </Link>

@@ -67,23 +67,28 @@ export const useMutationCreateMusicVote = () => {
 // ================================================================
 const getMusicVotes = async (
   pageNumber?: number,
-  userId?: number
+  userId?: number,
+  stars?: number
 ): Promise<IPagination<IVoteMusic[]>> => {
   let params;
-  if (!!userId) params = { user_id: userId, page: pageNumber };
-  else params = { page: pageNumber };
+  if (!!userId) params = { user_id: userId, page: pageNumber, stars: stars };
+  else params = { page: pageNumber, stars: stars };
 
   const { data } = await axiosInstance.get('/music/votes', {
     params
   });
   return data;
 };
-export const useQueryMusicVotes = (pageNumber?: number, userId?: number) => {
+export const useQueryMusicVotes = (
+  pageNumber?: number,
+  userId?: number,
+  stars?: number
+) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['music', 'votes', pageNumber, userId],
-    () => getMusicVotes(pageNumber, userId),
+    ['music', 'votes', pageNumber, userId, stars],
+    () => getMusicVotes(pageNumber, userId, stars),
     {
       // Stale 5min
       staleTime: 60_000 * 5,

@@ -61,23 +61,28 @@ export const useMutationCreateVote = () => {
 // ================================================================
 const getVotes = async (
   pageNumber?: number,
-  userId?: number
+  userId?: number,
+  stars?: number
 ): Promise<IPagination<IVote[]>> => {
   let params;
-  if (!!userId) params = { user_id: userId, page: pageNumber };
-  else params = { page: pageNumber };
+  if (!!userId) params = { user_id: userId, page: pageNumber, stars: stars };
+  else params = { page: pageNumber, stars: stars };
 
   const { data } = await axiosInstance.get('/votes', {
     params
   });
   return data;
 };
-export const useQueryVotes = (pageNumber?: number, userId?: number) => {
+export const useQueryVotes = (
+  pageNumber?: number,
+  userId?: number,
+  stars?: number
+) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['votes', pageNumber, userId],
-    () => getVotes(pageNumber, userId),
+    ['votes', pageNumber, userId, stars],
+    () => getVotes(pageNumber, userId, stars),
     {
       // Stale 5min
       staleTime: 60_000 * 5,

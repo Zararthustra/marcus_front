@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { Empty, Pagination } from 'antd';
+import { Empty, Pagination, Rate } from 'antd';
 
 import { Vote } from '@components/index';
-import { IconClapLoader } from '@assets/index';
 import { useQueryVotes } from '@queries/index';
+import { IconClapLoader, IconVote } from '@assets/index';
 
 interface IVotesProps {
   user?: number;
 }
 
 const Votes = ({ user }: IVotesProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data: votes, isLoading } = useQueryVotes(currentPage, user);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [stars, setStars] = useState<number | undefined>(undefined);
+  const { data: votes, isLoading } = useQueryVotes(currentPage, user, stars);
 
   if (isLoading)
     return (
@@ -23,15 +24,34 @@ const Votes = ({ user }: IVotesProps) => {
 
   if (!!!votes || votes.total === 0)
     return (
-      <div className="flex-col justify-center gap-3">
+      <div className="flex-col justify-center">
         {!!!user && <h1 className="self-center">Votes</h1>}
+        <Rate
+          allowHalf
+          allowClear
+          id="vote"
+          className="self-center mt-1 mb-2"
+          character={<IconVote width={30} height={30} />}
+          value={stars}
+          onChange={(value) => setStars(!!value ? value : undefined)}
+        />
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </div>
     );
 
   return (
-    <div className="flex-col justify-center gap-3">
+    <div className="flex-col justify-center">
       {!!!user && <h1 className="self-center">Votes</h1>}
+
+      <Rate
+        allowHalf
+        allowClear
+        id="vote"
+        className="self-center mt-1 mb-2"
+        character={<IconVote width={30} height={30} />}
+        value={stars}
+        onChange={(value) => setStars(!!value ? value : undefined)}
+      />
 
       <div className="flex flex-wrap gap-05 justify-evenly">
         {votes.data.map((vote, index) => (
@@ -48,7 +68,7 @@ const Votes = ({ user }: IVotesProps) => {
       </div>
 
       <Pagination
-        className="self-center"
+        className="self-center mt-2"
         total={votes.total}
         onChange={(page) => setCurrentPage(page)}
         // showTotal={(total, range) => `${range[0]}-${range[1]} sur ${total}`}
