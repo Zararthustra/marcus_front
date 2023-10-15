@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/Zararthustra/marcus_front/compare/v1.8.0...v1.9.0) (2023-10-15)
+
+
+### Features
+
+* **Movie:** add Critics & Votes tabs ([2ce9578](https://github.com/Zararthustra/marcus_front/commit/2ce957858cd2d7b4104b4cb6414abc6eee78f1d5))
+
+
+### Bug Fixes
+
+* add loading status on reconnect button ([b3eef9c](https://github.com/Zararthustra/marcus_front/commit/b3eef9c85171ea09139396e3435bd0879d3a90cc))
+
 ## [1.8.0](https://github.com/Zararthustra/marcus_front/compare/v1.7.0...v1.8.0) (2023-10-15)
 
 
