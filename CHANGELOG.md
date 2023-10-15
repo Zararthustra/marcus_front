@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/Zararthustra/marcus_front/compare/v1.7.0...v1.8.0) (2023-10-15)
+
+
+### Features
+
+* **Music:** add pagination to artist albums ([5874b9b](https://github.com/Zararthustra/marcus_front/commit/5874b9b91f37d646c0f6bbcefbe0fa498ec569b0))
+* **Votes:** add stars filter ([cdbbcb1](https://github.com/Zararthustra/marcus_front/commit/cdbbcb16bd37b8df621e3639d12572adfb5664c6))
+
 ## [1.7.0](https://github.com/Zararthustra/marcus_front/compare/v1.6.1...v1.7.0) (2023-10-11)
 
 
