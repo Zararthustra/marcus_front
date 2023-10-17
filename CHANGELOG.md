@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/Zararthustra/marcus_front/compare/v1.9.0...v1.10.0) (2023-10-17)
+
+
+### Features
+
+* **Movie, TV:** add person movies/TVs on credit click ([04c8e53](https://github.com/Zararthustra/marcus_front/commit/04c8e53d8146b449aabc47243d3fd5debd9b1f42))
+
 ## [1.9.0](https://github.com/Zararthustra/marcus_front/compare/v1.8.0...v1.9.0) (2023-10-15)
 
 
