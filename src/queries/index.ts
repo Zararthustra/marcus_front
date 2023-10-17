@@ -53,7 +53,9 @@ export {
   searchMovie,
   searchTv,
   useQueryMovie,
-  useQueryTV
+  useQueryTV,
+  useQueryPersonMovies,
+  useQueryPersonTVs
 } from './tmdb';
 export {
   useMutationLogSpotify,

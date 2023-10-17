@@ -23,7 +23,9 @@ export type {
   IMovieResult,
   ITVResults,
   ICast,
-  ICrew
+  ICrew,
+  IPersonMovies,
+  IPersonTVs
 } from './tmdb.interface';
 export type { ICommunity } from './community.interface';
 export type { ILoginRequest, ILoginResponse } from './login.interface';

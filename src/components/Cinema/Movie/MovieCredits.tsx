@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import { defaultImg } from '@assets/index';
 import { ICast, ICrew } from '@interfaces/index';
+import { ModalPersonMovies } from '@components/index';
 
 interface IMovieCreditsProps {
   cast: ICast[];
@@ -7,9 +10,20 @@ interface IMovieCreditsProps {
 }
 
 const MovieCredits = ({ cast, crew }: IMovieCreditsProps) => {
+  const [person, setPerson] = useState<{ id: number; name: string }>();
+
   return (
     <>
-      {!!cast.length && <h2 className="mb-1">Acteurs</h2>}
+      {!!person && (
+        <ModalPersonMovies
+          showModal={!!person}
+          setShowModal={setPerson}
+          personId={person.id}
+          personName={person.name}
+        />
+      )}
+
+      {!!cast.length && <h2 className="mb-1">Casting</h2>}
       <div className="movie__persons flex">
         {cast
           .sort((p1, p2) =>
@@ -22,7 +36,11 @@ const MovieCredits = ({ cast, crew }: IMovieCreditsProps) => {
           .slice(0, 20)
           .map((actor, index) => {
             return (
-              <article className="movie__person pb-1" key={index}>
+              <article
+                className="movie__person pb-1"
+                style={{ cursor: 'pointer' }}
+                key={index}
+                onClick={() => setPerson({ id: actor.id, name: actor.name })}>
                 <img
                   src={
                     actor.profile_path
@@ -58,7 +76,11 @@ const MovieCredits = ({ cast, crew }: IMovieCreditsProps) => {
           .slice(0, 20)
           .map((actor, index) => {
             return (
-              <article className="movie__person pb-1" key={index}>
+              <article
+                style={{ cursor: 'pointer' }}
+                className="movie__person pb-1"
+                key={index}
+                onClick={() => setPerson({ id: actor.id, name: actor.name })}>
                 <img
                   src={
                     actor.profile_path

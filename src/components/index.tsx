@@ -10,6 +10,7 @@ export { default as ModalVoteDelete } from './Modals/ModalVoteDelete';
 export { default as ModalMusicVoteDelete } from './Modals/ModalMusicVoteDelete';
 export { default as ModalReconnect } from './Modals/ModalReconnect';
 export { default as ModalAlbum } from './Modals/ModalAlbum';
+export { default as ModalPersonMovies } from './Modals/ModalPersonMovies';
 
 // Miscellaneous
 export { default as Button } from './Button/Button';

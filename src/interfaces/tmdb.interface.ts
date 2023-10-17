@@ -1,4 +1,12 @@
-export type { IRelease, IMovieResult, ITVResults, ICast, ICrew };
+export type {
+  IRelease,
+  IMovieResult,
+  ITVResults,
+  ICast,
+  ICrew,
+  IPersonMovies,
+  IPersonTVs
+};
 
 interface ICast {
   id: number;
@@ -64,4 +72,40 @@ interface IRelease<T> {
   page: number;
   total_pages: number;
   total_results: number;
+}
+
+interface IPersonMovie {
+  id: number;
+  poster_path: string;
+  backdrop_path: string;
+  title: string;
+  overview: string;
+  release_date: string;
+  popularity: number;
+  // Cast or Crew
+  character?: string;
+  job?: string;
+}
+interface IPersonMovies {
+  id: number;
+  cast: IPersonMovie[];
+  crew: IPersonMovie[];
+}
+
+interface IPersonTV {
+  id: number;
+  poster_path: string;
+  backdrop_path: string;
+  name: string;
+  overview: string;
+  first_air_date: string;
+  popularity: number;
+  // Cast or Crew
+  character?: string;
+  job?: string;
+}
+interface IPersonTVs {
+  id: number;
+  cast: IPersonTV[];
+  crew: IPersonTV[];
 }

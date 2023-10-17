@@ -2,8 +2,14 @@ import { App } from 'antd';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import {
+  IRelease,
+  IMovieResult,
+  ITVResults,
+  IPersonMovies,
+  IPersonTVs
+} from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
-import { IRelease, IMovieResult, ITVResults } from '@interfaces/index';
 
 const tmdbInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_TMDB_URL,
@@ -181,6 +187,70 @@ export const useQueryTV = (movieId: string) => {
 
   return useQuery(['tv', movieId], () => getTV(movieId), {
     // Stale 5min
+    staleTime: 60_000 * 5,
+    onError: (error: AxiosError) =>
+      notification.error(
+        toastObject(
+          'error',
+          'Impossible de récupérer les données',
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
+        )
+      )
+  });
+};
+
+// Person Movies
+const getPersonMovies = async (personId: number): Promise<IPersonMovies> => {
+  const { data } = await tmdbInstance.get(`person/${personId}/movie_credits`, {
+    params: {
+      append_to_response: 'videos,images',
+      include_image_language: 'fr, null'
+    }
+  });
+  return data;
+};
+export const useQueryPersonMovies = (personId: number) => {
+  const { notification } = App.useApp();
+
+  return useQuery(
+    ['movie', 'person', personId],
+    () => getPersonMovies(personId),
+    {
+      // Stale 5min
+      enabled: !!personId,
+      staleTime: 60_000 * 5,
+      onError: (error: AxiosError) =>
+        notification.error(
+          toastObject(
+            'error',
+            'Impossible de récupérer les données',
+            `Une erreur est survenue. Code : ${
+              error.response ? error.response.status : error.message
+            }`
+          )
+        )
+    }
+  );
+};
+
+// Person TVs
+const getPersonTVs = async (personId: number): Promise<IPersonTVs> => {
+  const { data } = await tmdbInstance.get(`person/${personId}/tv_credits`, {
+    params: {
+      append_to_response: 'videos,images',
+      include_image_language: 'fr, null'
+    }
+  });
+  return data;
+};
+export const useQueryPersonTVs = (personId: number) => {
+  const { notification } = App.useApp();
+
+  return useQuery(['tv', 'person', personId], () => getPersonTVs(personId), {
+    // Stale 5min
+    enabled: !!personId,
     staleTime: 60_000 * 5,
     onError: (error: AxiosError) =>
       notification.error(

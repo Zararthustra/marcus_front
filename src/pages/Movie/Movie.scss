@@ -86,9 +86,14 @@
   }
 
   &__person {
+    a {
+      text-align: center;
+      line-height: 14px;
+      font-size: var(--font-s);
+    }
     img {
-      width: 5.5rem;
-      height: 8rem;
+      width: 5.8rem;
+      height: 7.5rem;
       object-fit: cover;
     }
     p {
