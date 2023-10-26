@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/Zararthustra/marcus_front/compare/v2.0.0...v2.0.1) (2023-10-26)
+
+
+### Bug Fixes
+
+* **TV:** add critics & votes tabs + fix mobile footer ([f5b3e70](https://github.com/Zararthustra/marcus_front/commit/f5b3e707e2a53cefdc57aa5752ee1a7a861bbeaf))
+
 ## [2.0.0](https://github.com/Zararthustra/marcus_front/compare/v1.10.0...v2.0.0) (2023-10-17)
 
 ## [1.10.0](https://github.com/Zararthustra/marcus_front/compare/v1.9.0...v1.10.0) (2023-10-17)
