@@ -1,5 +1,5 @@
 .footer {
-  padding: 2rem 0 10rem;
+  padding: 4rem 0 10rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 100% 45%;
@@ -17,6 +17,7 @@
 
 @media screen and (max-width: 800px) {
   .footer {
+    margin-top: 0rem;
     margin-left: 0;
     background-position: center;
   }

@@ -1,4 +1,4 @@
-import { Empty } from 'antd';
+import { Empty, Tabs } from 'antd';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -9,7 +9,8 @@ import {
   ModalVote,
   MovieCredits,
   MovieDescription,
-  MovieProviders
+  MovieProviders,
+  Vote
 } from '@components/index';
 import {
   IconClapLoader,
@@ -42,7 +43,12 @@ const TV = () => {
   const { data: masterpieces } = useQueryMasterpieces(undefined, userId);
   const { data: watchlists } = useQueryWatchlists(undefined, userId);
   const { data: movieCritics } = useQueryMovieCritics(movieId as string);
-  const { data: votes } = useQueryVotes(undefined, userId);
+  const { data: votes } = useQueryVotes(
+    undefined,
+    undefined,
+    undefined,
+    movieId as string
+  );
 
   useEffect(() => {
     if (!!movieCritics)
@@ -161,21 +167,67 @@ const TV = () => {
           buy={movie['watch/providers'].results.FR?.buy}
         />
 
-        {!!movieCritics && !!movieCritics.data.length && (
-          <>
-            <h1 className="my-2">Critiques</h1>
-            {movieCritics.data.map((critic, index) => (
-              <CriticMovie
-                key={index}
-                userId={critic.user_id}
-                userName={critic.user_name}
-                movieId={movie.id}
-                movieName={movie.name}
-                content={critic.content}
-                vote={critic.vote}
-              />
-            ))}
-          </>
+        {((!!movieCritics && !!movieCritics.data.length) ||
+          (!!votes && !!votes.total)) && (
+          <Tabs
+            defaultActiveKey="0"
+            size="small"
+            centered
+            tabBarGutter={20}
+            className="cinema__tabs mt-5"
+            items={[
+              {
+                label: <h2>Critiques ({movieCritics?.data.length})</h2>,
+                key: '0',
+                children:
+                  !!movieCritics && movieCritics.data.length > 0 ? (
+                    <div className="flex flex-wrap justify-center gap-05 mt-2 px-1">
+                      {movieCritics.data.map((critic, index) => (
+                        <CriticMovie
+                          key={index}
+                          userId={critic.user_id}
+                          userName={critic.user_name}
+                          movieId={movie.id}
+                          movieName={movie.name}
+                          content={critic.content}
+                          vote={critic.vote}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <Empty
+                      className="mt-5"
+                      image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    />
+                  )
+              },
+              {
+                label: <h2>Votes ({votes?.total})</h2>,
+                key: '1',
+                children:
+                  votes && votes.total > 0 ? (
+                    <div className="flex flex-wrap justify-evenly gap-05 mt-2 px-1">
+                      {votes.data.map((vote, index) => (
+                        <Vote
+                          key={index}
+                          userId={vote.user_id}
+                          userName={vote.user_name}
+                          movieId={vote.movie_id}
+                          movieName={vote.movie_name}
+                          value={vote.value}
+                          platform={vote.platform}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <Empty
+                      className="mt-5"
+                      image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    />
+                  )
+              }
+            ]}
+          />
         )}
       </main>
     </>

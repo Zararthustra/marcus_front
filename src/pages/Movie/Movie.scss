@@ -102,6 +102,9 @@
       margin: 0;
       line-height: 14px;
     }
+    &:hover p:first-child {
+      text-decoration: underline;
+    }
   }
 
   &__trailer {
