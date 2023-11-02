@@ -119,6 +119,7 @@ const Movie = () => {
           year={movie.release_date}
           masterpieces={masterpieces?.data}
           watchlists={watchlists?.data}
+          genres={movie.genres}
         />
 
         <div className="movie__buttons flex gap-05 mb-3">

@@ -18,6 +18,9 @@ interface IMovieDescriptionProps {
   title: string;
   year: string;
   platform: 'tv' | 'movie';
+  seasons?: number;
+  episodes?: number;
+  genres: { name: string }[];
   masterpieces?: IMasterpiece[];
   watchlists?: IMasterpiece[];
 }
@@ -31,7 +34,10 @@ const MovieDescription = ({
   year,
   platform,
   masterpieces,
-  watchlists
+  watchlists,
+  seasons,
+  episodes,
+  genres
 }: IMovieDescriptionProps) => {
   // Watchlist
   const [addedWatchlist, setAddedWatchlist] = useState<boolean>(false);
@@ -94,24 +100,49 @@ const MovieDescription = ({
       />
 
       <div className="movie__details flex-col gap-2">
-        <div className="flex flex-wrap gap-2 w-100 justify-between align-center">
-          <h1>{title}</h1>
-          <div className="flex gap-05">
-            <Button
-              onClick={handleMasterpieces}
-              className={`movie__button ${
-                addedMasterpiece ? '' : 'movie__button--add'
-              }`}>
-              <IconMasterpiece width={20} height={20} />
-            </Button>
-            <Button
-              onClick={handleWatchlists}
-              className={`movie__button ${
-                addedWatchlist ? '' : 'movie__button--add'
-              }`}>
-              <IconWatchlist width={20} height={20} />
-            </Button>
+        <div>
+          <div className="flex flex-wrap gap-2 w-100 justify-between align-center">
+            <h1>{title}</h1>
+            <div className="flex gap-05">
+              <Button
+                onClick={handleMasterpieces}
+                className={`movie__button ${
+                  addedMasterpiece ? '' : 'movie__button--add'
+                }`}>
+                <IconMasterpiece width={20} height={20} />
+              </Button>
+              <Button
+                onClick={handleWatchlists}
+                className={`movie__button ${
+                  addedWatchlist ? '' : 'movie__button--add'
+                }`}>
+                <IconWatchlist width={20} height={20} />
+              </Button>
+            </div>
           </div>
+          {(!!seasons || !!episodes) && (
+            <div className="flex gap-05 mt-05">
+              {!!seasons && (
+                <div className="tag--info br-full">
+                  {seasons} {seasons > 1 ? 'saisons' : 'saison'}
+                </div>
+              )}
+              {!!episodes && (
+                <div className="tag--info br-full">
+                  {episodes} {episodes > 1 ? 'épisodes' : 'épisode'}
+                </div>
+              )}
+            </div>
+          )}
+          {!!genres.length && (
+            <div className="flex gap-05 mt-05">
+              {genres.map((genre, index) => (
+                <div key={index} className="tag--primary f-xs br-full">
+                  {genre.name}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <p className="m-0">{overview}</p>

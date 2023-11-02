@@ -228,7 +228,11 @@ const ModalPersonMovies = ({
 
                       <div className="flex-col justify-between align-center">
                         <Link
-                          to={`/cinema/films/${movie.id}`}
+                          to={
+                            !!movie.first_air_date
+                              ? `/cinema/series/${movie.id}`
+                              : `/cinema/films/${movie.id}`
+                          }
                           className="f-b f-s mb-05">
                           {movie.name.length > 25
                             ? movie.name.slice(0, 22) + '...'

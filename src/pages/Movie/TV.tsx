@@ -119,6 +119,9 @@ const TV = () => {
           year={movie.first_air_date}
           masterpieces={masterpieces?.data}
           watchlists={watchlists?.data}
+          seasons={movie.number_of_seasons}
+          episodes={movie.number_of_episodes}
+          genres={movie.genres}
         />
 
         <div className="movie__buttons flex gap-05 mb-3">
@@ -161,11 +164,13 @@ const TV = () => {
           </div>
         )}
 
-        <MovieProviders
-          flatrate={movie['watch/providers'].results.FR?.flatrate}
-          rent={movie['watch/providers'].results.FR?.rent}
-          buy={movie['watch/providers'].results.FR?.buy}
-        />
+        {!!movie['watch/providers'].results.FR && (
+          <MovieProviders
+            flatrate={movie['watch/providers'].results.FR?.flatrate}
+            rent={movie['watch/providers'].results.FR?.rent}
+            buy={movie['watch/providers'].results.FR?.buy}
+          />
+        )}
 
         {((!!movieCritics && !!movieCritics.data.length) ||
           (!!votes && !!votes.total)) && (

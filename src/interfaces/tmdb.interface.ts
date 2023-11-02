@@ -42,6 +42,7 @@ interface IMovieResult {
   release_date: string;
   popularity: number;
   credits: { cast: ICast[]; crew: ICrew[] };
+  genres: { name: string }[];
   videos: {
     results: {
       key: string;
@@ -64,6 +65,9 @@ interface ITVResults {
       key: string;
     }[];
   };
+  number_of_seasons: number;
+  number_of_episodes: number;
+  genres: { name: string }[];
   'watch/providers': IWatchProviders;
 }
 
