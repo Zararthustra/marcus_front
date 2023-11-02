@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/Zararthustra/marcus_front/compare/v2.0.1...v2.1.0) (2023-11-02)
+
+
+### Features
+
+* **Movie, TV:** add genres + seasons/episodes infos + fix ModalPersonMovies serie link ([75818b3](https://github.com/Zararthustra/marcus_front/commit/75818b3a4b8d537f680fde3dcb71fc37d30c5538))
+
 ### [2.0.1](https://github.com/Zararthustra/marcus_front/compare/v2.0.0...v2.0.1) (2023-10-26)
 
 
