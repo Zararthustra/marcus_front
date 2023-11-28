@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/Zararthustra/marcus_front/compare/v2.1.0...v2.2.0) (2023-11-28)
+
+
+### Features
+
+* **Music:** add masterpieces & playlist ([1619100](https://github.com/Zararthustra/marcus_front/commit/1619100114bd5215c8102d961685ed2d3aeaaf33))
+
 ## [2.1.0](https://github.com/Zararthustra/marcus_front/compare/v2.0.1...v2.1.0) (2023-11-02)
 
 
