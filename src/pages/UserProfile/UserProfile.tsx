@@ -19,7 +19,9 @@ import {
   Critics,
   Masterpieces,
   MusicCritics,
+  MusicMasterpieces,
   MusicVotes,
+  Playlist,
   Votes,
   Watchlists
 } from '@components/index';
@@ -126,8 +128,8 @@ const UserProfile = () => {
                         <div className="flex-col align-center">
                           {index === 0 && <MusicCritics user={userId} />}
                           {index === 1 && <MusicVotes user={userId} />}
-                          {index === 2 && <h2>Bientôt disponible</h2>}
-                          {index === 3 && <h2>Bientôt disponible</h2>}
+                          {index === 2 && <MusicMasterpieces user={userId} />}
+                          {index === 3 && <Playlist user={userId} />}
                         </div>
                       )
                     }

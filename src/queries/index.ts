@@ -34,6 +34,16 @@ export {
   useQueryMusicVotes,
   useQueryArtistVotes
 } from './music/vote';
+export {
+  useQueryMusicMasterpieces,
+  useMutationCreateMusicMasterpiece,
+  useMutationDeleteMusicMasterpiece
+} from './music/masterpiece';
+export {
+  useQueryMusicPlaylist,
+  useMutationCreateMusicPlaylist,
+  useMutationDeleteMusicPlaylist
+} from './music/playlist';
 
 // Others
 export { useQueryCommunity } from './community';

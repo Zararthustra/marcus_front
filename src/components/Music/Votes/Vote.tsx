@@ -55,17 +55,16 @@ const Vote = ({
         selectedAlbum={selectedAlbum}
       />
 
-      <div
-        className="vote flex-col align-center justify-between"
-        onClick={() =>
-          setSelectedAlbum({
-            albumId,
-            albumName,
-            imageUrl
-          })
-        }>
+      <div className="vote flex-col align-center justify-between">
         <Rate allowHalf disabled value={value} />
-        <h2>
+        <h2
+          onClick={() =>
+            setSelectedAlbum({
+              albumId,
+              albumName,
+              imageUrl
+            })
+          }>
           {albumName.length > 28 ? albumName.slice(0, 25) + '...' : albumName}
         </h2>
         <Link className="vote__artist" to={`/musique/${artistId}`}>

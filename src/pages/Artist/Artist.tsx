@@ -4,17 +4,25 @@ import { Empty, Pagination, Tabs } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 
 import {
+  useMutationCreateMusicMasterpiece,
+  useMutationCreateMusicPlaylist,
+  useMutationDeleteMusicMasterpiece,
+  useMutationDeleteMusicPlaylist,
   useQueryArtist,
   useQueryArtistAlbums,
   useQueryArtistCritics,
   useQueryArtistVotes,
+  useQueryMusicMasterpieces,
+  useQueryMusicPlaylist,
   useQueryTopTracks
 } from '@queries/index';
 import {
   IconCritic,
   IconInfo,
+  IconMasterpiece,
   IconShare,
   IconVote,
+  IconWatchlist,
   defaultImg
 } from '@assets/index';
 import {
@@ -28,9 +36,9 @@ import {
   ModalMusicVote,
   MusicVote
 } from '@components/index';
+import { getLS } from '@services/localStorageService';
 
 import './Artist.scss';
-import { getLS } from '@services/localStorageService';
 
 const Artist = () => {
   const { artistId } = useParams();
@@ -48,6 +56,11 @@ const Artist = () => {
   const { data: albums } = useQueryArtistAlbums(artistId as string, pageAlbum);
   const { data: critics } = useQueryArtistCritics(artistId as string);
   const { data: votes } = useQueryArtistVotes(artistId as string);
+  const { data: masterpieces } = useQueryMusicMasterpieces();
+  const { data: playlist } = useQueryMusicPlaylist(
+    undefined,
+    parseInt(getLS('userId'))
+  );
 
   useEffect(() => {
     if (albums && !!albums.items.length && !isMobile)
@@ -59,6 +72,64 @@ const Artist = () => {
           : defaultImg
       });
   }, [albums]);
+
+  // Masterpiece
+  const [addedMasterpiece, setAddedMasterpiece] = useState<string>();
+  const { mutate: addMasterpiece } = useMutationCreateMusicMasterpiece();
+  const { mutate: delMasterpiece } = useMutationDeleteMusicMasterpiece();
+  useEffect(() => {
+    if (!!masterpieces?.total)
+      setAddedMasterpiece(
+        masterpieces.data.filter(
+          (item) =>
+            item.user.username === getLS('name') &&
+            item.album_id === selectedAlbum.albumId
+        )[0]?.id
+      );
+  }, [masterpieces, selectedAlbum]);
+  const handleMasterpieces = () => {
+    if (addedMasterpiece) {
+      delMasterpiece(addedMasterpiece);
+      setAddedMasterpiece(undefined);
+    } else {
+      addMasterpiece({
+        album_id: selectedAlbum.albumId,
+        album_name: selectedAlbum.albumName,
+        image_url: selectedAlbum.imageUrl,
+        artist_name: artist?.name as string,
+        artist_id: artist?.id as string
+      });
+    }
+  };
+
+  // Playlist
+  const [addedPlaylist, setAddedPlaylist] = useState<string>();
+  const { mutate: addPlaylist } = useMutationCreateMusicPlaylist();
+  const { mutate: delPlaylist } = useMutationDeleteMusicPlaylist();
+  useEffect(() => {
+    if (!!playlist)
+      setAddedPlaylist(
+        playlist.data.filter(
+          (item) =>
+            item.user.username === getLS('name') &&
+            item.album_id === selectedAlbum.albumId
+        )[0]?.id
+      );
+  }, [playlist, selectedAlbum]);
+  const handlePlaylists = () => {
+    if (addedPlaylist) {
+      delPlaylist(addedPlaylist);
+      setAddedPlaylist(undefined);
+    } else {
+      addPlaylist({
+        album_id: selectedAlbum.albumId,
+        album_name: selectedAlbum.albumName,
+        image_url: selectedAlbum.imageUrl,
+        artist_name: artist?.name as string,
+        artist_id: artist?.id as string
+      });
+    }
+  };
 
   if (!!!artist)
     return <Empty className="mt-5" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
@@ -132,33 +203,51 @@ const Artist = () => {
             ) : (
               <>
                 <Player uri={'album/' + selectedAlbum.albumId} height={400} />
-                <div className="flex w-100 gap-1">
-                  {!critics?.data.some(
-                    (item) =>
-                      item.album_id === selectedAlbum.albumId &&
-                      item.user.id.toString() === getLS('userId')
-                  ) && (
+                <div className="w-100">
+                  <div className="flex gap-05 mb-1">
                     <Button
-                      primary
-                      className="w-100"
-                      onClick={() => setIsCriticizing(true)}>
-                      <IconCritic width={20} height={20} />
-                      <p className="m-0">Critiquer</p>
+                      onClick={handleMasterpieces}
+                      className={`movie__button ${
+                        addedMasterpiece ? '' : 'movie__button--add'
+                      }`}>
+                      <IconMasterpiece width={20} height={20} />
                     </Button>
-                  )}
-                  {!votes?.data.some(
-                    (item) =>
-                      item.album_id === selectedAlbum.albumId &&
-                      item.user.id.toString() === getLS('userId')
-                  ) && (
                     <Button
-                      primary
-                      className="w-100"
-                      onClick={() => setIsVoting(true)}>
-                      <IconVote width={20} height={20} />
-                      <p className="m-0">Voter</p>
+                      onClick={handlePlaylists}
+                      className={`movie__button ${
+                        addedPlaylist ? '' : 'movie__button--add'
+                      }`}>
+                      <IconWatchlist width={20} height={20} />
                     </Button>
-                  )}
+                  </div>
+                  <div className="flex w-100 gap-1">
+                    {!critics?.data.some(
+                      (item) =>
+                        item.album_id === selectedAlbum.albumId &&
+                        item.user.id.toString() === getLS('userId')
+                    ) && (
+                      <Button
+                        primary
+                        className="w-100"
+                        onClick={() => setIsCriticizing(true)}>
+                        <IconCritic width={20} height={20} />
+                        <p className="m-0">Critiquer</p>
+                      </Button>
+                    )}
+                    {!votes?.data.some(
+                      (item) =>
+                        item.album_id === selectedAlbum.albumId &&
+                        item.user.id.toString() === getLS('userId')
+                    ) && (
+                      <Button
+                        primary
+                        className="w-100"
+                        onClick={() => setIsVoting(true)}>
+                        <IconVote width={20} height={20} />
+                        <p className="m-0">Voter</p>
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </>
             ))}

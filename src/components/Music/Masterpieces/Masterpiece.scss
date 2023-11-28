@@ -1,15 +1,16 @@
-.vote {
-  width: 15rem;
-  height: 9rem;
+.music-masterpiece {
   padding: 0.7rem;
-  background-color: var(--color-white);
-  box-shadow: var(--shadow);
-  border-radius: var(--rounded-m);
+  cursor: zoom-in;
+
+  &__img {
+    width: 5rem;
+    object-fit: cover;
+    border-radius: var(--rounded-s);
+  }
 
   h2 {
-    text-align: center;
+    width: 15rem;
     line-height: 20px;
-    cursor: zoom-in;
   }
 
   &__del {
@@ -27,8 +28,9 @@
 }
 
 @media screen and (max-width: 800px) {
-  .vote {
-    width: 10rem;
-    height: 10rem;
+  .music-masterpiece {
+    h2 {
+      width: 12rem;
+    }
   }
 }

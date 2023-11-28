@@ -33,6 +33,18 @@ const MusicCritics = ({ user }: IMusicCriticsProps) => {
     <div className="flex-col justify-center align-center gap-1 w-100">
       {!!!user && <h1 className="self-center mb-2">Critiques</h1>}
 
+      <Pagination
+        className="self-center"
+        total={critics.total}
+        onChange={(page) => setCurrentPage(page)}
+        // showTotal={(total, range) => `${range[0]}-${range[1]} sur ${total}`}
+        defaultPageSize={10}
+        showSizeChanger={false}
+        current={currentPage}
+        hideOnSinglePage
+        responsive
+      />
+
       {critics.data.map((critic, index) => (
         <CriticMusic
           key={index}

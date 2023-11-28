@@ -1,5 +1,12 @@
-export type { IMasterpiece, IMovieDetails, IMasterpieceRequest };
+export type {
+  IMasterpiece,
+  IMovieDetails,
+  IMasterpieceRequest,
+  IMasterpieceMusic,
+  IMasterpieceMusicRequest
+};
 
+//Cinema
 interface IMovieDetails {
   poster_path: string;
   backdrop_path: string;
@@ -21,4 +28,26 @@ interface IMasterpieceRequest {
   movie_id: number;
   movie_name: string;
   platform: 'tv' | 'movie';
+}
+
+// Music
+interface IMasterpieceMusic {
+  id: string;
+  album_id: string;
+  album_name: string;
+  artist_id: string;
+  artist_name: string;
+  image_url: string;
+  user: {
+    id: number;
+    username: string;
+  };
+}
+
+interface IMasterpieceMusicRequest {
+  album_id: string;
+  album_name: string;
+  image_url: string;
+  artist_name: string;
+  artist_id: string;
 }

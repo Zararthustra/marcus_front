@@ -16,7 +16,9 @@ export type {
 export type {
   IMasterpiece,
   IMovieDetails,
-  IMasterpieceRequest
+  IMasterpieceRequest,
+  IMasterpieceMusic,
+  IMasterpieceMusicRequest
 } from './masterpiece.interface';
 export type {
   IRelease,

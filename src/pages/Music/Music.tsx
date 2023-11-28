@@ -8,7 +8,12 @@ import {
   vinyl,
   IconVote
 } from '@assets/index';
-import { MusicCritics, MusicVotes, ResearchMusic } from '@components/index';
+import {
+  MusicCritics,
+  MusicMasterpieces,
+  MusicVotes,
+  ResearchMusic
+} from '@components/index';
 
 import './Music.scss';
 
@@ -65,7 +70,7 @@ const Music = () => {
                 {index === 0 && <ResearchMusic />}
                 {index === 1 && <MusicCritics />}
                 {index === 2 && <MusicVotes />}
-                {index === 3 && <h2>Bientôt disponible</h2>}
+                {index === 3 && <MusicMasterpieces />}
               </div>
             )
           }))}

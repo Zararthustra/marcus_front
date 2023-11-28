@@ -57,6 +57,18 @@ const Votes = ({ user }: IVotesProps) => {
         onChange={(value) => setStars(!!value ? value : undefined)}
       />
 
+      <Pagination
+        className="self-center mb-2"
+        total={votes.total}
+        onChange={(page) => setCurrentPage(page)}
+        // showTotal={(total, range) => `${range[0]}-${range[1]} sur ${total}`}
+        defaultPageSize={10}
+        showSizeChanger={false}
+        current={currentPage}
+        hideOnSinglePage
+        responsive
+      />
+
       <div className="flex flex-wrap gap-05 justify-evenly">
         {votes.data.map((vote, index) => (
           <MusicVote
