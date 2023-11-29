@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: Test, Build & Deploy
 
 on:
   push:
@@ -7,22 +7,23 @@ on:
 
 jobs:
   deploy:
+    name: Test, Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install 🏗️
         run: npm install
 
-      - name: Test
+      - name: Test 🧪
         run: npm run coverage
 
-      - name: Build
+      - name: Build 🛠️
         run: npm run build
 
-      - name: Deploy
+      - name: Deploy 🚀
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: ${{ secrets.FTP_SERVER }}
