@@ -55,6 +55,10 @@ export default defineConfig({
       provider: 'v8',
       exclude: ['src/assets', 'src/services']
     },
+    // Combine with 'typecheck' arg
+    // typecheck: {
+    //   include: ['src/queries']
+    // },
     globals: true,
     setupFiles: ['src/setupTest.ts'],
     exclude: ['./node_modules'],

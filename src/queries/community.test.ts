@@ -1,16 +1,13 @@
 import { expect, test, describe, assertType } from 'vitest';
 
+import { communityMock } from '@mocks/index';
 import { getUsers } from '@queries/community';
-import { communityMock } from '@mocks/community';
-import { ICommunity } from '@interfaces/community.interface';
+import { ICommunity } from '@interfaces/index';
 
 describe('Community', () => {
-  test('GET Users \t schema', async () => {
+  test('GET Users', async () => {
     const users = await getUsers();
     expect(users).toStrictEqual(communityMock);
-  });
-  test('GET Users \t type', async () => {
-    const users = await getUsers();
     assertType<ICommunity[]>(users);
   });
 });

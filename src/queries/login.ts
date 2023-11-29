@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 import {
-  getLS,
   setAccessToken,
   setLS,
   setRefreshToken
@@ -15,7 +14,7 @@ import { messageObject, toastObject } from '@utils/formatters';
 import { ILoginRequest, ILoginResponse } from '@interfaces/index';
 
 // Login
-const login = async (payload: ILoginRequest) => {
+export const login = async (payload: ILoginRequest) => {
   const { data } = await axiosInstance.post<ILoginResponse>(`/token/`, payload);
   return data;
 };
@@ -73,7 +72,7 @@ export const useMutationLogin = () => {
 };
 
 // Reconnect
-const reconnect = async (refreshToken: string) => {
+export const reconnect = async (refreshToken: string) => {
   const { data } = await axiosInstance.post<ILoginResponse>(`/token/refresh/`, {
     refresh: refreshToken
   });
@@ -122,7 +121,7 @@ export const useMutationReconnect = () => {
 };
 
 // Register
-const register = async (payload: ILoginRequest) => {
+export const register = async (payload: ILoginRequest) => {
   const { data } = await axiosInstance.post(`/register`, payload);
   return data;
 };
