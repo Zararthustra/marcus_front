@@ -1,6 +1,6 @@
 import { App } from 'antd';
 import { AxiosError } from 'axios';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import axiosInstance from './axios';
 import { ICommunity } from '@interfaces/index';
@@ -8,7 +8,7 @@ import { toastObject, messageObject } from '@utils/formatters';
 
 // RETRIEVE
 // ================================================================
-const getUsers = async (): Promise<ICommunity[]> => {
+export const getUsers = async (): Promise<ICommunity[]> => {
   const { data } = await axiosInstance.get('/users');
   return data;
 };

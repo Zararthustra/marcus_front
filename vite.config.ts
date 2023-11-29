@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -47,5 +49,15 @@ export default defineConfig({
   ],
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version)
+  },
+  test: {
+    coverage: {
+      provider: 'v8',
+      exclude: ['src/assets', 'src/services']
+    },
+    globals: true,
+    setupFiles: ['src/setupTest.ts'],
+    exclude: ['./node_modules'],
+    include: ['**/*.test.ts']
   }
 });

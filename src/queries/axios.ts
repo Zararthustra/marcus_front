@@ -2,11 +2,12 @@ import axios, { AxiosInstance } from 'axios';
 
 import { getLS } from '@services/localStorageService';
 
-const devURL = 'http://192.168.1.44:8000/api';
+const devURL = 'http://localhost:8000/api';
 const prodURL = 'https://planifit.pythonanywhere.com/api';
+export const baseURL = import.meta.env.MODE === 'production' ? prodURL : devURL;
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === 'production' ? prodURL : devURL,
+  baseURL,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -15,7 +16,7 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config) {
     const token = getLS('accessToken');
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    if (!!token) config.headers.Authorization = `Bearer ${token}`;
 
     return config;
   },
