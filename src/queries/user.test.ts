@@ -11,6 +11,7 @@ describe('User', () => {
     expect(user).toStrictEqual(userMock);
     assertType<ICommunity>(user);
   });
+
   test('POST Register \t', async () => {
     const registerResponse = await register(loginRequestMock);
     expect(registerResponse).toStrictEqual({
@@ -18,11 +19,13 @@ describe('User', () => {
     });
     assertType<{ message: string }>(registerResponse);
   });
+
   test('POST Login \t token', async () => {
     const loginResponse = await login(loginRequestMock);
     expect(loginResponse).toStrictEqual(loginResponseMock);
     assertType<ILoginResponse>(loginResponse);
   });
+
   test('POST Reconnect \t refresh token', async () => {
     const reconnectResponse = await reconnect(loginResponseMock.refresh);
     expect(reconnectResponse).toStrictEqual(loginResponseMock);

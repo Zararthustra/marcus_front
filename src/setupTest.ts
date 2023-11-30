@@ -1,5 +1,11 @@
 import { setupServer } from 'msw/node';
-import { beforeAll, afterAll, afterEach, vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { beforeAll, afterAll, afterEach, expect } from 'vitest';
+
+// Extend "expect" method with @testing-library/jest-dom methods like "toBeInTheDocument()"
+import * as matchers from '@testing-library/jest-dom/matchers';
+import '@testing-library/jest-dom';
+expect.extend(matchers);
 
 import { handlers } from '@mocks/api';
 
@@ -43,4 +49,7 @@ beforeAll(() => {
 //  Close server after all tests
 afterAll(() => server.close());
 // Reset handlers after each test
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  cleanup();
+  server.resetHandlers();
+});

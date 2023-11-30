@@ -53,15 +53,16 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      exclude: ['src/assets', 'src/services']
+      exclude: ['src/assets', 'src/services', 'src/components']
     },
     // Combine with 'typecheck' arg
     // typecheck: {
     //   include: ['src/queries']
     // },
+    environment: 'jsdom',
     globals: true,
     setupFiles: ['src/setupTest.ts'],
     exclude: ['./node_modules'],
-    include: ['**/*.test.ts']
+    include: ['**/*.test.ts?(x)']
   }
 });
