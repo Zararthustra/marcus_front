@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/Zararthustra/marcus_front/compare/v2.2.0...v2.3.0) (2023-11-30)
+
+
+### Features
+
+* **Community:** add first tests ([ea7e2fb](https://github.com/Zararthustra/marcus_front/commit/ea7e2fb723798c1ff199cb50daeff0d5e14f99e8))
+* **Formatters, NotFound:** add functionnals & DOM tests ([24a6612](https://github.com/Zararthustra/marcus_front/commit/24a6612dc92caf5697b82f5e0630eababf5a6778))
+* **User:** add tests ([5767918](https://github.com/Zararthustra/marcus_front/commit/576791873486e1e06290f86fc2eaab1bf57c8b1f))
+
+
+### Bug Fixes
+
+* update pipeline deploy path ([f2993e7](https://github.com/Zararthustra/marcus_front/commit/f2993e7a4fcbbdc193737ea0289b6c6d437b111b))
+
 ## [2.2.0](https://github.com/Zararthustra/marcus_front/compare/v2.1.0...v2.2.0) (2023-11-28)
 
 
