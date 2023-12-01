@@ -135,7 +135,7 @@ const MovieDescription = ({
             </div>
           )}
           {!!genres.length && (
-            <div className="flex gap-05 mt-05">
+            <div className="flex flex-wrap gap-05 mt-05">
               {genres.map((genre, index) => (
                 <div key={index} className="tag--primary f-xs br-full">
                   {genre.name}

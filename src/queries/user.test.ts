@@ -5,7 +5,7 @@ import { login, reconnect, register } from '@queries/login';
 import { ICommunity, ILoginResponse } from '@interfaces/index';
 import { userMock, loginRequestMock, loginResponseMock } from '@mocks/index';
 
-describe('User', () => {
+describe('Query User', () => {
   test('GET User', async () => {
     const user = await getUser(1);
     expect(user).toStrictEqual(userMock);
