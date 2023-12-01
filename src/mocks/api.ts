@@ -3,7 +3,7 @@ import { HttpResponse, http } from 'msw';
 import { baseURL } from '@queries/axios';
 import { communityMock, userMock, loginResponseMock } from '@mocks/index';
 
-const endpoint = (endpoint: string): string => baseURL + endpoint;
+export const endpoint = (endpoint: string): string => baseURL + endpoint;
 
 export const handlers = [
   // ============================================ Community

@@ -10,7 +10,7 @@ expect.extend(matchers);
 import { handlers } from '@mocks/api';
 
 // Mock server to catch API requests
-const server = setupServer(...handlers);
+export const server = setupServer(...handlers);
 beforeAll(() => {
   // Mock local storage as a global variable to fit in tests scope
   const localStorageMock: Storage = (function () {

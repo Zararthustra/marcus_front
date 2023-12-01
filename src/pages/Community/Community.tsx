@@ -11,7 +11,7 @@ const Community = () => {
 
   if (isLoading)
     return (
-      <div className="flex-col align-center mt-5 gap-2">
+      <div data-testid="no-data" className="flex-col align-center mt-5 gap-2">
         <h1>Communauté</h1>
         <IconClapLoader width={100} height={100} className="loader-cinema" />
       </div>
@@ -22,6 +22,7 @@ const Community = () => {
 
   return (
     <main
+      data-testid="community"
       className="community pb-5 flex-col align-center"
       style={{ minHeight: '55dvh' }}>
       <header className="community__header w-100">
