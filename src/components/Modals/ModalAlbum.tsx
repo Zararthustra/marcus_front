@@ -53,7 +53,7 @@ const ModalAlbum = ({
               </Button>
             )}
           </div>
-          {!!navigator.share && (
+          {!!navigator.share && setSearchParams && (
             <div className="flex w-100 my-05">
               <Button
                 className="w-100 px-0"
