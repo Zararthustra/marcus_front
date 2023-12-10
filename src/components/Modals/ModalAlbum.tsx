@@ -14,7 +14,7 @@ interface IModalAlbumProps {
   setSelectedAlbum: (value: any) => void;
   setIsCriticizing?: (value: boolean) => void;
   setIsVoting?: (value: boolean) => void;
-  setSearchParams: (value: any) => void;
+  setSearchParams?: (value: any) => void;
 }
 
 const ModalAlbum = ({
@@ -77,7 +77,7 @@ const ModalAlbum = ({
           albumName: '',
           imageUrl: ''
         });
-        setSearchParams({});
+        if (setSearchParams) setSearchParams({});
       }}>
       <div className="ModalAlbum flex-col align-center pt-2">
         <h2 className="mb-2">{selectedAlbum.albumName}</h2>
