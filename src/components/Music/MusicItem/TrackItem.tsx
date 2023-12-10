@@ -61,7 +61,11 @@ const TrackItem = ({ name, preview_url, album, artists }: ITrackItemProps) => {
 
       {!!preview_url && (
         <>
-          <audio ref={audioRef} src={preview_url} autoPlay={false}></audio>
+          <audio
+            ref={audioRef}
+            src={preview_url}
+            onEnded={() => setIsPlaying(false)}
+            autoPlay={false}></audio>
           <button
             onClick={handlePlayer}
             className="musicItem__button flex align-center">

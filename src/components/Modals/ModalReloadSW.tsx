@@ -38,8 +38,8 @@ const ModalReloadSW = ({
 
         <p className="mt-2 mb-0">Une nouvelle version est disponible !</p>
 
-        <div className="tag--info br-full mt-2 flex gap-05 align-center justify-center">
-          <IconInfo size={40} />
+        <div className="tag--info br-m mt-2 flex gap-05 align-center justify-center">
+          <IconInfo size={40} style={{flexShrink: 0}}/>
           <p className="f-s m-05">
             La mise à jour est recommandée pour éviter tout conflit, sauf si
             vous n'avez pas de connexion internet.

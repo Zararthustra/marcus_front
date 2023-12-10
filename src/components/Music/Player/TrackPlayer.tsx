@@ -29,6 +29,7 @@ const TrackPlayer = ({ url, name }: ITrackPlayerProps) => {
       <audio
         ref={audioRef}
         src={url}
+        onEnded={() => setIsPlaying(false)}
         autoPlay={false}
         style={{ display: 'none' }}></audio>
       <button

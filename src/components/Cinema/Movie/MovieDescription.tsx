@@ -123,12 +123,12 @@ const MovieDescription = ({
           {(!!seasons || !!episodes) && (
             <div className="flex gap-05 mt-05">
               {!!seasons && (
-                <div className="tag--info br-full">
+                <div className="tag--info br-full" style={{whiteSpace: "nowrap"}}>
                   {seasons} {seasons > 1 ? 'saisons' : 'saison'}
                 </div>
               )}
               {!!episodes && (
-                <div className="tag--info br-full">
+                <div className="tag--info br-full" style={{whiteSpace: "nowrap"}}>
                   {episodes} {episodes > 1 ? 'épisodes' : 'épisode'}
                 </div>
               )}
@@ -137,7 +137,7 @@ const MovieDescription = ({
           {!!genres.length && (
             <div className="flex flex-wrap gap-05 mt-05">
               {genres.map((genre, index) => (
-                <div key={index} className="tag--primary f-xs br-full">
+                <div key={index} className="tag--primary f-xs br-full" style={{whiteSpace: "nowrap"}}>
                   {genre.name}
                 </div>
               ))}

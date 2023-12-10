@@ -274,7 +274,7 @@ const Artist = () => {
 
           <div className="flex justify-center flex-wrap gap-05">
             {artist.genres.map((genre, index) => (
-              <p key={index} className="f-xs m-0 tag--primary br-full">
+              <p key={index} className="f-xs m-0 tag--primary br-full" style={{whiteSpace: "nowrap"}}>
                 {genre}
               </p>
             ))}
@@ -330,7 +330,7 @@ const Artist = () => {
               children: (
                 <div className="flex-col align-center gap-05">
                   <div className="mb-2 mt-05 tag--info br-full flex align-center">
-                    <IconInfo size={20} />
+                    <IconInfo size={20} style={{flexShrink: 0}} />
                     <p className="m-05 f-s">
                       Sélectionnez un album pour l'écouter
                     </p>

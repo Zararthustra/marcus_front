@@ -23,7 +23,7 @@ const ArtistItem = ({ id, name, genres, images }: IArtistItemProps) => {
         <h2>{name}</h2>
         <div className="musicItem__authors flex flex-wrap gap-05 mt-05">
           {genres.map((gender, index) => (
-            <p className="m-0 f-xs tag--primary br-full px-05" key={index}>
+            <p className="m-0 f-xs tag--primary br-full px-05" style={{whiteSpace: "nowrap"}} key={index}>
               {gender}
             </p>
           ))}

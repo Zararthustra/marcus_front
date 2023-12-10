@@ -37,8 +37,8 @@ const ModalReconnect = ({
       <div className="flex-col align-center">
         <h2>⌛ Session expirée ⌛</h2>
         <p className="mt-2 mb-0">Que désirez-vous faire ?</p>
-        <div className="tag--info br-full mt-2 flex gap-05 align-center justify-center">
-          <IconInfo size={45} />
+        <div className="tag--info br-m mt-2 flex gap-05 align-center justify-center">
+          <IconInfo size={45} style={{ flexShrink: 0 }} />
           <p className="f-s m-05">
             Pas de panique ! Pour des raisons de sécurité, votre session expire
             après un certain temps.
