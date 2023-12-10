@@ -11,10 +11,12 @@ interface AlbumItemProps {
     imageUrl: string;
   };
   setSelectedAlbum: (value: any) => void;
+  setSearchParams: (value: any) => void;
 }
 
 const AlbumItem = ({
   album,
+  setSearchParams,
   setSelectedAlbum,
   selectedAlbum
 }: AlbumItemProps) => {
@@ -23,13 +25,17 @@ const AlbumItem = ({
       className={`musicItem albumItem flex align-center gap-1 p-1 br-s ${
         selectedAlbum.albumId === album.id ? 'albumItem--selected' : ''
       }`}
-      onClick={() =>
+      onClick={() => {
         setSelectedAlbum({
           albumId: album.id,
           albumName: album.name,
           imageUrl: !!album.images.length ? album.images[1].url : defaultImg
-        })
-      }>
+        });
+        setSearchParams({
+          albumId: album.id,
+          albumName: album.name
+        });
+      }}>
       <img
         src={!!album.images.length ? album.images[1].url : defaultImg}
         alt={album.name}

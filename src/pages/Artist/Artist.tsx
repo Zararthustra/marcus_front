@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Empty, Pagination, Tabs } from 'antd';
 import { useMediaQuery } from 'react-responsive';
+import { Breadcrumb, Empty, Pagination, Tabs } from 'antd';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 import {
   useMutationCreateMusicMasterpiece,
@@ -42,6 +42,7 @@ import './Artist.scss';
 
 const Artist = () => {
   const { artistId } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isCriticizing, setIsCriticizing] = useState<boolean>(false);
   const [pageAlbum, setPageAlbum] = useState<number>(1);
   const [isVoting, setIsVoting] = useState<boolean>(false);
@@ -62,15 +63,29 @@ const Artist = () => {
     parseInt(getLS('userId'))
   );
 
+  // Dynamically set selectedAlbum from URL or set URL from first album
   useEffect(() => {
-    if (albums && !!albums.items.length && !isMobile)
-      setSelectedAlbum({
-        albumId: albums.items[0].id,
-        albumName: albums.items[0].name,
-        imageUrl: !!albums.items[0].images[1].url
-          ? albums.items[0].images[1].url
-          : defaultImg
-      });
+    if (albums && !!albums.items.length) {
+      if (!!searchParams.get('albumId') && !!searchParams.get('albumName')) {
+        setSelectedAlbum({
+          albumId: searchParams.get('albumId') as string,
+          albumName: searchParams.get('albumName') as string,
+          imageUrl: defaultImg
+        });
+      } else if (!isMobile) {
+        setSelectedAlbum({
+          albumId: albums.items[0].id,
+          albumName: albums.items[0].name,
+          imageUrl: !!albums.items[0].images[1].url
+            ? albums.items[0].images[1].url
+            : defaultImg
+        });
+        setSearchParams({
+          albumId: albums.items[0].id,
+          albumName: albums.items[0].name
+        });
+      }
+    }
   }, [albums]);
 
   // Masterpiece
@@ -178,11 +193,52 @@ const Artist = () => {
             src={!!artist.images.length ? artist.images[0].url : defaultImg}
             alt={artist.name}
           />
+          <Breadcrumb
+            separator=""
+            items={
+              !!selectedAlbum.albumName
+                ? [
+                    {
+                      title: 'Musique',
+                      href: '/musique'
+                    },
+                    {
+                      type: 'separator',
+                      separator: '/'
+                    },
+                    {
+                      title: artist.name
+                    },
+                    {
+                      type: 'separator',
+                      separator: ':'
+                    },
+                    {
+                      title: selectedAlbum.albumName
+                    }
+                  ]
+                : [
+                    {
+                      title: 'Musique',
+                      href: '/musique'
+                    },
+                    {
+                      type: 'separator',
+                      separator: '/'
+                    },
+                    {
+                      title: artist.name
+                    }
+                  ]
+            }
+          />
+
           {!!selectedAlbum &&
             (isMobile ? (
               <ModalAlbum
                 setIsCriticizing={setIsCriticizing}
                 setIsVoting={setIsVoting}
+                setSearchParams={setSearchParams}
                 setSelectedAlbum={setSelectedAlbum}
                 selectedAlbum={selectedAlbum}
                 hasCriticized={
@@ -248,6 +304,20 @@ const Artist = () => {
                       </Button>
                     )}
                   </div>
+                  <div className="flex w-100 my-05">
+                    <Button
+                      className="w-100 px-0"
+                      onClick={() =>
+                        navigator.share({
+                          text: "Voici un album que j'ai découvert",
+                          title: selectedAlbum.albumName,
+                          url: window.location.href
+                        })
+                      }>
+                      <IconShare />
+                      Partager l'album
+                    </Button>
+                  </div>
                 </div>
               </>
             ))}
@@ -274,7 +344,10 @@ const Artist = () => {
 
           <div className="flex justify-center flex-wrap gap-05">
             {artist.genres.map((genre, index) => (
-              <p key={index} className="f-xs m-0 tag--primary br-full" style={{whiteSpace: "nowrap"}}>
+              <p
+                key={index}
+                className="f-xs m-0 tag--primary br-full"
+                style={{ whiteSpace: 'nowrap' }}>
                 {genre}
               </p>
             ))}
@@ -306,11 +379,12 @@ const Artist = () => {
                 navigator.share({
                   text: "Voici un artiste que j'ai découvert",
                   title: artist.name,
-                  url: window.location.href
+                  // Get rid of selected album
+                  url: window.location.href.split('?')[0]
                 })
               }>
               <IconShare />
-              Partager
+              Partager l'artiste
             </Button>
           )}
         </div>
@@ -330,7 +404,7 @@ const Artist = () => {
               children: (
                 <div className="flex-col align-center gap-05">
                   <div className="mb-2 mt-05 tag--info br-full flex align-center">
-                    <IconInfo size={20} style={{flexShrink: 0}} />
+                    <IconInfo size={20} style={{ flexShrink: 0 }} />
                     <p className="m-05 f-s">
                       Sélectionnez un album pour l'écouter
                     </p>
@@ -352,6 +426,7 @@ const Artist = () => {
                       <AlbumItem
                         album={album}
                         key={index}
+                        setSearchParams={setSearchParams}
                         setSelectedAlbum={setSelectedAlbum}
                         selectedAlbum={selectedAlbum}
                       />
