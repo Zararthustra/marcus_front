@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/Zararthustra/marcus_front/compare/v2.3.0...v2.5.0) (2023-12-11)
+
+
+### Features
+
+* **Artist:** add breadcrumb & dynamic URL management to get album sharing link ([1b769f5](https://github.com/Zararthustra/marcus_front/commit/1b769f54688f35bf0fee3c81846893c4486c22fb))
+* **Community:** add DOM tests ([9d5f8d5](https://github.com/Zararthustra/marcus_front/commit/9d5f8d55c4621c7573939a627b8251fe7fc2b443))
+* **Sidebar, MovieDescription, Cinema, Music:** add profile to sidebar, add breadcrumb to Movie, add query parameters to Movie & Music tabs, add links to those query parameters ([051ca16](https://github.com/Zararthustra/marcus_front/commit/051ca165dcf399eea8a1721618311009069153ca))
+
+
+### Bug Fixes
+
+* album modal should not display share button outside of Artist page ([21f93c1](https://github.com/Zararthustra/marcus_front/commit/21f93c1e2c9882497df870c37a7c9527edf7a318))
+* tags and player ([6a797a2](https://github.com/Zararthustra/marcus_front/commit/6a797a25bcb4e1d821eb8d5ca337f6ea2732af56))
+* white space on tags ([4d77549](https://github.com/Zararthustra/marcus_front/commit/4d7754953b1034f1853247a070ad61b4cf69c181))
+
 ## [2.4.0](https://github.com/Zararthustra/marcus_front/compare/v2.3.0...v2.4.0) (2023-12-10)
 
 
