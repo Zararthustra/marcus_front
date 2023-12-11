@@ -1,5 +1,6 @@
 import { Tabs } from 'antd';
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import {
   IconCritic,
@@ -18,7 +19,10 @@ import {
 import './Music.scss';
 
 const Music = () => {
-  const [activeKey, setActiveKey] = useState<number>(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeKey, setActiveKey] = useState<string>(
+    (searchParams.get('tab') as string) || '0'
+  );
   const tabs = [IconSearchMusic, IconCritic, IconVote, IconMasterpiece];
 
   return (
@@ -46,19 +50,20 @@ const Music = () => {
 
       <div className="w-100 flex justify-center px-1">
         <Tabs
-          defaultActiveKey="0"
+          defaultActiveKey={searchParams.get('tab') || '0'}
           size="small"
           centered
           tabBarGutter={20}
           className="cinema__tabs"
-          onChange={(key) => {
-            setActiveKey(parseInt(key));
+          onChange={(key: string) => {
+            setActiveKey(key);
+            setSearchParams({ tab: key });
           }}
           items={tabs.map((Tab, index) => ({
             label: (
               <Tab
                 color={
-                  activeKey === index
+                  activeKey === index.toString()
                     ? 'var(--color-primary-700)'
                     : 'var(--color-grey-400)'
                 }

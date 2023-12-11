@@ -13,7 +13,12 @@ import {
   logo,
   IconCommunity,
   IconMusic,
-  IconLogin
+  IconLogin,
+  IconMasterpiece,
+  IconVote,
+  IconCritic,
+  IconSearchMusic,
+  IconSearchMovies
 } from '@assets/index';
 import { ModalReconnect } from '@components/index';
 import { useMutationLogSpotify } from '@queries/index';
@@ -133,6 +138,23 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   />
                 </div>
 
+                {/* Profile */}
+                {isLogged && (
+                  <div
+                    className={
+                      location.pathname === '/communaute/' + getLS('userId')
+                        ? 'active-item'
+                        : ''
+                    }>
+                    <IconUser
+                      width={35}
+                      height={35}
+                      className="sidebar__icon-item"
+                      onClick={() => navigate('/communaute/' + getLS('userId'))}
+                    />
+                  </div>
+                )}
+
                 {/* Community */}
                 <div
                   className={
@@ -210,7 +232,7 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                 </div>
 
                 {/* Cinema */}
-                <div className="sidebar__item">
+                <div className="sidebar__item sidebar__item--cinema">
                   <div
                     className={
                       location.pathname === '/cinema' ? 'active-item' : ''
@@ -225,10 +247,53 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   <Link className="sidebar__link" to="/cinema">
                     Cinéma
                   </Link>
+
+                  <div className="sidebar__subitem sidebar__subitem--cinema">
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/cinema?tab=0')}>
+                      <IconSearchMovies
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Recherche</p>
+                    </div>
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/cinema?tab=1')}>
+                      <IconCritic
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Critiques</p>
+                    </div>
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/cinema?tab=2')}>
+                      <IconVote
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Votes</p>
+                    </div>
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/cinema?tab=3')}>
+                      <IconMasterpiece
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Chefs d'oeuvres</p>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Music */}
-                <div className="sidebar__item">
+                <div className="sidebar__item sidebar__item--music">
                   <div
                     className={
                       location.pathname === '/musique' ? 'active-item' : ''
@@ -243,7 +308,76 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   <Link className="sidebar__link" to="/musique">
                     Musique
                   </Link>
+
+                  <div className="sidebar__subitem sidebar__subitem--music">
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/musique?tab=0')}>
+                      <IconSearchMusic
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Recherche</p>
+                    </div>
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/musique?tab=1')}>
+                      <IconCritic
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Critiques</p>
+                    </div>
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/musique?tab=2')}>
+                      <IconVote
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Votes</p>
+                    </div>
+                    <div
+                      className="flex my-05 align-center justify-between"
+                      onClick={() => navigate('/musique?tab=3')}>
+                      <IconMasterpiece
+                        width={24}
+                        height={24}
+                        className="sidebar__icon-item"
+                      />
+                      <p className="m-0">Chefs d'oeuvres</p>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Profile */}
+                {isLogged && (
+                  <div className="sidebar__item">
+                    <div
+                      className={
+                        location.pathname === '/communaute/' + getLS('userId')
+                          ? 'active-item'
+                          : ''
+                      }>
+                      <IconUser
+                        width={35}
+                        height={35}
+                        className="sidebar__icon-item"
+                        onClick={() =>
+                          navigate('/communaute/' + getLS('userId'))
+                        }
+                      />
+                    </div>
+                    <Link
+                      className="sidebar__link"
+                      to={`/communaute/${getLS('userId')}`}>
+                      Profil
+                    </Link>
+                  </div>
+                )}
 
                 {/* Community */}
                 <div className="sidebar__item">

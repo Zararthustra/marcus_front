@@ -1,5 +1,15 @@
+import { Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import {
+  IconCritic,
+  IconMasterpiece,
+  IconSearchMovies,
+  IconVote,
+  IconWatchlist,
+  defaultImg
+} from '@assets/index';
 import {
   useMutationAddMasterpiece,
   useMutationAddWatchlist,
@@ -8,7 +18,6 @@ import {
 } from '@queries/index';
 import { Button } from '@components/index';
 import { IMasterpiece } from '@interfaces/index';
-import { IconMasterpiece, IconWatchlist, defaultImg } from '@assets/index';
 
 interface IMovieDescriptionProps {
   overview: string;
@@ -99,9 +108,81 @@ const MovieDescription = ({
         alt={title}
       />
 
+      <Breadcrumb
+        separator=""
+        items={[
+          {
+            title: 'Cinéma',
+            href: '/cinema',
+            menu: {
+              items: [
+                {
+                  key: '1',
+                  label: (
+                    <Link
+                      className="flex w-100 justify-between align-center"
+                      to="/cinema?tab=0">
+                      <IconSearchMovies width={24} height={24} />
+                      <p className="m-0">Recherche</p>
+                    </Link>
+                  )
+                },
+                {
+                  key: '2',
+                  label: (
+                    <Link
+                      className="flex w-100 justify-between align-center"
+                      to="/cinema?tab=1">
+                      <IconCritic width={24} height={24} />
+                      <p className="m-0">Critiques</p>
+                    </Link>
+                  )
+                },
+                {
+                  key: '3',
+                  label: (
+                    <Link
+                      className="flex w-100 justify-between align-center"
+                      to="/cinema?tab=2">
+                      <IconVote width={24} height={24} />
+                      <p className="m-0">Votes</p>
+                    </Link>
+                  )
+                },
+                {
+                  key: '4',
+                  label: (
+                    <Link
+                      className="flex w-100 justify-between gap-1 align-center"
+                      to="/cinema?tab=3">
+                      <IconMasterpiece width={24} height={24} />
+                      <p className="m-0">Chefs d'oeuvres</p>
+                    </Link>
+                  )
+                }
+              ]
+            }
+          },
+          {
+            type: 'separator',
+            separator: '/'
+          },
+          {
+            title: platform === 'movie' ? 'Films' : 'Séries'
+          },
+          {
+            type: 'separator',
+            separator: '/'
+          },
+          {
+            title: title
+          }
+        ]}
+      />
+
       <div className="movie__details flex-col gap-2">
         <div>
-          <div className="flex flex-wrap gap-2 w-100 justify-between align-center">
+          <div className="flex flex-wrap gap-05 w-100 justify-between align-center">
             <h1>{title}</h1>
             <div className="flex gap-05">
               <Button
@@ -123,12 +204,16 @@ const MovieDescription = ({
           {(!!seasons || !!episodes) && (
             <div className="flex gap-05 mt-05">
               {!!seasons && (
-                <div className="tag--info br-full" style={{whiteSpace: "nowrap"}}>
+                <div
+                  className="tag--info br-full"
+                  style={{ whiteSpace: 'nowrap' }}>
                   {seasons} {seasons > 1 ? 'saisons' : 'saison'}
                 </div>
               )}
               {!!episodes && (
-                <div className="tag--info br-full" style={{whiteSpace: "nowrap"}}>
+                <div
+                  className="tag--info br-full"
+                  style={{ whiteSpace: 'nowrap' }}>
                   {episodes} {episodes > 1 ? 'épisodes' : 'épisode'}
                 </div>
               )}
@@ -137,7 +222,10 @@ const MovieDescription = ({
           {!!genres.length && (
             <div className="flex flex-wrap gap-05 mt-05">
               {genres.map((genre, index) => (
-                <div key={index} className="tag--primary f-xs br-full" style={{whiteSpace: "nowrap"}}>
+                <div
+                  key={index}
+                  className="tag--primary f-xs br-full"
+                  style={{ whiteSpace: 'nowrap' }}>
                   {genre.name}
                 </div>
               ))}

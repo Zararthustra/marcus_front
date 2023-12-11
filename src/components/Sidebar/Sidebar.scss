@@ -42,16 +42,42 @@
     flex-shrink: 0;
   }
   &__item {
+    position: relative;
     display: flex;
     white-space: nowrap;
     width: 100%;
     justify-content: space-between;
-    align-items: center;
     padding-right: 1rem;
     padding-left: 0.6rem;
 
     svg {
       flex-shrink: 0;
+    }
+    &--music:hover .sidebar__subitem--music {
+      display:block;
+    }
+    &--cinema:hover .sidebar__subitem--cinema {
+      display:block;
+    }
+  }
+  &__subitem {
+    display: none;
+    position: absolute;
+    width: 13rem;
+    background-color: var(--color-grey-100);
+    right: -13rem;
+    top: -1rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.1);
+
+    div:hover svg, div:hover p{
+      color: var(--color-primary-500);
+    }
+    div {
+      cursor: pointer;
+    }
+    p {
+      font-weight: 600;
     }
   }
   &__link {

@@ -20,6 +20,7 @@ import {
   IconCritic,
   IconInfo,
   IconMasterpiece,
+  IconSearchMusic,
   IconShare,
   IconVote,
   IconWatchlist,
@@ -195,42 +196,74 @@ const Artist = () => {
           />
           <Breadcrumb
             separator=""
-            items={
-              !!selectedAlbum.albumName
-                ? [
+            items={[
+              {
+                title: 'Musique',
+                href: '/musique',
+                menu: {
+                  items: [
                     {
-                      title: 'Musique',
-                      href: '/musique'
+                      key: '1',
+                      label: (
+                        <Link
+                          className="flex w-100 justify-between align-center"
+                          to="/musique?tab=0">
+                          <IconSearchMusic width={24} height={24} />
+                          <p className="m-0">Recherche</p>
+                        </Link>
+                      )
                     },
                     {
-                      type: 'separator',
-                      separator: '/'
+                      key: '2',
+                      label: (
+                        <Link
+                          className="flex w-100 justify-between align-center"
+                          to="/musique?tab=1">
+                          <IconCritic width={24} height={24} />
+                          <p className="m-0">Critiques</p>
+                        </Link>
+                      )
                     },
                     {
-                      title: artist.name
+                      key: '3',
+                      label: (
+                        <Link
+                          className="flex w-100 justify-between align-center"
+                          to="/musique?tab=2">
+                          <IconVote width={24} height={24} />
+                          <p className="m-0">Votes</p>
+                        </Link>
+                      )
                     },
                     {
-                      type: 'separator',
-                      separator: ':'
-                    },
-                    {
-                      title: selectedAlbum.albumName
+                      key: '4',
+                      label: (
+                        <Link
+                          className="flex w-100 justify-between gap-1 align-center"
+                          to="/musique?tab=3">
+                          <IconMasterpiece width={24} height={24} />
+                          <p className="m-0">Chefs d'oeuvres</p>
+                        </Link>
+                      )
                     }
                   ]
-                : [
-                    {
-                      title: 'Musique',
-                      href: '/musique'
-                    },
-                    {
-                      type: 'separator',
-                      separator: '/'
-                    },
-                    {
-                      title: artist.name
-                    }
-                  ]
-            }
+                }
+              },
+              {
+                type: 'separator',
+                separator: '/'
+              },
+              {
+                title: artist.name
+              },
+              {
+                type: 'separator',
+                separator: '/'
+              },
+              {
+                title: selectedAlbum.albumName
+              }
+            ]}
           />
 
           {!!selectedAlbum &&
