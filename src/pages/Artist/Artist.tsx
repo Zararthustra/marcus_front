@@ -269,6 +269,11 @@ const Artist = () => {
           {!!selectedAlbum &&
             (isMobile ? (
               <ModalAlbum
+                showButtons
+                handleMasterpieces={handleMasterpieces}
+                handlePlaylists={handlePlaylists}
+                addedMasterpiece={addedMasterpiece}
+                addedPlaylist={addedPlaylist}
                 setIsCriticizing={setIsCriticizing}
                 setIsVoting={setIsVoting}
                 setSearchParams={setSearchParams}

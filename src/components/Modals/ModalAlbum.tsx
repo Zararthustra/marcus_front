@@ -1,7 +1,13 @@
 import { Modal } from 'antd';
 
+import {
+  IconCritic,
+  IconMasterpiece,
+  IconShare,
+  IconVote,
+  IconWatchlist
+} from '@assets/index';
 import { Button, Player } from '@components/index';
-import { IconCritic, IconShare, IconVote } from '@assets/index';
 
 interface IModalAlbumProps {
   hasCriticized?: boolean;
@@ -15,12 +21,22 @@ interface IModalAlbumProps {
   setIsCriticizing?: (value: boolean) => void;
   setIsVoting?: (value: boolean) => void;
   setSearchParams?: (value: any) => void;
+  handleMasterpieces?: () => void;
+  handlePlaylists?: () => void;
+  addedMasterpiece?: string | undefined;
+  addedPlaylist?: string | undefined;
+  showButtons?: boolean;
 }
 
 const ModalAlbum = ({
+  showButtons,
   selectedAlbum,
   hasCriticized,
   hasVoted,
+  addedMasterpiece,
+  addedPlaylist,
+  handleMasterpieces,
+  handlePlaylists,
   setSearchParams,
   setSelectedAlbum,
   setIsCriticizing,
@@ -79,9 +95,29 @@ const ModalAlbum = ({
         });
         if (setSearchParams) setSearchParams({});
       }}>
-      <div className="ModalAlbum flex-col align-center pt-2">
-        <h2 className="mb-2">{selectedAlbum.albumName}</h2>
-        <Player uri={'album/' + selectedAlbum.albumId} height={450} />
+      <div className="flex-col align-center">
+        <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+          {selectedAlbum.albumName}
+        </h2>
+        {showButtons && (
+          <div className="flex self-start gap-05 mb-1">
+            <Button
+              onClick={handleMasterpieces}
+              className={`movie__button ${
+                addedMasterpiece ? '' : 'movie__button--add'
+              }`}>
+              <IconMasterpiece width={20} height={20} />
+            </Button>
+            <Button
+              onClick={handlePlaylists}
+              className={`movie__button ${
+                addedPlaylist ? '' : 'movie__button--add'
+              }`}>
+              <IconWatchlist width={20} height={20} />
+            </Button>
+          </div>
+        )}
+        <Player uri={'album/' + selectedAlbum.albumId} height={400} />
       </div>
     </Modal>
   );
