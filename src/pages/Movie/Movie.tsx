@@ -17,8 +17,7 @@ import {
   IconCritic,
   IconShare,
   IconVote,
-  defaultImg,
-  random_ogg
+  defaultImg
 } from '@assets/index';
 import {
   useQueryMasterpieces,
@@ -142,11 +141,7 @@ const Movie = () => {
                 navigator.share({
                   text: 'Voici un audio sympa',
                   title: 'AH !',
-                  files: [
-                    new File([random_ogg], 'random_ogg.ogg', {
-                      type: 'audio/ogg'
-                    })
-                  ]
+                  url: 'https://res.cloudinary.com/dvrr1t3ss/video/upload/v1706918177/divers/random_ogg_m9xeaw.ogg'
                 })
               }>
               <IconShare width={20} height={20} />
