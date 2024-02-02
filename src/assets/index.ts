@@ -9,6 +9,7 @@ export { default as login } from './img/login.png';
 export { default as logologin } from './img/logo-login.png';
 export { default as tickets } from './img/tickets.jpg';
 export { default as vinyl } from './img/vinyl.png';
+export { default as random_mp3 } from './random_mp3.mp3';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';

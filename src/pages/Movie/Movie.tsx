@@ -17,7 +17,8 @@ import {
   IconCritic,
   IconShare,
   IconVote,
-  defaultImg
+  defaultImg,
+  random_mp3
 } from '@assets/index';
 import {
   useQueryMasterpieces,
@@ -139,9 +140,13 @@ const Movie = () => {
             <Button
               onClick={() =>
                 navigator.share({
-                  text: "Voici un film que j'ai découvert",
-                  title: movie.title,
-                  url: window.location.href
+                  text: 'Voici un audio sympa',
+                  title: 'AH !',
+                  files: [
+                    new File([random_mp3], 'random_mp3.mp3', {
+                      type: 'audio/mp3'
+                    })
+                  ]
                 })
               }>
               <IconShare width={20} height={20} />
