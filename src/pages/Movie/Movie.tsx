@@ -18,7 +18,7 @@ import {
   IconShare,
   IconVote,
   defaultImg,
-  random_m4a
+  random_ogg
 } from '@assets/index';
 import {
   useQueryMasterpieces,
@@ -143,8 +143,8 @@ const Movie = () => {
                   text: 'Voici un audio sympa',
                   title: 'AH !',
                   files: [
-                    new File([random_m4a], 'random_m4a.m4a', {
-                      type: 'audio/m4a'
+                    new File([random_ogg], 'random_ogg.ogg', {
+                      type: 'audio/ogg'
                     })
                   ]
                 })

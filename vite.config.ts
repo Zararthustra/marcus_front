@@ -47,7 +47,6 @@ export default defineConfig({
       }
     })
   ],
-  assetsInclude: ['**/*.m4a'],
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version)
   },
