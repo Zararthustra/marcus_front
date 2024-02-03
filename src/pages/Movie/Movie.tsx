@@ -50,6 +50,43 @@ const Movie = () => {
   const { data: masterpieces } = useQueryMasterpieces(undefined, userId);
   const { data: watchlists } = useQueryWatchlists(undefined, userId);
 
+  // ============================================
+  const soundUrl =
+    'https://res.cloudinary.com/dlpyn3wxf/video/upload/v1706918214/kinaomsirdwchg0dheha.mp3';
+  const [audioData, setAudioData] = useState<Uint8Array | null>(null);
+
+  useEffect(() => {
+    fetch(soundUrl)
+      .then((response) => response.arrayBuffer())
+      .then((data) => setAudioData(new Uint8Array(data)))
+      .catch((error) =>
+        console.error('Erreur chargement des données audio :', error)
+      );
+  }, [soundUrl]);
+
+  const handleShareClick = async () => {
+    try {
+      if (navigator.share && audioData) {
+        const blob = new Blob([audioData], { type: 'audio/mp3' });
+        const file = new File([blob], 'audio.mp3', { type: 'audio/mp3' });
+
+        await navigator.share({
+          files: [file],
+          title: 'Partager ce son',
+          text: 'Découvre ce son intéressant !'
+        });
+      } else {
+        alert(
+          "pas supportée par votre navigateur ou les données audio n'ont pas été chargées."
+        );
+      }
+    } catch (error) {
+      console.error('Erreur partage :', error);
+    }
+  };
+
+  // ============================================
+
   useEffect(() => {
     if (!!movieCritics)
       setHasCriticized(
@@ -148,6 +185,7 @@ const Movie = () => {
               <p className="m-0">Partager</p>
             </Button>
           )}
+          <Button onClick={handleShareClick}>Share mp3</Button>
         </div>
 
         <MovieCredits cast={movie.credits.cast} crew={movie.credits.crew} />
