@@ -139,9 +139,9 @@ const Movie = () => {
             <Button
               onClick={() =>
                 navigator.share({
-                  text: 'Voici un audio sympa',
-                  title: 'AH !',
-                  url: 'https://res.cloudinary.com/dvrr1t3ss/video/upload/v1706918177/divers/random_ogg_m9xeaw.ogg'
+                  text: "Voici un film que j'ai découvert",
+                  title: movie.title,
+                  url: window.location.href
                 })
               }>
               <IconShare width={20} height={20} />
