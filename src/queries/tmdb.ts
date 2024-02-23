@@ -16,12 +16,27 @@ const tmdbInstance: AxiosInstance = axios.create({
   params: { api_key: import.meta.env.VITE_TMDB_API_KEY, language: 'fr-FR' }
 });
 
+const getLastWeek = () => {
+  var today = new Date();
+  var lastWeek = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() - 7
+  );
+  return lastWeek;
+};
+
 // Cinema
 const getCinemaReleases = async (): Promise<IRelease<IMovieResult>> => {
   const { data } = await tmdbInstance.get('/discover/movie', {
     params: {
       append_to_response: 'videos,images',
-      include_image_language: 'fr, null'
+      include_image_language: 'fr, null',
+      'release_date.gte': getLastWeek(),
+      region: 'FR',
+      watch_region: 'FR',
+      language: 'fr-FR',
+      with_release_type: '2,3'
     }
   });
   return data;
@@ -48,7 +63,12 @@ export const useQueryCinema = () => {
 // Netflix
 const getNetflixReleases = async (): Promise<IRelease<ITVResults>> => {
   const { data } = await tmdbInstance.get('/discover/tv', {
-    params: { with_networks: 213 }
+    params: {
+      with_networks: 213,
+      'air_date.gte': getLastWeek(),
+      language: 'fr-FR',
+      watch_region: 'FR'
+    }
   });
   return data;
 };
@@ -74,7 +94,12 @@ export const useQueryNetflix = () => {
 // Disney
 const getDisneyReleases = async (): Promise<IRelease<ITVResults>> => {
   const { data } = await tmdbInstance.get('/discover/tv', {
-    params: { with_networks: 2739 }
+    params: {
+      with_networks: 2739,
+      'air_date.gte': getLastWeek(),
+      language: 'fr-FR',
+      watch_region: 'FR'
+    }
   });
   return data;
 };
@@ -100,7 +125,12 @@ export const useQueryDisney = () => {
 // Amazon
 const getAmazonReleases = async (): Promise<IRelease<ITVResults>> => {
   const { data } = await tmdbInstance.get('/discover/tv', {
-    params: { with_networks: 1024 }
+    params: {
+      with_networks: 1024,
+      'air_date.gte': getLastWeek(),
+      language: 'fr-FR',
+      watch_region: 'FR'
+    }
   });
   return data;
 };
@@ -139,6 +169,16 @@ export const searchTv = async (
 ): Promise<IRelease<ITVResults>> => {
   const { data } = await tmdbInstance.get('/search/tv', {
     params: { query: tvName }
+  });
+  return data;
+};
+
+// Search Person
+export const searchPerson = async (
+  personName: string
+): Promise<IRelease<ITVResults>> => {
+  const { data } = await tmdbInstance.get('/search/person', {
+    params: { query: personName }
   });
   return data;
 };

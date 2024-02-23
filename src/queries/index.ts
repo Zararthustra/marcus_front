@@ -62,6 +62,7 @@ export {
   useQueryAmazon,
   searchMovie,
   searchTv,
+  searchPerson,
   useQueryMovie,
   useQueryTV,
   useQueryPersonMovies,
