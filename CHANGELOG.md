@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/Zararthustra/marcus_front/compare/v2.5.0...v2.6.0) (2024-02-23)
+
+
+### Features
+
+* **AxiosInstance:** prevent expired token to throw error on requests that do not necessarily need authentication ([f661fb2](https://github.com/Zararthustra/marcus_front/commit/f661fb200ad448cbe4c7e985ca7bb2009773e3e4))
+* **Cinema:** add person search, fix searchbar ([dbe2e73](https://github.com/Zararthustra/marcus_front/commit/dbe2e735947c512443497d5ccf7322d787102dec))
+* **ModalAlbum:** add masterpiece & playlist buttons ([b2ab9ef](https://github.com/Zararthustra/marcus_front/commit/b2ab9ef601cb0a6f46d00fe7175cf40c056afb44))
+* **README:** update readme ([73ea89e](https://github.com/Zararthustra/marcus_front/commit/73ea89e855f0e0bec3defa32d0476568d44727e7))
+
+
+### Bug Fixes
+
+* discover endpoints, prepare search person ([628f536](https://github.com/Zararthustra/marcus_front/commit/628f536e4a4254380468c38f5bb7e7c44ede929a))
+* roll back ([5401c6f](https://github.com/Zararthustra/marcus_front/commit/5401c6f75e058e83084b8bc8db466f30a40d7e5a))
+* roll back to original shared link ([d9adfd7](https://github.com/Zararthustra/marcus_front/commit/d9adfd736a3a315104fec537d8fb4b1a76cb932d))
+* test audio file sharing ([95ccbce](https://github.com/Zararthustra/marcus_front/commit/95ccbce334d3c2641e234a1e2fc4277a009ea4b1))
+* test with .m4a ([bbbacd2](https://github.com/Zararthustra/marcus_front/commit/bbbacd2f9b86e624ffffaaf9386a475246540e47))
+* test with .ogg ([40009d1](https://github.com/Zararthustra/marcus_front/commit/40009d1d1cf5656dd10c8605f90bed44f7a063f4))
+* test with url ([687b8ca](https://github.com/Zararthustra/marcus_front/commit/687b8ca61eb3a59353d1e85641470d389fd82869))
+* test with url blob ([b03355d](https://github.com/Zararthustra/marcus_front/commit/b03355dd19b19967536defcb79f23dd736894525))
+
 ## [2.5.0](https://github.com/Zararthustra/marcus_front/compare/v2.3.0...v2.5.0) (2023-12-11)
 
 
