@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/Zararthustra/marcus_front/compare/v2.6.0...v2.7.0) (2024-02-23)
+
+
+### Features
+
+* **Person:** add person page ([18cbd3c](https://github.com/Zararthustra/marcus_front/commit/18cbd3c135697d5d392b11cebd11f76c41ed39da))
+
 ## [2.6.0](https://github.com/Zararthustra/marcus_front/compare/v2.5.0...v2.6.0) (2024-02-23)
 
 
