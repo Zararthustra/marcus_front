@@ -5,7 +5,8 @@ export type {
   ICast,
   ICrew,
   IPersonMovies,
-  IPersonTVs
+  IPersonTVs,
+  IPersonSearch
 };
 
 interface ICast {
@@ -112,4 +113,18 @@ interface IPersonTVs {
   id: number;
   cast: IPersonTV[];
   crew: IPersonTV[];
+}
+interface IPersonSearch {
+  id: number;
+  known_for_department: string;
+  name: string;
+  popularity: number;
+  profile_path: string;
+  known_for: {
+    id: number;
+    name?: string;
+    title?: string;
+    poster_path: string;
+    media_type: 'movie' | 'tv';
+  }[];
 }

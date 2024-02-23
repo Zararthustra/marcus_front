@@ -34,6 +34,7 @@ export { default as MovieItem } from './Cinema/MovieItem/MovieItem';
 export { default as MovieProviders } from './Cinema/Movie/MovieProviders';
 export { default as MovieCredits } from './Cinema/Movie/MovieCredits';
 export { default as MovieDescription } from './Cinema/Movie/MovieDescription';
+export { default as Person } from './Cinema/Research/Person';
 
 // Music
 export { default as Player } from './Music/Player/Player';

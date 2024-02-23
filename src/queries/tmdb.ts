@@ -7,7 +7,8 @@ import {
   IMovieResult,
   ITVResults,
   IPersonMovies,
-  IPersonTVs
+  IPersonTVs,
+  IPersonSearch
 } from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
 
@@ -176,7 +177,7 @@ export const searchTv = async (
 // Search Person
 export const searchPerson = async (
   personName: string
-): Promise<IRelease<ITVResults>> => {
+): Promise<IRelease<IPersonSearch>> => {
   const { data } = await tmdbInstance.get('/search/person', {
     params: { query: personName }
   });
