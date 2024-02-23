@@ -1,43 +1,27 @@
 import { useNavigate } from 'react-router-dom';
 
 import { defaultImg } from '@assets/index';
-import { getPlatformUri } from '@utils/formatters';
-import { IPersonSearch } from '@interfaces/tmdb.interface';
+import { IPersonSearch } from '@interfaces/index';
+import { getPlatformUri, handleRole } from '@utils/formatters';
 
-interface IPersonProps {
+interface IPersonItemProps {
   person: IPersonSearch;
 }
 
-const MovieCredits = ({ person }: IPersonProps) => {
+const PersonItem = ({ person }: IPersonItemProps) => {
   const navigate = useNavigate();
   const handleMovieLink = (mediaType: 'movie' | 'tv', id: number) => {
     navigate(`/cinema/${getPlatformUri(mediaType)}/${id}`);
   };
 
-  const handleRole = (role: string) => {
-    switch (role) {
-      case 'Acting':
-        return 'Acteur';
-      case 'Directing':
-        return 'Directeur';
-      case 'Writing':
-        return 'Scénariste';
-      case 'Crew':
-        return 'Equipe technique';
-      case 'Editing':
-        return 'Editeur';
-
-      default:
-        return role;
-    }
-  };
   return (
     <article className="research__person">
       <div
-        className="flex gap-1 items-center"
+        className="research__person__header flex gap-1 items-center"
         style={{
           width: '17rem'
-        }}>
+        }}
+        onClick={() => navigate(`/cinema/personnes/${person.id}`)}>
         <img
           className="research__person__img"
           src={
@@ -84,4 +68,4 @@ const MovieCredits = ({ person }: IPersonProps) => {
   );
 };
 
-export default MovieCredits;
+export default PersonItem;

@@ -8,7 +8,7 @@ import {
   ITVResults
 } from '@interfaces/index';
 import { messageObject } from '@utils/formatters';
-import { MovieItem, Person, Releases } from '@components/index';
+import { MovieItem, PersonItem, Releases } from '@components/index';
 import { searchMovie, searchPerson, searchTv } from '@queries/index';
 
 import './Research.scss';
@@ -152,7 +152,9 @@ const Research = () => {
                 }
                 return 0;
               })
-              .map((person, index) => <Person key={index} person={person} />)}
+              .map((person, index) => (
+                <PersonItem key={index} person={person} />
+              ))}
         </div>
       )}
     </div>

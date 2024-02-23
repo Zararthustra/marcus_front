@@ -132,3 +132,21 @@ export const messageObject = (
 
 export const getPlatformUri = (platform: 'tv' | 'movie') =>
   platform === 'tv' ? 'series' : 'films';
+
+export const handleRole = (role: string) => {
+  switch (role) {
+    case 'Acting':
+      return 'Acteur';
+    case 'Directing':
+      return 'Directeur';
+    case 'Writing':
+      return 'Scénariste';
+    case 'Crew':
+      return 'Equipe technique';
+    case 'Editing':
+      return 'Editeur';
+
+    default:
+      return role;
+  }
+};

@@ -9,3 +9,4 @@ export { default as Community } from './Community/Community';
 export { default as UserProfile } from './UserProfile/UserProfile';
 export { default as NotFound } from './NotFound/NotFound';
 export { default as Artist } from './Artist/Artist';
+export { default as Person } from './Person/Person';

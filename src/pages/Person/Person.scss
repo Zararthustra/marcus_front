@@ -1,0 +1,44 @@
+.person {
+  padding: 1rem 0 5rem;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    img {
+      width: 100%;
+      max-width: 20rem;
+      border-radius: 3px;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    &__lifespan p {
+      text-align: center;
+      margin: 0;
+      font-size: var(--font-s);
+    }
+
+    &__biography {
+      text-align: justify;
+      width: 100%;
+      max-width: 40rem;
+    }
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+    color: var(--color-slate-700);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .person {
+  }
+}

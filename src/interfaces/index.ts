@@ -28,7 +28,8 @@ export type {
   ICrew,
   IPersonMovies,
   IPersonTVs,
-  IPersonSearch
+  IPersonSearch,
+  IPerson
 } from './tmdb.interface';
 export type { ICommunity } from './community.interface';
 export type { ILoginRequest, ILoginResponse } from './login.interface';

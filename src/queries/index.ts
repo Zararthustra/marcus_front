@@ -66,7 +66,8 @@ export {
   useQueryMovie,
   useQueryTV,
   useQueryPersonMovies,
-  useQueryPersonTVs
+  useQueryPersonTVs,
+  useQueryPerson
 } from './tmdb';
 export {
   useMutationLogSpotify,

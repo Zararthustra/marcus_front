@@ -12,6 +12,7 @@ import {
   Movie,
   Music,
   NotFound,
+  Person,
   Register,
   TV,
   UserProfile
@@ -65,6 +66,7 @@ const App = () => {
               <Route element={<Cinema />} path="/cinema" />
               <Route element={<Movie />} path="/cinema/films/:movieId" />
               <Route element={<TV />} path="/cinema/series/:movieId" />
+              <Route element={<Person />} path="/cinema/personnes/:personId" />
 
               <Route element={<Music />} path="/musique" />
               <Route element={<Artist />} path="/musique/:artistId" />

@@ -32,6 +32,15 @@
     max-width: fit-content;
     overflow: hidden;
 
+    &__header {
+      cursor: pointer;
+
+      &:hover {
+        .research__person__details p:first-child {
+          text-decoration: underline;
+        }
+      }
+    }
     &__img {
       width: 5rem;
       height: 5rem;

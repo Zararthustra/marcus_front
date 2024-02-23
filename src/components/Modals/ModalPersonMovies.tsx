@@ -31,7 +31,9 @@ const ModalPersonMovies = ({
       <div
         className="pr-05 mt-2"
         style={{ maxHeight: '75vh', overflow: 'scroll' }}>
-        <h1 style={{ textAlign: 'center' }}>{personName}</h1>
+        <Link to={`/cinema/personnes/${personId}`}>
+          <h1 style={{ textAlign: 'center' }}>{personName}</h1>
+        </Link>
         {/* Movie */}
         {(!!personMovies?.crew.length || !!personMovies?.cast.length) && (
           <div className="flex align-center mt-2 w-100">

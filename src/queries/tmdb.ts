@@ -8,7 +8,8 @@ import {
   ITVResults,
   IPersonMovies,
   IPersonTVs,
-  IPersonSearch
+  IPersonSearch,
+  IPerson
 } from '@interfaces/index';
 import { toastObject, messageObject } from '@utils/formatters';
 
@@ -228,6 +229,37 @@ export const useQueryTV = (movieId: string) => {
 
   return useQuery(['tv', movieId], () => getTV(movieId), {
     // Stale 5min
+    staleTime: 60_000 * 5,
+    onError: (error: AxiosError) =>
+      notification.error(
+        toastObject(
+          'error',
+          'Impossible de récupérer les données',
+          `Une erreur est survenue. Code : ${
+            error.response ? error.response.status : error.message
+          }`
+        )
+      )
+  });
+};
+
+// Person by ID
+const getPerson = async (personId: string): Promise<IPerson> => {
+  const { data } = await tmdbInstance.get(`person/${personId}`, {
+    params: {
+      append_to_response: 'videos,images',
+      include_image_language: 'fr, null',
+      language: 'fr-FR'
+    }
+  });
+  return data;
+};
+export const useQueryPerson = (personId: string) => {
+  const { notification } = App.useApp();
+
+  return useQuery(['person', personId], () => getPerson(personId), {
+    // Stale 5min
+    enabled: !!personId,
     staleTime: 60_000 * 5,
     onError: (error: AxiosError) =>
       notification.error(
