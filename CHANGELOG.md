@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.1](https://github.com/Zararthustra/marcus_front/compare/v2.8.0...v2.8.1) (2024-04-15)
+
+
+### Bug Fixes
+
+* remove tag duplicate ([98b8945](https://github.com/Zararthustra/marcus_front/commit/98b8945b9fe89f007cf85a640507be56666d00eb))
+
 ## [2.8.0](https://github.com/Zararthustra/marcus_front/compare/v2.7.0...v2.8.0) (2024-04-15)
 
 
