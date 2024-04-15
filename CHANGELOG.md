@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/Zararthustra/marcus_front/compare/v2.7.0...v2.8.0) (2024-04-15)
+
+
+### Features
+
+* **Movie:** add movie gender tags filter ([990cbbc](https://github.com/Zararthustra/marcus_front/commit/990cbbcfdcd474be020f188b4844846d841c9333))
+
 ## [2.7.0](https://github.com/Zararthustra/marcus_front/compare/v2.6.0...v2.7.0) (2024-02-23)
 
 
