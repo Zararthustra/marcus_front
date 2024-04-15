@@ -22,7 +22,6 @@ export const movieTags = [
   'Western',
   // TV
   'Kids',
-  'Mystère',
   'News',
   'Reality',
   'Soap',
