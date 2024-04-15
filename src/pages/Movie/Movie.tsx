@@ -89,6 +89,7 @@ const Movie = () => {
         showModal={isCriticizing}
         platform="movie"
         setShowModal={setIsCriticizing}
+        tags={movie.genres.map((item) => item.name).join(',')}
       />
       <ModalVote
         movieId={movie.id}
@@ -96,6 +97,7 @@ const Movie = () => {
         showModal={isVoting}
         platform="movie"
         setShowModal={setIsVoting}
+        tags={movie.genres.map((item) => item.name).join(',')}
       />
 
       <main className="movie flex-col align-center w-100 px-1">

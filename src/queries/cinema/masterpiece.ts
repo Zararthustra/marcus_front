@@ -65,23 +65,30 @@ export const useMutationAddMasterpiece = () => {
 // ================================================================
 const getMasterpieces = async (
   pageNumber?: number,
-  userId?: number
+  userId?: number,
+  tag?: string
 ): Promise<IPagination<IMasterpiece[]>> => {
-  let params;
-  if (!!userId) params = { user_id: userId, page: pageNumber };
-  else params = { page: pageNumber };
+  const params = {
+    ...(!!pageNumber && { page: pageNumber }),
+    ...(!!userId && { user_id: userId }),
+    ...(!!tag && { tag: tag })
+  };
 
   const { data } = await axiosInstance.get('/masterpieces', {
     params
   });
   return data;
 };
-export const useQueryMasterpieces = (pageNumber?: number, userId?: number) => {
+export const useQueryMasterpieces = (
+  pageNumber?: number,
+  userId?: number,
+  tag?: string
+) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['masterpieces', pageNumber, userId],
-    () => getMasterpieces(pageNumber, userId),
+    ['masterpieces', pageNumber, userId, tag],
+    () => getMasterpieces(pageNumber, userId, tag),
     {
       // Stale 5min
       staleTime: 60_000 * 5,

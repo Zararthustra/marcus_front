@@ -22,12 +22,14 @@ interface IMasterpiece {
   platform: 'tv' | 'movie';
   user_id: number;
   user_name: string;
+  tags: string;
 }
 
 interface IMasterpieceRequest {
   movie_id: number;
   movie_name: string;
   platform: 'tv' | 'movie';
+  tags: string;
 }
 
 // Music

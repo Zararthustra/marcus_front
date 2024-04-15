@@ -1,0 +1,31 @@
+export const movieTags = [
+  'Tous',
+  // Movie
+  'Action',
+  'Aventure',
+  'Animation',
+  'Comédie',
+  'Crime',
+  'Documentaire',
+  'Drame',
+  'Familial',
+  'Fantastique',
+  'Histoire',
+  'Horreur',
+  'Musique',
+  'Mystère',
+  'Romance',
+  'Science-Fiction',
+  'Téléfilm',
+  'Thriller',
+  'Guerre',
+  'Western',
+  // TV
+  'Kids',
+  'Mystère',
+  'News',
+  'Reality',
+  'Soap',
+  'Talk',
+  'War & Politics'
+];

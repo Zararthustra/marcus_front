@@ -66,23 +66,30 @@ export const useMutationCreateCritic = () => {
 // ================================================================
 const getCritics = async (
   pageNumber: number,
-  userId?: number
+  userId?: number,
+  tag?: string
 ): Promise<IPagination<ICritic[]>> => {
-  let params;
-  if (!!userId) params = { user_id: userId, page: pageNumber };
-  else params = { page: pageNumber };
+  const params = {
+    page: pageNumber,
+    ...(!!userId && { user_id: userId }),
+    ...(!!tag && { tag: tag })
+  };
 
   const { data } = await axiosInstance.get('/critics', {
     params
   });
   return data;
 };
-export const useQueryCritics = (pageNumber: number, userId?: number) => {
+export const useQueryCritics = (
+  pageNumber: number,
+  userId?: number,
+  tag?: string
+) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['critics', pageNumber, userId],
-    () => getCritics(pageNumber, userId),
+    ['critics', pageNumber, userId, tag],
+    () => getCritics(pageNumber, userId, tag),
     {
       // Stale 5min
       staleTime: 60_000 * 5,

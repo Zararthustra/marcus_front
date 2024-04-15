@@ -65,23 +65,30 @@ export const useMutationAddWatchlist = () => {
 // ================================================================
 const getWatchlists = async (
   pageNumber?: number,
-  userId?: number
+  userId?: number,
+  tag?: string
 ): Promise<IPagination<IMasterpiece[]>> => {
-  let params;
-  if (!!userId) params = { user_id: userId, page: pageNumber };
-  else params = { page: pageNumber };
+  const params = {
+    ...(!!pageNumber && { page: pageNumber }),
+    ...(!!userId && { user_id: userId }),
+    ...(!!tag && { tag: tag })
+  };
 
   const { data } = await axiosInstance.get('/watchlists', {
     params
   });
   return data;
 };
-export const useQueryWatchlists = (pageNumber?: number, userId?: number) => {
+export const useQueryWatchlists = (
+  pageNumber?: number,
+  userId?: number,
+  tag?: string
+) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['watchlists', pageNumber, userId],
-    () => getWatchlists(pageNumber, userId),
+    ['watchlists', pageNumber, userId, tag],
+    () => getWatchlists(pageNumber, userId, tag),
     {
       // Stale 5min
       staleTime: 60_000 * 5,

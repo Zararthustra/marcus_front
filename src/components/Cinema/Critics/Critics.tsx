@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Empty, Pagination } from 'antd';
 
-import { Critic } from '@components/index';
+import { Critic, GendersFilter } from '@components/index';
 import { IconClapLoader } from '@assets/index';
 import { useQueryCritics } from '@queries/index';
+import { movieTags } from '@data/tags';
 
 interface ICriticsProps {
   user?: number;
 }
 
 const Critics = ({ user }: ICriticsProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data: critics, isLoading } = useQueryCritics(currentPage, user);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [tag, setTag] = useState<string>(movieTags[0]);
+  const { data: critics, isLoading } = useQueryCritics(currentPage, user, tag);
 
   if (isLoading)
     return (
@@ -25,6 +27,7 @@ const Critics = ({ user }: ICriticsProps) => {
     return (
       <div className="flex-col justify-center gap-1">
         {!!!user && <h1 className="self-center mb-2">Critiques</h1>}
+        <GendersFilter tag={tag} setTag={setTag} />
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </div>
     );
@@ -32,6 +35,20 @@ const Critics = ({ user }: ICriticsProps) => {
   return (
     <div className="flex-col justify-center align-center gap-1 w-100">
       {!!!user && <h1 className="self-center mb-2">Critiques</h1>}
+
+      <GendersFilter tag={tag} setTag={setTag} />
+
+      <Pagination
+        className="self-center mb-2"
+        total={critics.total}
+        onChange={(page) => setCurrentPage(page)}
+        // showTotal={(total, range) => `${range[0]}-${range[1]} sur ${total}`}
+        defaultPageSize={10}
+        showSizeChanger={false}
+        current={currentPage}
+        hideOnSinglePage
+        responsive
+      />
 
       {critics.data.map((critic, index) => (
         <Critic

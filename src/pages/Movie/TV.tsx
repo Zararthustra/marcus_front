@@ -88,6 +88,7 @@ const TV = () => {
         movieName={movie.name}
         showModal={isCriticizing}
         platform="tv"
+        tags={movie.genres.map((item) => item.name).join(',')}
         setShowModal={setIsCriticizing}
       />
       <ModalVote
@@ -95,6 +96,7 @@ const TV = () => {
         movieName={movie.name}
         showModal={isVoting}
         platform="tv"
+        tags={movie.genres.map((item) => item.name).join(',')}
         setShowModal={setIsVoting}
       />
 

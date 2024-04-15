@@ -35,6 +35,7 @@ export { default as MovieProviders } from './Cinema/Movie/MovieProviders';
 export { default as MovieCredits } from './Cinema/Movie/MovieCredits';
 export { default as MovieDescription } from './Cinema/Movie/MovieDescription';
 export { default as PersonItem } from './Cinema/Research/PersonItem';
+export { default as GendersFilter } from './Cinema/GendersFilter';
 
 // Music
 export { default as Player } from './Music/Player/Player';

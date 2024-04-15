@@ -14,6 +14,7 @@ interface ICritic {
   platform: 'tv' | 'movie';
   user_id: number;
   user_name: string;
+  tags: string;
 }
 
 interface IMovieCritic {
@@ -28,6 +29,7 @@ interface ICriticRequest {
   movie_id: number;
   movie_name: string;
   platform: 'tv' | 'movie';
+  tags: string;
 }
 
 // Music

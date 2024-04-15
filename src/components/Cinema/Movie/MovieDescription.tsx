@@ -68,7 +68,8 @@ const MovieDescription = ({
       addWatchlist({
         movie_id: movieId,
         movie_name: title,
-        platform: platform
+        platform: platform,
+        tags: genres.map((item) => item.name).join(',')
       });
       setAddedWatchlist(true);
     }
@@ -94,7 +95,8 @@ const MovieDescription = ({
       addMasterpiece({
         movie_id: movieId,
         movie_name: title,
-        platform: platform
+        platform: platform,
+        tags: genres.map((item) => item.name).join(',')
       });
       setAddedMasterpiece(true);
     }

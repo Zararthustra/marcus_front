@@ -63,11 +63,16 @@ const getVotes = async (
   pageNumber?: number,
   userId?: number,
   stars?: number,
-  movieId?: string
+  movieId?: string,
+  tag?: string
 ): Promise<IPagination<IVote[]>> => {
-  let params;
-  if (!!userId) params = { user_id: userId, page: pageNumber, stars: stars };
-  else params = { page: pageNumber, stars: stars, movie_id: movieId };
+  const params = {
+    page: pageNumber,
+    ...(!!stars && { stars: stars }),
+    ...(!!movieId && { movie_id: movieId }),
+    ...(!!userId && { user_id: userId }),
+    ...(!!tag && { tag: tag })
+  };
 
   const { data } = await axiosInstance.get('/votes', {
     params
@@ -78,13 +83,14 @@ export const useQueryVotes = (
   pageNumber?: number,
   userId?: number,
   stars?: number,
-  movieId?: string
+  movieId?: string,
+  tag?: string
 ) => {
   const { notification } = App.useApp();
 
   return useQuery(
-    ['votes', pageNumber, userId, stars, movieId],
-    () => getVotes(pageNumber, userId, stars, movieId),
+    ['votes', pageNumber, userId, stars, movieId, tag],
+    () => getVotes(pageNumber, userId, stars, movieId, tag),
     {
       // Stale 5min
       staleTime: 60_000 * 5,

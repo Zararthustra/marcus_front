@@ -10,6 +10,7 @@ interface IModalCriticProps {
   movieId: number;
   platform: 'tv' | 'movie';
   showModal: boolean;
+  tags: string;
   setShowModal: (value: boolean) => void;
 }
 
@@ -18,6 +19,7 @@ const ModalCritic = ({
   movieId,
   platform,
   showModal,
+  tags,
   setShowModal
 }: IModalCriticProps) => {
   const { message } = App.useApp();
@@ -26,7 +28,8 @@ const ModalCritic = ({
     content: '',
     movie_id: movieId,
     movie_name: movieName,
-    platform: platform
+    platform: platform,
+    tags: tags
   });
 
   const handleInputChange = (e: any) => {

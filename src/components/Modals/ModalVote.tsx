@@ -11,6 +11,7 @@ interface IModalVoteProps {
   movieId: number;
   platform: 'tv' | 'movie';
   showModal: boolean;
+  tags: string;
   setShowModal: (value: boolean) => void;
 }
 
@@ -19,6 +20,7 @@ const ModalVote = ({
   movieId,
   platform,
   showModal,
+  tags,
   setShowModal
 }: IModalVoteProps) => {
   const { message } = App.useApp();
@@ -27,7 +29,8 @@ const ModalVote = ({
     value: 0,
     movie_id: movieId,
     movie_name: movieName,
-    platform: platform
+    platform: platform,
+    tags: tags
   });
 
   const handleInputChange = (value: number) => {
