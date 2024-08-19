@@ -7,12 +7,14 @@ import {
   IconClap,
   IconClapLoader,
   IconCritic,
+  IconExport,
   IconMasterpiece,
   IconMusic,
   IconVote,
   IconWatchlist,
   projector
 } from '@assets/index';
+import { baseURL } from '@queries/axios';
 import { useQueryUser } from '@queries/index';
 import { capitalizeFirstLetter } from '@utils/formatters';
 import {
@@ -114,7 +116,23 @@ const UserProfile = () => {
                       label: <IconClap width={30} height={30} />,
                       children: (
                         <div className="flex-col align-center">
-                          {index === 0 && <Critics user={userId} />}
+                          {index === 0 && (
+                            <>
+                              <Critics user={userId} />
+                              <a
+                                download
+                                href={`${baseURL}/critics/export?user_id=${userId}`}
+                                className="flex align-center justify-center gap-1 px-1 py-05 br-m f-m my-1"
+                                style={{
+                                  backgroundColor: 'var(--color-primary-700)',
+                                  color: 'white',
+                                  fontWeight: 600
+                                }}>
+                                <IconExport />
+                                Exporter
+                              </a>
+                            </>
+                          )}
                           {index === 1 && <Votes user={userId} />}
                           {index === 2 && <Masterpieces user={userId} />}
                           {index === 3 && <Watchlists user={userId} />}
@@ -126,7 +144,23 @@ const UserProfile = () => {
                       label: <IconMusic width={30} height={30} />,
                       children: (
                         <div className="flex-col align-center">
-                          {index === 0 && <MusicCritics user={userId} />}
+                          {index === 0 && (
+                            <>
+                              <MusicCritics user={userId} />
+                              <a
+                                download
+                                href={`${baseURL}/music/critics/export?user_id=${userId}`}
+                                className="flex align-center justify-center gap-1 px-1 py-05 br-m f-m my-1"
+                                style={{
+                                  backgroundColor: 'var(--color-primary-700)',
+                                  color: 'white',
+                                  fontWeight: 600
+                                }}>
+                                <IconExport />
+                                Exporter
+                              </a>
+                            </>
+                          )}
                           {index === 1 && <MusicVotes user={userId} />}
                           {index === 2 && <MusicMasterpieces user={userId} />}
                           {index === 3 && <Playlist user={userId} />}

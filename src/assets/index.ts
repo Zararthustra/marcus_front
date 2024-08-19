@@ -47,3 +47,4 @@ export { default as IconPlay } from './svg/IconPlay';
 export { default as IconPause } from './svg/IconPause';
 export { default as IconShare } from './svg/IconShare';
 export { default as IconSearchMusic } from './svg/IconSearchMusic';
+export { default as IconExport } from './svg/IconExport';
