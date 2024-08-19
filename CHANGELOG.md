@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/Zararthustra/marcus_front/compare/v2.8.1...v2.9.0) (2024-08-19)
+
+
+### Features
+
+* export critics to excel format ([ff724a6](https://github.com/Zararthustra/marcus_front/commit/ff724a6bcbdf1b4167fe107d35b901c2e3a43f7a))
+
 ### [2.8.1](https://github.com/Zararthustra/marcus_front/compare/v2.8.0...v2.8.1) (2024-04-15)
 
 
